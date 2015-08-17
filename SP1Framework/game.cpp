@@ -12,6 +12,30 @@ bool keyPressed[K_COUNT];
 COORD charLocation;
 COORD consoleSize;
 
+
+char tmp_map[18][32];
+
+char map[18][32] = {
+	"###############################",
+	"#                             #",
+	"#                             #",
+	"### ########### ##   ##########",
+	"#   #                         #",
+	"# # #### #  #           #     #",
+	"# #      #  # ####  #   #  #  #",
+	"# # ######  # #      ## #     #",
+	"# #           ####  #      #  #",
+	"# ###### ###         ##       #",
+	"#          ######  ####### ####",
+	"#                             #",
+	"## ### ####      ###   ########",
+	"#                             #",
+	"#                             #",
+	"#                             #",
+	"#                             #",
+	"###############################"
+	};
+
 void init()
 {
     // Set precision for floating point output
@@ -20,7 +44,7 @@ void init()
     SetConsoleTitle(L"SP1 Framework");
 
     // Sets the console size, this is the biggest so far.
-    setConsoleSize(79, 28);
+    setConsoleSize(79,28);
 
     // Get console width and height
     CONSOLE_SCREEN_BUFFER_INFO csbi; /* to get buffer info */     
@@ -31,9 +55,8 @@ void init()
     consoleSize.Y = csbi.srWindow.Bottom + 1;
 
     // set the character to be in the center of the screen.
-    charLocation.X = consoleSize.X / 2;
-    charLocation.Y = consoleSize.Y / 2;
-
+    charLocation.X = 15;
+    charLocation.Y = 16;
     elapsedTime = 0.0;
 }
 
@@ -57,27 +80,40 @@ void update(double dt)
     // get the delta time
     elapsedTime += dt;
     deltaTime = dt;
-
+	int x=charLocation.X;
+	int y=charLocation.Y;
     // Updating the location of the character based on the key press
     if (keyPressed[K_UP] && charLocation.Y > 0)
     {
-        Beep(1440, 30);
-        charLocation.Y--; 
+		if (map[y-1][x] != '#')
+		{
+        Beep(1330, 30);
+        charLocation.Y--;
+		}
     }
     if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
-        Beep(1440, 30);
+		if (map[y][x-1] != '#')
+		{
+        Beep(1330, 30);
         charLocation.X--; 
+		}
     }
     if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
     {
-        Beep(1440, 30);
+		if (map[y+1][x] != '#')
+		{
+        Beep(1330, 30);
         charLocation.Y++; 
+		}
     }
     if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
     {
-        Beep(1440, 30);
+		if (map[y][x+1] != '#')
+		{
+        Beep(1330, 30);
         charLocation.X++; 
+		}
     }
 
     // quits the game if player hits the escape key
@@ -85,8 +121,10 @@ void update(double dt)
         g_quitGame = true;    
 }
 
+
 void render()
 {
+	
     // clear previous screen
     colour(0x0F);
     cls();
@@ -98,13 +136,21 @@ void render()
 	                        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
 	                        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	                        };
-	
-	for (int i = 0; i < 12; ++i)
+
+
+	/*for (int i = 0; i < 12; ++i)
 	{
-		gotoXY(3*i,i+1);
+		//gotoXY(3*i,i+1);
 		colour(colors[i]);
-		std::cout << "WOW";
+		std::cout << std::endl;
+		std::cout << "LOLOL";
+	}*/
+
+	for(int i = 0; i < 18; i++) {
+
+		printf("%s\n",map[i] );
 	}
+			
 
     // render time taken to calculate this frame
     gotoXY(70, 0);
@@ -120,5 +166,5 @@ void render()
     colour(0x0C);
     std::cout << (char)1;
 
-    
+
 }
