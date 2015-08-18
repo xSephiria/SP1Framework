@@ -16,6 +16,7 @@ void mainLoop();
 
 int main()
 {
+	
 	init();      // initialize your variables
     mainLoop();  // main loop
     shutdown();  // do clean up, if any. free memory.
@@ -29,10 +30,11 @@ void mainLoop()
 {
     g_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
     while (!g_quitGame)      // run this loop until user wants to quit 
-	{        
+	{   
+		
         getInput();                         // get keyboard input
         update(g_timer.getElapsedTime());   // update the game
-        render();                           // render the graphics output to screen
+        render();							// render the graphics output to screen
         g_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.      
 	}    
 }

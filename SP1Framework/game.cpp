@@ -11,6 +11,7 @@ double deltaTime;
 bool keyPressed[K_COUNT];
 COORD charLocation;
 COORD consoleSize;
+COORD boxLocation;
 
 
 char tmp_map[18][32];
@@ -58,6 +59,9 @@ void init()
     charLocation.X = 15;
     charLocation.Y = 16;
     elapsedTime = 0.0;
+
+	boxLocation.X = 15;
+	boxLocation.Y = 15;
 }
 
 void shutdown()
@@ -87,9 +91,14 @@ void update(double dt)
     {
 		if (map[y-1][x] != '#')
 		{
-        Beep(1330, 30);
-        charLocation.Y--;
+			Beep(1330, 30); 
+			charLocation.Y--;
+			if ((charLocation.Y - 1) == boxLocation.Y)
+			{
+				boxLocation.Y--;
+			}
 		}
+		
     }
     if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
@@ -97,6 +106,10 @@ void update(double dt)
 		{
         Beep(1330, 30);
         charLocation.X--; 
+		if ((charLocation.X - 1) == boxLocation.X)
+	{
+		boxLocation.X -= 1;
+	}
 		}
     }
     if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
@@ -105,6 +118,11 @@ void update(double dt)
 		{
         Beep(1330, 30);
         charLocation.Y++; 
+		if((charLocation.Y + 1) == boxLocation.Y)
+	{
+		boxLocation.Y += 1;
+	}
+
 		}
     }
     if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
@@ -113,12 +131,62 @@ void update(double dt)
 		{
         Beep(1330, 30);
         charLocation.X++; 
+			if ((charLocation.X + 1) == boxLocation.X)
+	{
+		boxLocation.X += 1;
+		
+	}
 		}
     }
 
+	//update box location when pushed
+
+	/*if (keyPressed[K_UP] && boxLocation.Y > 0 && charLocation.Y > 0)
+	{
+		if (((charLocation.Y - 1) == boxLocation.Y) && (map[y-1][x] != '#'))
+		{
+		boxLocation.Y--;
+        Beep(1330, 30); 
+        charLocation.Y--;
+		}
+	}
+	if (keyPressed[K_LEFT] && charLocation.X > 0 && boxLocation.X > 0)
+	{
+		if (((charLocation.Y - 1) == boxLocation.Y) && (map[y][x-1] != '#'))
+		{
+		boxLocation.X--;
+        Beep(1330, 30); 
+        charLocation.X--;
+		}
+	}
+	if (keyPressed[K_UP] && boxLocation.Y > 0 && charLocation.Y > 0)
+	{
+		if (((charLocation.Y - 1) == boxLocation.Y) && (map[y-1][x] != '#'))
+		{
+		boxLocation.Y--;
+        Beep(1330, 30); 
+        charLocation.Y--;
+		}
+	}
+	if (keyPressed[K_UP] && boxLocation.Y > 0 && charLocation.Y > 0)
+	{
+		if (((charLocation.Y - 1) == boxLocation.Y) && (map[y-1][x] != '#'))
+		{
+		boxLocation.Y--;
+        Beep(1330, 30); 
+        charLocation.Y--;
+		}
+	}*/
+	
+	
+
+	
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
         g_quitGame = true;    
+
+	
+
 }
 
 
@@ -164,7 +232,12 @@ void render()
     // render character
     gotoXY(charLocation);
     colour(0x0C);
-    std::cout << (char)1;
+    std::cout << (char)3;
 
+	//render box
+	gotoXY(boxLocation);
+	colour(7);
+	std::cout << (char)223;
+	
 
 }
