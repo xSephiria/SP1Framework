@@ -18,24 +18,15 @@ COORD consoleSize;
 char tmp_map[18][32];
 
 char map[18][32] = {
-	"                               ",
-	"                               ",
-	"                               ",
-	"                               ",
-	"                               ",
-	"        # P#   # ##X#          ",
-	"         #  #     # #          ",
-	"         #  #     # #          ",
-	"         #  ##   ## #          ",
-	"       ### ### B    #          ",
-	"       #         #  ###        ",
-	"       # ##############        ",
-	"       #              #        ",
-	"       #B####     ### #        ",
-	"       #X#  #     #   #        ",
-	"       ###  #     #####        ",
-	"            #  S  #            ",
-	"            #######            ",
+	"############################",
+	"#                          #",
+	"#        B                 #",
+	"#                 B        #",
+	"#                 B        #",
+	"#  B                       #",
+	"#         B                #",
+	"############################"
+
 	};
 
 void init()
@@ -57,17 +48,9 @@ void init()
     consoleSize.Y = csbi.srWindow.Bottom + 1;
 
     // set the character to be in the center of the screen.
-    charLocation.X = 15;
-    charLocation.Y = 16;
+    charLocation.X = 9;
+    charLocation.Y = 3;
     elapsedTime = 0.0;
-
-	// set box.
-	boxLocation.X = 15;
-	boxLocation.Y = 14;
-	elapsedTime = 0.0;
-	box2Location.X = 16;
-	box2Location.Y = 14;
-	elapsedTime = 0.0;
 }
 
 void shutdown()
@@ -92,135 +75,66 @@ void update(double dt)
     deltaTime = dt;
 	int x=charLocation.X;
 	int y=charLocation.Y;
-	int a=boxLocation.X;
-	int b=boxLocation.Y;
-	int c=box2Location.X;
-	int d=box2Location.Y;
     // Updating the location of the character based on the key press
-    if (keyPressed[K_UP] && charLocation.Y > 0)
+	if ( keyPressed[K_UP] && charLocation.Y > 0 )
     {
-		if (map[y-1][x] != '#' && charLocation.X != boxLocation.X && charLocation.Y-1 != boxLocation.Y )
-		{
-			Beep(1330, 30);
-			charLocation.Y--;	
-		} 
-			else
-				{
-					if (charLocation.Y-1 == boxLocation.Y && charLocation.X == boxLocation.X)
-					{
-						if (map[b-1][a] != '#' && boxLocation.X != box2Location.X && boxLocation.Y-1 != box2Location.Y) //if the box in front is not a # and not behind box2
-					{
-						Beep(1330, 30);
-						boxLocation.Y--;
-						charLocation.Y--;
-					}
-					else
-					{
-						if (boxLocation.Y-1 == box2Location.Y && boxLocation.X == box2Location.X) //if box 1 is behind box2
-						{
-							if (map[d-1][c] != ' ')
-							{
-								Beep(1330, 30);
-								boxLocation.Y--;
-								charLocation.Y--;
-							}
-						}
-						else if (map[b-1][a] != '#') //if box1 in front is not a #
-						{	
-							Beep(1330, 30);
-							boxLocation.Y--;
-							charLocation.Y--;
-						}
-					}
-					}
-					else if (map[y-1][x] != '#')
-					{
-						charLocation.Y--;
-					}
-				}
+	   if (map[y-1][x] != '#')
+	   {
+			if( map[y - 1][x] != 'B') //if box(ascii char 66) not present
+			{ 
+                charLocation.Y--;
+			} 
+			else if ( map[y - 1][x] == 'B' && map[y-2][x] != '#' && map[y-2][x] != 'B')
+			{
+				map[y - 2][x] = 'B';
+				charLocation.Y--;
+				map[y - 1][x] = ' ';
+				--y;
+			}
+			else if (map[y-1][x] != 'B' && map[y-2][x] != 'B' )
+			{
+				charLocation.Y--;
+			}
+		}
 	}
 
     if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
-		if (map[y][x-1] != '#' && charLocation.X - 1 != boxLocation.X && charLocation.Y != boxLocation.Y )
-		{
-        Beep(1330, 30);
-        charLocation.X--; 
-		}
-		else
-		{
-			if (charLocation.Y == boxLocation.Y && charLocation.X - 1 == boxLocation.X)
+		if (map[y][x-1] != '#')
+	    {
+			if( map[y][x-1] != 'B') //if box(ascii char 66) not present
+			{ 
+                charLocation.X--;
+			} 
+			else if ( map[y][x-1] == 'B' && map[y][x-2] != '#' && map[y][x-2] != 'B')
 			{
-				if (map[b][a-1] != '#' && boxLocation.X - 1 != box2Location.X && boxLocation.Y != box2Location.Y) //if the box in front is not a # and not behind box2
-					{
-						Beep(1330, 30);
-						boxLocation.X--;
-						charLocation.X--;
-					}
-					else
-					{
-						if (boxLocation.Y == box2Location.Y && boxLocation.X-1 == box2Location.X) //if box 1 is behind box2
-						{
-							if (map[d][c-1] != ' ')
-							{
-								Beep(1330, 30);
-								boxLocation.X--;
-								charLocation.X--;
-							}
-						}
-						else if (map[b][a-1] != '#') //if box1 in front is not a #
-						{	
-							Beep(1330, 30);
-							boxLocation.X--;
-							charLocation.X--;
-						}
-					}
+				map[y][x-2] = 'B';
+				charLocation.X--;
+				map[y][x-1] = ' ';
+				
 			}
-			else if (map[y][x-1] != '#')
+			else if (map[y][x-1] != 'B' && map[y][x-2] != 'B' )
 			{
 				charLocation.X--;
 			}
 		}
-
-
     }
     if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
     {
-		if (map[y+1][x] != '#' && charLocation.X != boxLocation.X && charLocation.Y+1 != boxLocation.Y )
-		{
-        Beep(1330, 30);
-        charLocation.Y++; 
-		}
-		else
-		{
-			if (charLocation.Y+1 == boxLocation.Y && charLocation.X == boxLocation.X)
+		  if (map[y+1][x] != '#')
+	   {
+			if( map[y + 1][x] != 'B') //if box(ascii char 66) not present
+			{ 
+                charLocation.Y++;
+			} 
+			else if ( map[y+1][x] == 'B' && map[y+2][x] != '#' && map[y+2][x] != 'B')
 			{
-				if (map[b+1][a] != '#' && boxLocation.X  != box2Location.X && boxLocation.Y + 1 != box2Location.Y) 
-					{
-						Beep(1330, 30);
-						boxLocation.Y++;
-						charLocation.Y++;
-					}
-					else
-					{
-						if (boxLocation.Y+1 == box2Location.Y && boxLocation.X == box2Location.X) 
-						{
-							if (map[d+1][c] != ' ')
-							{
-								Beep(1330, 30);
-								boxLocation.Y++;
-								charLocation.Y++;
-							}
-						}
-						else if (map[b+1][a] != '#')
-						{	
-							Beep(1330, 30);
-							boxLocation.Y++;
-							charLocation.Y++;
-						}
-					}
+				map[y+2][x] = 'B';
+				charLocation.Y++;
+				map[y+1][x] = ' ';
+				++y;
 			}
-			else if (map[y+1][x] != '#')
+			else if (map[y+1][x] != 'B' && map[y+2][x] != 'B' )
 			{
 				charLocation.Y++;
 			}
@@ -229,41 +143,20 @@ void update(double dt)
 
     if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
     {
-		if (map[y][x+1] != '#' && charLocation.X + 1 != boxLocation.X && charLocation.Y != boxLocation.Y ) // if the char in front is not # and not behind a box
-		{
-        Beep(1330, 30);
-        charLocation.X++; 
-		}
-		else
-		{
-			if (charLocation.Y == boxLocation.Y && charLocation.X+1 == boxLocation.X) // if the char is behind a box
+		if (map[y][x+1] != '#')
+	    {
+			if( map[y][x+1] != 'B') //if box(ascii char 66) not present
+			{ 
+                charLocation.X++;
+			} 
+			else if ( map[y][x+1] == 'B' && map[y][x+2] != '#' && map[y][x+2] != 'B')
 			{
-					if (map[b][a+1] != '#' && boxLocation.X + 1 != box2Location.X && boxLocation.Y != box2Location.Y) //if the box in front is not a # and not behind box2
-					{
-						Beep(1330, 30);
-						boxLocation.X++;
-						charLocation.X++;
-					}
-					else
-					{
-						if (boxLocation.Y == box2Location.Y && boxLocation.X+1 == box2Location.X) //if box 1 is behind box2
-						{
-							if (map[d][c+1] != ' ')
-							{
-								Beep(1330, 30);
-								boxLocation.X++;
-								charLocation.X++;
-							}
-						}
-						else if (map[b][a+1] != '#') //if box1 in front is not a #
-						{	
-							Beep(1330, 30);
-							boxLocation.X++;
-							charLocation.X++;
-						}
-					}
+				map[y][x+2] = 'B';
+				charLocation.X++;
+				map[y][x+1] = ' ';
+				
 			}
-			else if (map[y][x+1] != '#') // if the char in front is not a #
+			else if (map[y][x+1] != 'B' && map[y][x+2] != 'B' )
 			{
 				charLocation.X++;
 			}
