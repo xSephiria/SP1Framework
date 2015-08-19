@@ -2,12 +2,21 @@
 
 #include "Framework\timer.h"
 #include "game.h"
+#include <string>
+#include <windows.h>
+#include <iostream>
+
+using std::string;
+using std::cout;
+using std::endl;
 
 
 StopWatch g_timer;            // Timer function to keep track of time and the frame rate
 bool g_quitGame = false;      // Set to true if you want to quit the game
 const unsigned char FPS = 5; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
+int displayMenu();
+void gameStart();
 
 void mainLoop();
 
@@ -27,12 +36,80 @@ int main()
 // at a specific frame rate
 void mainLoop()
 {
-    g_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
-    while (!g_quitGame)      // run this loop until user wants to quit 
+    g_timer.startTimer(); // Start timer to calculate how long it takes to render this frame
+	displayMenu();    
+}
+int displayMenu()
+{
+	string Menu[3] ={"Start Game", "Options", "Exit"};
+	int pointer = 0;
+	
+	while(true)
+	{
+		system("cls");
+
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			cout << "Main Menu\n\n";
+
+		for (int i = 0; i < 3; ++i)
+		{
+			if (i == pointer)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+				cout << Menu[i] << endl;
+			}
+			else
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << Menu[i] << endl;
+			}
+	}
+
+		while(true)
+		{
+			if (GetAsyncKeyState(VK_UP) != 0)
+			{
+				pointer -= 1;
+				if (pointer == -1)
+				{
+					pointer = 2;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			{
+				pointer += 1;
+				if (pointer == 3)
+				{
+					pointer = 0;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_RETURN) != 0)
+			{
+				switch(pointer)
+				{
+
+					case 0:
+						{
+							gameStart();
+						}break;
+				}
+			}
+			
+		}
+		Sleep(150);
+		
+	}
+	return 0;
+}
+void gameStart()
+{
+	 while (!g_quitGame)      // run this loop until user wants to quit 
 	{        
         getInput();                         // get keyboard input
         update(g_timer.getElapsedTime());   // update the game
         render();                           // render the graphics output to screen
         g_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.      
-	}    
+	}
 }
