@@ -10,24 +10,12 @@ double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
 COORD charLocation;
-COORD boxLocation;
-COORD box2Location;
 COORD consoleSize;
 
+void map1();
+void map2();
 
-char tmp_map[18][32];
-
-char map[18][32] = {
-	"############################",
-	"#                          #",
-	"#        B                 #",
-	"#                 B        #",
-	"#                 B        #",
-	"#  B                       #",
-	"#         B                #",
-	"############################"
-
-	};
+char map[18][32] = {0};
 
 void init()
 {
@@ -51,14 +39,14 @@ void init()
     charLocation.X = 9;
     charLocation.Y = 3;
     elapsedTime = 0.0;
-}
 
+	
+}
 void shutdown()
 {
     // Reset to white text on black background
 	colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 }
-
 void getInput()
 {    
     keyPressed[K_UP] = isKeyPressed(VK_UP);
@@ -67,7 +55,6 @@ void getInput()
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 }
-
 void update(double dt)
 {
     // get the delta time
@@ -140,7 +127,6 @@ void update(double dt)
 			}
 		}
     }
-
     if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
     {
 		if (map[y][x+1] != '#')
@@ -160,24 +146,19 @@ void update(double dt)
 			{
 				charLocation.X++;
 			}
+			
 		}
+		
 	}
-	
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
         g_quitGame = true;    
 }
-
-
 void render()
 {
-	
     // clear previous screen
     colour(0x0F);
     cls();
-
-    //render the game
-
     //render test screen code (not efficient at all)
     const WORD colors[] =   {
 	                        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
@@ -213,12 +194,46 @@ void render()
     colour(0x0C);
     std::cout << (char)1;
 
-	gotoXY(boxLocation);
-    colour(0x0C);
-    std::cout << (char)219;
-	gotoXY(box2Location);
-    colour(0x0C);
-    std::cout << (char)219;
-
+	
 }
+void map1()
+{
+	char Nmap[18][32] ={
+	"############################",
+	"#                          #",
+	"#        @                 #",
+	"#                 B        #",
+	"#                 B        #",
+	"#  B                       #",
+	"#         B                #",
+	"############################"};
 
+	for (int cols = 0; cols < 18; cols++)
+	{
+		for (int rows = 0; rows < 32; rows++)
+		{
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+	
+}
+void map2()
+{
+	char Nmap[18][32] ={
+	"############################",
+	"#           @              #",
+	"###########   ##############",
+	"#          BBB             #",
+	"#                          #",
+	"#                          #",
+	"#                          #",
+	"############################"};
+
+	for (int cols = 0; cols < 18; cols++)
+	{
+		for (int rows = 0; rows < 32; rows++)
+		{
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
