@@ -120,7 +120,7 @@ int displayMenu()
 						}break;
 					case 2:
 						{
-							return 0;
+							something = true;
 						}break;
 				}
 
@@ -249,8 +249,8 @@ int levelMenu()
 						}break;
 					case 10:
 						{
-							return 0;
-						}
+							displayMenu();
+						}break;
 				}
 
 			}
