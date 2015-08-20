@@ -316,7 +316,7 @@ int optionsMenu()
 
 					case 0:
 						{
-							cout << "\n\nThis should be SpeedMod Option";
+							cout << "What character do you want?\n 1 for smiley, 2 for hearts, 3 for invisible.";
 						}break;
 					case 1:
 						{
@@ -340,7 +340,7 @@ void displayLevel()
 {
 	switch (currentLevel)
 	{
-	case 1: map1(); break;
+	case 1: map1(); break; 
 	case 2: map2(); break;
 	case 3: map3(); break;
 	case 4: map4(); break;

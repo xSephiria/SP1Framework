@@ -7,6 +7,7 @@ extern StopWatch g_timer;
 extern bool g_quitGame;
 int levelMenu();
 
+
 enum Keys
 {
     K_UP,

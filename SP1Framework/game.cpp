@@ -200,11 +200,11 @@ void render()
 			
 
     // render time taken to calculate this frame
-    gotoXY(70, 0);
+    gotoXY(70, 25);
     colour(0x1A);
     std::cout << 1.0 / deltaTime << "fps" << std::endl;
   
-    gotoXY(0, 0);
+    gotoXY(0, 25);
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;
 
@@ -560,32 +560,32 @@ void map8() {
 void map9() {
 
 	char Nmap[25][60] = {
-	"###########################################################",
-	"#       B     BBB         #                    B   BB  B  #",
-	"#         #        ######          #######     BB   B     #",
-	"# BBBBBB  ##########REKT############FACES##############   #",
-	"# B       #       B######B         B######B           #   #",
-	"# BBBBBB  #      B        B       B        B          #   #",
-	"# B       #     B  B   B   B     B  B    B  B         #BBB#",
-	"# BBBBBB  #     B          B     B          B         #   #",
-	"#         #     B   BBBB   B     B  B    B  B         #   #",
-	"# BBBBBB  #      B B    B B       B  BBBB  B          # B #",
-	"#     B   #       BBBBBBBB         BBBBBBBB  BBBB######B B#",
-	"#    B    ## ##############################BBBB    BB##  B#",
-	"#   B     #                               #BBBBB B BB #   #",
-	"#  B      ########################B#B B B##BBBBBB B   #   #",
-	"# BBBBBB  #                       B B## B######### B  #   #",
-	"#         #     ###############BBBB #  BB##     #BB BB#   #",
-	"########  #     ########### S # B # BBB B## LOL #   B #   #",
-	"#         #BB BB# LEVEL  ##   #   B    B ##     #   # #B B#",
-	"# B######## B B #  NINE  ##   # BBBB  BB ##########BB #BB #",
-	"#     B BB#B B B# LET'S  ## B #  B BB  BB### BB   #   #B B#",
-	"######  BB# BBB #  GO    ##  B#   BB B B ##B  B       # B #",
-	"#   B     # BB  ###########B B# ########### BBB####BBB#   #",
-	"# #########  B  #         ##  ###  B    BB    ##  #B B#BB #",
-	"#            B  #         #B        BB    B  B#   #B  # @ #",
-	"###########################################################",
-	};
+        "###########################################################",
+        "#       B     BBB         #                    B   BB  B  #",
+        "#         #        ######          #######     BB   B     #",
+        "##B B#BBB###########REKT############FACES##############   #",
+        "#         #       B######B         B######B           #   #",
+        "##BBB# BB##      B        B       B        B    #B  # #   #",
+        "# B       #     B  B   B   B     B  B    B  B   B#B#  #BBB#",
+        "##BBB#B B##     B          B     B          B    B#   #   #",
+        "#         #     B   BBBB   B     B  B    B  B   B#B#  #   #",
+        "##BBB# B###      B B    B B       B  BBBB  B        # # B #",
+        "#     B   #       BBBBBBBB         BBBBBBBB  BBBB######B B#",
+        "#    #    ## ##############################BBBB    BB##  B#",
+        "#   B     #                               #BBBBB B BB #   #",
+        "#  B      ########################B#B B B##BBBBBB B   #   #",
+        "##BBB#BB###                       B B## B######### B  #   #",
+        "#         #     ###############BBBB #  BB##     #BB BB#   #",
+        "########  #     ########### S # B # BBB B## LOL #   B #   #",
+        "#         #BB BB# LEVEL  ##   #   B    B ##     #   # #B B#",
+        "# B######## B B #  NINE  ##   # BBBB  BB ##########BB #BB #",
+        "#     B BB#B B B# LET'S  ## B #  B BB  BB### BB   #   #B B#",
+        "######  BB# BBB #  GO    ##  B#   BB B B ##B  B       # B #",
+        "#   B     # BB  ###########B B# ########### BBB####BBB#   #",
+        "# #########  B  #         ##  ###  B    BB    ##  #B B#BB #",
+        "#            B  #         #B        BB    B  B#   #B  # @ #",
+        "###########################################################",
+        };
 	for (int cols = 0; cols < 26; cols++)
 	{
 		for (int rows = 0; rows <61; rows++)
@@ -616,13 +616,13 @@ void map10() {
 	"# B##  #B## BB # # B# #  ########   B # # #          #B#BB#",
 	"#B   B    #       B#  #  #  # B #  BB #    B #########    #",
 	"## B ############    ##  #      ##B  B######## # # # B  #B#",
-	"##B B#JUST DO IT# ##     # BB#  #BB BB##    ##B # B B ### #",
-	"## B #######################S#BB#  B B#  # B ##B B # B B B#",
+	"##B B#JUST DO IT# ##     # BB#  #BB BB#     ##B # B B ##  #",
+	"## B #######################S#BB#  B B#  # B ##B B #   B B#",
 	"#  ###B   B  B   B  BB     ###  #  B B#B ## B ##B   B # B #",
 	"# ##B    BB   B BB B     B B#  B#B BB # B### B ######### ##",
 	"# ##BBB################## B #   #B B B#  B ## B #    B    #",
 	"#  #B  B         B    B #B  #   #BB BB### B ##B # #########",
-	"## #B B########    BBB B# B #BBB#BB BBB ## B # B#         #",
+	"## #B B########    BBB B# B #BBB#BB B B ## B # B#         #",
 	"## ##### B B  ####### B #B B#   ### B B  ##  #  ######### #",
 	"#B                 B    ##  B   ###  BB     ##            #",
 	"###########################################################",
