@@ -149,7 +149,6 @@ void update(double dt)
 		}
 	}
 
-
     // quits the game if player hits the escape key
     else if (keyPressed[K_ESCAPE])
 	{
