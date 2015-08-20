@@ -105,7 +105,7 @@ void update(double dt)
 			}
 		}
     }
-    if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
+    else if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
     {
 		  if (map[y+1][x] != (char)178)
 	   {
@@ -126,7 +126,7 @@ void update(double dt)
 			}
 		}
     }
-    if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
+    else if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
     {
 		if (map[y][x+1] != (char)178)
 	    {
@@ -145,22 +145,22 @@ void update(double dt)
 			{
 				charLocation.X++;
 			}
-			
 		}
-		
 	}
     // quits the game if player hits the escape key
-    if (keyPressed[K_ESCAPE])
+    else if (keyPressed[K_ESCAPE])
 	{
-        g_quitGame = true;    
+        g_quitGame = true;
+		charLocation.X = 28;
+		charLocation.Y = 16;
 	}
-	if (keyPressed[K_SPACE])
+	// Resets the level if player hits the spacebar
+	else if (keyPressed[K_SPACE])
 	{
 		charLocation.X = 28;
 		charLocation.Y = 16;
 		displayLevel();
 	}
-
 }
 void render()
 {
@@ -333,8 +333,8 @@ void map3() {
 		}
 	}
 }
-
-void map4() {
+void map4()
+{
 
 	char Nmap[25][60] = {
 	"###########################################################",
@@ -464,8 +464,8 @@ void map6() {
 		}
 	}
 }
-
-void map7() {
+void map7() 
+{
 
 	char Nmap[25][60] = {
 	"###########################################################",
@@ -508,7 +508,6 @@ void map7() {
 	}
 
 }
-
 void map8() {
 
 	char Nmap[25][60] = {
@@ -551,7 +550,6 @@ void map8() {
 		}
 	}
 }
-
 void map9() {
 
 	char Nmap[25][60] = {
@@ -593,7 +591,6 @@ void map9() {
 		}
 	}
 }
-
 void map10() {
 
 	char Nmap[25][60] = {
