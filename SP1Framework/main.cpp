@@ -14,7 +14,7 @@ using std::endl;
 StopWatch g_timer;            // Timer function to keep track of time and the frame rate
 bool something = false;
 bool g_quitGame = false;      // Set to true if you want to quit the game
-const unsigned char FPS = 5; // FPS of this game
+const unsigned char FPS = 10; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
 int displayMenu();
@@ -355,6 +355,7 @@ void displayLevel()
 void gameStart()
 {
 	displayLevel();
+
 	 while (!g_quitGame)      // run this loop until user wants to quit 
 	{        
         getInput();                         // get keyboard input
