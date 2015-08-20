@@ -159,6 +159,14 @@ void update(double dt)
 		charLocation.Y = 16;
 		displayLevel();
 	}
+	
+	if (map[y][x] == '@')
+	{
+		charLocation.X = 28;
+		charLocation.Y = 16;
+		levelMenu();
+		displayLevel();
+	}
 }
 void render()
 {
