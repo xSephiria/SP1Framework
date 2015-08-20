@@ -11,7 +11,6 @@ double deltaTime;
 bool keyPressed[K_COUNT];
 COORD charLocation;
 COORD consoleSize;
-
 char map[25][60] = {0};
 
 void init()
@@ -83,8 +82,7 @@ void update(double dt)
 			}
 		}
 	}
-
-    if (keyPressed[K_LEFT] && charLocation.X > 0)
+    else if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
 		if (map[y][x-1] != (char)178)
 	    {
@@ -290,7 +288,6 @@ void map2()
 		}
 	}
 }
-
 void map3() {
 
 	char Nmap[25][60] = {
@@ -376,7 +373,6 @@ void map4()
 		}
 	}
 }
-
 void map5() {
 
 	char Nmap[25][60] = {
@@ -420,8 +416,6 @@ void map5() {
 	}
 
 }
-
-
 void map6() {
 
 	char Nmap[25][60] = {

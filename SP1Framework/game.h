@@ -6,6 +6,7 @@
 extern StopWatch g_timer;
 extern bool g_quitGame;
 
+
 enum Keys
 {
     K_UP,
