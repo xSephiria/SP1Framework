@@ -11,6 +11,9 @@ double deltaTime;
 bool keyPressed[K_COUNT];
 COORD charLocation;
 COORD consoleSize;
+
+
+
 char map[25][60] = {0};
 
 void init()
@@ -145,15 +148,19 @@ void update(double dt)
 			}
 		}
 	}
+
+
+
     // quits the game if player hits the escape key
     else if (keyPressed[K_ESCAPE])
 	{
-        g_quitGame = true;
+        g_quitGame = true;    
 		charLocation.X = 28;
 		charLocation.Y = 16;
 	}
-	// Resets the level if player hits the spacebar
-	else if (keyPressed[K_SPACE])
+
+	// restart the game if player hit space
+	if (keyPressed[K_SPACE])
 	{
 		charLocation.X = 28;
 		charLocation.Y = 16;
@@ -251,8 +258,8 @@ void map1()
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
-	
 }
+
 void map2()
 {
 	char Nmap[25][60] = {
@@ -599,21 +606,21 @@ void map10() {
 	"###########################################################",
 	"#         #          #         B      #   B               #",
 	"#               #  # # #######B # BBB ##B# ###########    #",
-	"#  ##############  # # #     #  #B   B#   B#         #    #",
-	"#  #    LAST    #  # # # ### #BB# BBB # #B## ####### #    #",
+	"#  ##############  # # #     #  #B   B#   B#         ##BB##",
+	"#  #    LAST    #  # # # ### #BB# BBB #  B## ####### #    #",
 	"#  #    STAGE   #B # #   ##  #  #BB BB# B  # #     # #    #",
 	"#  ##############B # #  ### ##BB##   ###B# # # ### # #    #",
 	"#       # B        # #BBB##  #  ### ###    # # #P# # #    #",
 	"#   ##  # ########## #   ### #BB#     # #B## #   # # #    #",
 	"#BBB##    #  B       BB  ##B    #B###B# B  # ##### # #    #",
 	"#  B   BB # B# # # #B BB  ####### ### # ####       # #    #",
-	"#  ##B## B#   # B B B##  ####### BB B # B ########## #    #",
-	"# B##  #B## BB # # B# #  ########   B # # #          #    #",
+	"#  ##B## B#   ##B B  B##  ####### BB B# B ########## #    #",
+	"# B##  #B## BB # # B# #  ########   B # # #          #B#BB#",
 	"#B   B    #       B#  #  #  # B #  BB #    B #########    #",
-	"## B ############    ##  #      ##B  B########            #",
-	"##B B#JUST DO IT# ##     # BB#  #BB BB##    ##            #",
-	"## B ####################### #BB# BB B#  # B ##           #",
-	"#  ###B   B  B   B  BB     ###  #  B B#B ## B ##          #",
+	"## B ############    ##  #      ##B  B######## # # # B  #B#",
+	"##B B#JUST DO IT# ##     # BB#  #BB BB##    ##B # B B ### #",
+	"## B ####################### #BB# BB B#  # B ##B B # B B B#",
+	"#  ###B   B  B   B  BB     ###  #  B B#B ## B ##B   B # B #",
 	"# ##B    BB   B BB B     B B#  B#B BB # B### B ######### ##",
 	"# ##BBB################## B #   #B B B#  B ## B #    B    #",
 	"#  #B  B         B    B #B  #   #BB BB### B ##B # #########",
