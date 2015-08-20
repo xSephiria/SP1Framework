@@ -27,7 +27,7 @@ char map[25][60] = {0};
 
 void init()
 {
-	map7();
+	map8();
     // Set precision for floating point output
     std::cout << std::fixed << std::setprecision(3);
 
@@ -482,7 +482,7 @@ void map7() {
 
 }
 
-void map9() {
+void map8() {
 
 	char Nmap[25][60] = {
 	"###########################################################",
