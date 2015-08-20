@@ -20,6 +20,7 @@ int displayMenu();
 int levelMenu();
 int optionsMenu();
 void gameStart();
+int currentLevel;
 
 void mainLoop();
 
@@ -133,7 +134,17 @@ int displayMenu()
 
 int levelMenu()
 {
-	string Menu[11] ={"                                      Map1", "                                      Map2", "                                      Map3", "                                      Map4", "                                      Map5", "                                      Map6", "                                      Map7", "                                      Map8", "                                      Map9", "                                      Map10\n\n", "                               Back to Main Menu"};
+	string Menu[11] ={"                                      Map1",
+		              "                                      Map2", 
+					  "                                      Map3", 
+					  "                                      Map4", 
+					  "                                      Map5", 
+					  "                                      Map6", 
+					  "                                      Map7", 
+					  "                                      Map8", 
+					  "                                      Map9",
+					  "                                      Map10\n\n",
+					  "                               Back to Main Menu"};
 	int pointer = 0;
 
 	while(!something)
@@ -179,48 +190,60 @@ int levelMenu()
 			}
 			else if (GetAsyncKeyState(VK_RETURN) != 0)
 			{
+				g_quitGame = false;
 				switch(pointer)
 				{
 
 					case 0:
 						{
-							cout << "\n\nMap1";
+							currentLevel = 1;
+							gameStart();  //Map 1
+							
 						}break;
 					case 1: 
 						{
-							cout << "\n\nMap2";
+							currentLevel = 2;
+							gameStart(); //Map 2
 						}break;
 					case 2:
 						{
-							cout << "\n\nMap3";
+							currentLevel = 3;
+							gameStart(); //Map 3
 						}break;
 					case 3:
 						{
-							cout << "\n\nMap4";
+							currentLevel = 4;
+							gameStart(); //Map 4
 						}break;
 					case 4:
 						{
-							cout << "\n\nMap5";
+							currentLevel = 5;
+							gameStart(); //Map 5
 						}break;
 					case 5:
 						{
-							cout << "Map6";
+							currentLevel = 6;
+							gameStart(); //Map 6
 						}break;
 					case 6:
 						{
-							cout << "\n\nMap7";
+							currentLevel = 7;
+							gameStart(); //Map 7
 						}break;
 					case 7:
 						{
-							cout << "\n\nMap8";
+							currentLevel = 8;
+							gameStart(); //Map 8
 						}break;
 					case 8:
 						{
-							cout << "\n\nMap9";
+							currentLevel = 9;
+							gameStart(); //Map 9
 						}break;
 					case 9:
 						{
-							cout << "\n\nMap10";
+							currentLevel = 10;
+							gameStart(); //Map 10
 						}break;
 					case 10:
 						{
@@ -311,8 +334,25 @@ int optionsMenu()
 	}
 	return 0;
 }
+void displayLevel()
+{
+	switch (currentLevel)
+	{
+	case 1: map1(); break;
+	case 2: map2(); break;
+	case 3: map3(); break;
+	case 4: map4(); break;
+	case 5: map5(); break;
+	case 6: map6(); break;
+	case 7: map7(); break;
+	case 8: map8(); break;
+	case 9: map9(); break;
+	case 10: map10(); break;
+	}
+}
 void gameStart()
 {
+	displayLevel();
 	 while (!g_quitGame)      // run this loop until user wants to quit 
 	{        
         getInput();                         // get keyboard input

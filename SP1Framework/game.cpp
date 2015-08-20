@@ -12,22 +12,11 @@ bool keyPressed[K_COUNT];
 COORD charLocation;
 COORD consoleSize;
 
-void map1();
-void map2();
-void map3();
-void map4();
-void map5();
-void map6();
-void map7();
-void map8();
-void map9();
-void map10();
-
 char map[25][60] = {0};
 
 void init()
 {
-	map8();
+	
     // Set precision for floating point output
     std::cout << std::fixed << std::setprecision(3);
 
@@ -62,6 +51,7 @@ void getInput()
     keyPressed[K_DOWN] = isKeyPressed(VK_DOWN);
     keyPressed[K_LEFT] = isKeyPressed(VK_LEFT);
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
+	keyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 }
 void update(double dt)
@@ -74,13 +64,13 @@ void update(double dt)
     // Updating the location of the character based on the key press
 	if ( keyPressed[K_UP] && charLocation.Y > 0 )
     {
-	   if (map[y-1][x] != '#')
+	   if (map[y-1][x] != (char)178)
 	   {
 			if( map[y - 1][x] != 'B') //if box(ascii char 66) not present
 			{ 
                 charLocation.Y--;
 			} 
-			else if ( map[y - 1][x] == 'B' && map[y-2][x] != '#' && map[y-2][x] != 'B')
+			else if ( map[y - 1][x] == 'B' && map[y-2][x] != (char)178 && map[y-2][x] != 'B')
 			{
 				map[y - 2][x] = 'B';
 				charLocation.Y--;
@@ -96,13 +86,13 @@ void update(double dt)
 
     if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
-		if (map[y][x-1] != '#')
+		if (map[y][x-1] != (char)178)
 	    {
 			if( map[y][x-1] != 'B') //if box(ascii char 66) not present
 			{ 
                 charLocation.X--;
 			} 
-			else if ( map[y][x-1] == 'B' && map[y][x-2] != '#' && map[y][x-2] != 'B')
+			else if ( map[y][x-1] == 'B' && map[y][x-2] != (char)178 && map[y][x-2] != 'B')
 			{
 				map[y][x-2] = 'B';
 				charLocation.X--;
@@ -117,13 +107,13 @@ void update(double dt)
     }
     if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
     {
-		  if (map[y+1][x] != '#')
+		  if (map[y+1][x] != (char)178)
 	   {
 			if( map[y + 1][x] != 'B') //if box(ascii char 66) not present
 			{ 
                 charLocation.Y++;
 			} 
-			else if ( map[y+1][x] == 'B' && map[y+2][x] != '#' && map[y+2][x] != 'B')
+			else if ( map[y+1][x] == 'B' && map[y+2][x] != (char)178 && map[y+2][x] != 'B')
 			{
 				map[y+2][x] = 'B';
 				charLocation.Y++;
@@ -138,13 +128,13 @@ void update(double dt)
     }
     if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
     {
-		if (map[y][x+1] != '#')
+		if (map[y][x+1] != (char)178)
 	    {
 			if( map[y][x+1] != 'B') //if box(ascii char 66) not present
 			{ 
                 charLocation.X++;
 			} 
-			else if ( map[y][x+1] == 'B' && map[y][x+2] != '#' && map[y][x+2] != 'B')
+			else if ( map[y][x+1] == 'B' && map[y][x+2] != (char)178 && map[y][x+2] != 'B')
 			{
 				map[y][x+2] = 'B';
 				charLocation.X++;
@@ -161,7 +151,16 @@ void update(double dt)
 	}
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
+	{
         g_quitGame = true;    
+	}
+	if (keyPressed[K_SPACE])
+	{
+		charLocation.X = 28;
+		charLocation.Y = 16;
+		displayLevel();
+	}
+
 }
 void render()
 {
@@ -182,9 +181,9 @@ void render()
 		std::cout << std::endl;
 		std::cout << "LOLOL";
 	}*/
-
-	for(int i = 0; i < 25; i++) {
-
+	for(int i = 0; i < 25; i++) 
+	{
+		colour(0x0B);
 		printf("%s\n",map[i] );
 	}
 			
@@ -239,6 +238,10 @@ void map1()
 	{
 		for (int rows = 0; rows <61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -279,6 +282,10 @@ void map2()
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -318,6 +325,10 @@ void map3() {
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -357,6 +368,10 @@ void map4() {
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -396,6 +411,10 @@ void map5() {
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -433,10 +452,14 @@ void map6() {
 	"###########################################################",
 	};
 
-			for (int cols = 0; cols < 26; cols++)
+	for (int cols = 0; cols < 26; cols++)
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -472,10 +495,14 @@ void map7() {
 	"###########################################################",
 	};
 
-			for (int cols = 0; cols < 26; cols++)
+	for (int cols = 0; cols < 26; cols++)
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -512,10 +539,14 @@ void map8() {
 	"###########################################################",
 	};
 
-				for (int cols = 0; cols < 26; cols++)
+	for (int cols = 0; cols < 26; cols++)
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -554,6 +585,10 @@ void map9() {
 	{
 		for (int rows = 0; rows <61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -593,6 +628,10 @@ void map10() {
 	{
 		for (int rows = 0; rows < 61; rows++)
 		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
