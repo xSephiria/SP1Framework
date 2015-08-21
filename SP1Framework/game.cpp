@@ -68,18 +68,18 @@ void update(double dt)
     {
 	   if (map[y-1][x] != (char)178)
 	   {
-			if( map[y - 1][x] != 'B') //if box(ascii char 66) not present
+			if( map[y - 1][x] != (char)254) //if box(ascii char 66) not present
 			{ 
                 charLocation.Y--;
 			} 
-			else if ( map[y - 1][x] == 'B' && map[y-2][x] != (char)178 && map[y-2][x] != 'B')
+			else if ( map[y - 1][x] == (char)254 && map[y-2][x] != (char)178 && map[y-2][x] != (char)254)
 			{
-				map[y - 2][x] = 'B';
+				map[y - 2][x] = (char)254;
 				charLocation.Y--;
 				map[y - 1][x] = ' ';
 				--y;
 			}
-			else if (map[y-1][x] != 'B' && map[y-2][x] != 'B' )
+			else if (map[y-1][x] != (char)254 && map[y-2][x] != (char)254 )
 			{
 				charLocation.Y--;
 			}
@@ -89,18 +89,18 @@ void update(double dt)
     {
 		if (map[y][x-1] != (char)178)
 	    {
-			if( map[y][x-1] != 'B') //if box(ascii char 66) not present
+			if( map[y][x-1] != (char)254) //if box(ascii char 66) not present
 			{ 
                 charLocation.X--;
 			} 
-			else if ( map[y][x-1] == 'B' && map[y][x-2] != (char)178 && map[y][x-2] != 'B')
+			else if ( map[y][x-1] == (char)254 && map[y][x-2] != (char)178 && map[y][x-2] != (char)254)
 			{
-				map[y][x-2] = 'B';
+				map[y][x-2] = (char)254;
 				charLocation.X--;
 				map[y][x-1] = ' ';
 				
 			}
-			else if (map[y][x-1] != 'B' && map[y][x-2] != 'B' )
+			else if (map[y][x-1] != (char)254 && map[y][x-2] != (char)254 )
 			{
 				charLocation.X--;
 			}
@@ -110,18 +110,18 @@ void update(double dt)
     {
 		  if (map[y+1][x] != (char)178)
 	   {
-			if( map[y + 1][x] != 'B') //if box(ascii char 66) not present
+			if( map[y + 1][x] != (char)254) //if box(ascii char 66) not present
 			{ 
                 charLocation.Y++;
 			} 
-			else if ( map[y+1][x] == 'B' && map[y+2][x] != (char)178 && map[y+2][x] != 'B')
+			else if ( map[y+1][x] == (char)254 && map[y+2][x] != (char)178 && map[y+2][x] != (char)254)
 			{
-				map[y+2][x] = 'B';
+				map[y+2][x] = (char)254;
 				charLocation.Y++;
 				map[y+1][x] = ' ';
 				++y;
 			}
-			else if (map[y+1][x] != 'B' && map[y+2][x] != 'B' )
+			else if (map[y+1][x] != (char)254 && map[y+2][x] != (char)254 )
 			{
 				charLocation.Y++;
 			}
@@ -131,18 +131,18 @@ void update(double dt)
     {
 		if (map[y][x+1] != (char)178)
 	    {
-			if( map[y][x+1] != 'B') //if box(ascii char 66) not present
+			if( map[y][x+1] != (char)254) //if box(ascii char 66) not present
 			{ 
                 charLocation.X++;
 			} 
-			else if ( map[y][x+1] == 'B' && map[y][x+2] != (char)178 && map[y][x+2] != 'B')
+			else if ( map[y][x+1] == (char)254 && map[y][x+2] != (char)178 && map[y][x+2] != (char)254)
 			{
-				map[y][x+2] = 'B';
+				map[y][x+2] = (char)254;
 				charLocation.X++;
 				map[y][x+1] = ' ';
 				
 			}
-			else if (map[y][x+1] != 'B' && map[y][x+2] != 'B' )
+			else if (map[y][x+1] != (char)254 && map[y][x+2] != (char)254 )
 			{
 				charLocation.X++;
 			}
@@ -194,6 +194,7 @@ void render()
 	}*/
 	for(int i = 0; i < 25; i++) 
 	{
+
 		colour(0x0B);
 		printf("%s\n",map[i] );
 	}
@@ -253,6 +254,10 @@ void map1()
 			{
 				Nmap[cols][rows] = (char)178;
 			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -297,6 +302,10 @@ void map2()
 			{
 				Nmap[cols][rows] = (char)178;
 			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -338,6 +347,10 @@ void map3() {
 			if (Nmap[cols][rows] == '#')
 			{
 				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
 			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
@@ -382,6 +395,10 @@ void map4()
 			{
 				Nmap[cols][rows] = (char)178;
 			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -423,6 +440,10 @@ void map5() {
 			if (Nmap[cols][rows] == '#')
 			{
 				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
 			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
@@ -467,6 +488,10 @@ void map6() {
 			{
 				Nmap[cols][rows] = (char)178;
 			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -509,6 +534,10 @@ void map7()
 			if (Nmap[cols][rows] == '#')
 			{
 				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
 			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
@@ -553,6 +582,10 @@ void map8() {
 			{
 				Nmap[cols][rows] = (char)178;
 			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
@@ -593,6 +626,10 @@ void map9() {
 			if (Nmap[cols][rows] == '#')
 			{
 				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
 			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
@@ -636,8 +673,11 @@ void map10() {
 			{
 				Nmap[cols][rows] = (char)178;
 			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
 	}
-
 }
