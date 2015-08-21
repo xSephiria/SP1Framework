@@ -5,7 +5,11 @@
 
 extern StopWatch g_timer;
 extern bool g_quitGame;
+int displayMenu();
 int levelMenu();
+int optionsMenu();
+void gameStart();
+
 
 
 enum Keys

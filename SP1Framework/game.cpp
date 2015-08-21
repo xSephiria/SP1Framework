@@ -5,14 +5,22 @@
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <windows.h>
+#include <iostream>
+
+using std::string;
+using std::cout;
+using std::endl;
 
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
+bool something = false;
 COORD charLocation;
 COORD consoleSize;
-
-
+double bouncetime;
+int currentLevel;
 
 char map[25][60] = {0};
 
@@ -63,25 +71,28 @@ void update(double dt)
     deltaTime = dt;
 	int x=charLocation.X;
 	int y=charLocation.Y;
+	
     // Updating the location of the character based on the key press
 	if ( keyPressed[K_UP] && charLocation.Y > 0 )
     {
 	   if (map[y-1][x] != (char)178)
 	   {
-			if( map[y - 1][x] != (char)254) //if box(ascii char 66) not present
+			if( map[y - 1][x] != (char)254) //if box not present
 			{ 
                 charLocation.Y--;
+				
 			} 
 			else if ( map[y - 1][x] == (char)254 && map[y-2][x] != (char)178 && map[y-2][x] != (char)254)
 			{
 				map[y - 2][x] = (char)254;
 				charLocation.Y--;
 				map[y - 1][x] = ' ';
-				--y;
+				
 			}
 			else if (map[y-1][x] != (char)254 && map[y-2][x] != (char)254 )
 			{
 				charLocation.Y--;
+				
 			}
 		}
 	}
@@ -92,17 +103,20 @@ void update(double dt)
 			if( map[y][x-1] != (char)254) //if box(ascii char 66) not present
 			{ 
                 charLocation.X--;
+				
 			} 
 			else if ( map[y][x-1] == (char)254 && map[y][x-2] != (char)178 && map[y][x-2] != (char)254)
 			{
 				map[y][x-2] = (char)254;
 				charLocation.X--;
 				map[y][x-1] = ' ';
+			
 				
 			}
 			else if (map[y][x-1] != (char)254 && map[y][x-2] != (char)254 )
 			{
 				charLocation.X--;
+				
 			}
 		}
     }
@@ -113,17 +127,19 @@ void update(double dt)
 			if( map[y + 1][x] != (char)254) //if box(ascii char 66) not present
 			{ 
                 charLocation.Y++;
+				
 			} 
 			else if ( map[y+1][x] == (char)254 && map[y+2][x] != (char)178 && map[y+2][x] != (char)254)
 			{
 				map[y+2][x] = (char)254;
 				charLocation.Y++;
 				map[y+1][x] = ' ';
-				++y;
+			
 			}
 			else if (map[y+1][x] != (char)254 && map[y+2][x] != (char)254 )
 			{
 				charLocation.Y++;
+				
 			}
 		}
     }
@@ -134,17 +150,20 @@ void update(double dt)
 			if( map[y][x+1] != (char)254) //if box(ascii char 66) not present
 			{ 
                 charLocation.X++;
+			
 			} 
 			else if ( map[y][x+1] == (char)254 && map[y][x+2] != (char)178 && map[y][x+2] != (char)254)
 			{
 				map[y][x+2] = (char)254;
 				charLocation.X++;
 				map[y][x+1] = ' ';
+			
 				
 			}
 			else if (map[y][x+1] != (char)254 && map[y][x+2] != (char)254 )
 			{
 				charLocation.X++;
+			
 			}
 		}
 	}
@@ -156,7 +175,7 @@ void update(double dt)
 		charLocation.X = 28;
 		charLocation.Y = 16;
 	}
-
+	
 	// restart the game if player hit space
 	if (keyPressed[K_SPACE])
 	{
@@ -262,7 +281,6 @@ void map1()
 		}
 	}
 }
-
 void map2()
 {
 	char Nmap[25][60] = {
@@ -679,5 +697,308 @@ void map10() {
 			}
 			map[cols][rows] = Nmap[cols][rows];
 		}
+	}
+}
+
+int displayMenu()
+{
+	string Menu[3] ={"                                   Start Game", "                                    Options", "                                      Exit"};
+	int pointer = 0;
+
+	char box[9][75] = {
+"                  ______   _______           _______  _______ ",
+"                 (  ___ \\ (  ___  )|\\     /|(  ____ \\(  ____ \\",
+"                 | (   ) )| (   ) |( \\   / )| (    \\/| (    \\/",
+"                 | (__/ / | |   | | \\ (_) / | (__    | (_____ ",
+"                 |  __ (  | |   | |  ) _ (  |  __)   (_____  )",
+"                 | (  \\ \\ | |   | | / ( ) \\ | (            ) |",
+"                 | )___) )| (___) |( /   \\ )| (____/\\/\\____) |",
+"                 |______/ (_______)|/     \\|(_______/\\_______)"
+	};
+	
+	while(!something)
+	{
+		system("cls");
+
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			for ( int i = 0; i < 9; i++)
+			{
+			cout << box[i] << endl;
+			}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			if (i == pointer)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+				cout << Menu[i] << endl;
+			}
+			else
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << Menu[i] << endl;
+			}
+	}
+
+		while(!something)
+		{
+			if (GetAsyncKeyState(VK_UP) != 0)
+			{
+				pointer -= 1;
+				if (pointer == -1)
+				{
+					pointer = 2;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			{
+				pointer += 1;
+				if (pointer == 3)
+				{
+					pointer = 0;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_RETURN) != 0)
+			{
+				switch(pointer)
+				{
+
+					case 0:
+						{
+							levelMenu();
+						}break;
+					case 1: 
+						{
+							optionsMenu();
+						}break;
+					case 2:
+						{
+							something = true;
+						}break;
+				}
+
+			}
+			break;
+			
+		}
+		Sleep(150);
+		
+	}
+	return 0;
+}
+
+int levelMenu()
+{
+	string Menu[11] ={"                                      Map1",
+		              "                                      Map2", 
+					  "                                      Map3", 
+					  "                                      Map4", 
+					  "                                      Map5", 
+					  "                                      Map6", 
+					  "                                      Map7", 
+					  "                                      Map8", 
+					  "                                      Map9",
+					  "                                      Map10\n\n",
+					  "                               Back to Main Menu"};
+	int pointer = 0;
+
+	while(!something)
+	{
+		system("cls");
+
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			cout << "                               Choose Your Level\n\n\n\n";
+
+		for (int i = 0; i < 11; ++i)
+		{
+			if (i == pointer)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+				cout << Menu[i] << endl;
+			}
+			else
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << Menu[i] << endl;
+			}
+	}
+
+		while(!something)
+		{
+			if (GetAsyncKeyState(VK_UP) != 0)
+			{
+				pointer -= 1;
+				if (pointer == -1)
+				{
+					pointer = 10;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			{
+				pointer += 1;
+				if (pointer == 11)
+				{
+					pointer = 0;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_RETURN) != 0)
+			{
+				g_quitGame = false;
+				switch(pointer)
+				{
+
+					case 0:
+						{
+							currentLevel = 1;
+							gameStart();  //Map 1
+							
+						}break;
+					case 1: 
+						{
+							currentLevel = 2;
+							gameStart(); //Map 2
+						}break;
+					case 2:
+						{
+							currentLevel = 3;
+							gameStart(); //Map 3
+						}break;
+					case 3:
+						{
+							currentLevel = 4;
+							gameStart(); //Map 4
+						}break;
+					case 4:
+						{
+							currentLevel = 5;
+							gameStart(); //Map 5
+						}break;
+					case 5:
+						{
+							currentLevel = 6;
+							gameStart(); //Map 6
+						}break;
+					case 6:
+						{
+							currentLevel = 7;
+							gameStart(); //Map 7
+						}break;
+					case 7:
+						{
+							currentLevel = 8;
+							gameStart(); //Map 8
+						}break;
+					case 8:
+						{
+							currentLevel = 9;
+							gameStart(); //Map 9
+						}break;
+					case 9:
+						{
+							currentLevel = 10;
+							gameStart(); //Map 10
+						}break;
+					case 10:
+						{
+							displayMenu();
+						}break;
+				}
+			}
+			break;
+		}
+		Sleep(150);
+	}
+	return 0;
+}
+
+int optionsMenu()
+{
+	string Menu[3] ={"Speed Mod", "Change Color", "Back to Main Menu"};
+	int pointer = 0;
+
+	while(!something)
+	{
+		system("cls");
+
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			cout << "Options\n\n";
+
+		for (int i = 0; i < 3; ++i)
+		{
+			if (i == pointer)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+				cout << Menu[i] << endl;
+			}
+			else
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << Menu[i] << endl;
+			}
+	}
+
+		while(!something)
+		{
+			if (GetAsyncKeyState(VK_UP) != 0)
+			{
+				pointer -= 1;
+				if (pointer == -1)
+				{
+					pointer = 2;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			{
+				pointer += 1;
+				if (pointer == 3)
+				{
+					pointer = 0;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_RETURN) != 0)
+			{
+				switch(pointer)
+				{
+
+					case 0:
+						{
+							cout << "What character do you want?\n 1 for smiley, 2 for hearts, 3 for invisible.";
+						}break;
+					case 1:
+						{
+							cout <<"\n\nThis sould be ColorChange Option";
+						}break;
+					case 2:
+						{
+							return 0;
+						}break;
+				}
+			}
+			break;
+		}
+		Sleep(150);	
+	}
+	return 0;
+}
+void displayLevel()
+{
+	switch (currentLevel)
+	{
+	case 1: map1(); break; 
+	case 2: map2(); break;
+	case 3: map3(); break;
+	case 4: map4(); break;
+	case 5: map5(); break;
+	case 6: map6(); break;
+	case 7: map7(); break;
+	case 8: map8(); break;
+	case 9: map9(); break;
+	case 10: map10(); break;
 	}
 }
