@@ -118,11 +118,11 @@ void map2()
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -164,11 +164,11 @@ void map3() {
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -211,11 +211,11 @@ void map4()
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -252,16 +252,15 @@ void map5() {
 	"##BB#BBB#         B      #  #   B    #                    #",
 	"###########################################################",
 	};
-
-		for (int cols = 0; cols < 25; cols++)
+	for (int cols = 0; cols < 25; cols++)
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -304,11 +303,11 @@ void map6() {
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -346,16 +345,15 @@ void map7()
 	"#                                                         #",
 	"###########################################################",
 	};
-
 	for (int cols = 0; cols < 25; cols++)
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -375,7 +373,7 @@ void map8() {
 	"#            ## B  #  #  # BB BB# B B # B B B # # B##     #",
 	"#           ## B B B  #  B  B B ## B B # # B B     B##    #",
 	"#           # B #  #########BB B# B # B B ## ## B B # ##  #",
-	"#          ##  #  #####UMAD?#BBB#B # B B###BRO?### B B #  #",
+	"#          ##  #  #####UMAD?#BBB#B # B B###bRO?### B B #  #",
 	"#         ## B## ##########  #  # B B #############  ##   #",
 	"#      ####BB #  B   #B B  # B B### #####         B B ##  #",
 	"#    ###  B B ####B###  #       #  B  #   B ##########    #",
@@ -398,11 +396,11 @@ void map8() {
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -443,11 +441,11 @@ void map9() {
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -489,11 +487,11 @@ void map10() {
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -963,54 +961,63 @@ void levelMenu()
 					case 1:
 						{
 							currentLevel = 2;//Map2
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 2:
 						{
 							currentLevel = 3;//Map3
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 3:
 						{
 							currentLevel = 4;//Map4
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 4:
 						{
 							currentLevel = 5;//Map5
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 5:
 						{
 							currentLevel = 6;//Map6
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 6:
 						{
 							currentLevel = 7;//Map7
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 7: 
 						{
 							currentLevel = 8;//Map8
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 8:
 						{
 							currentLevel = 9;//Map9
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
 					case 9:
 						{
 							currentLevel = 10;//Map10
+							displayLevel();
 							g_eGameState = S_GAME;
 							break;
 						}
