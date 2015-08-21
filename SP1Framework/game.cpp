@@ -557,6 +557,7 @@ void getInput( void )
     g_abKeyPressed[K_RIGHT]  = isKeyPressed(VK_RIGHT);
     g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
+	g_abKeyPressed[K_BACK] = isKeyPressed(VK_BACK);
 }
 
 //--------------------------------------------------------------
@@ -664,7 +665,7 @@ void moveCharacter()
 		}
         bSomethingHappened = true;
     }
-    if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
+    else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
         if (map[y][x-1] != (char)178)
 	    {
@@ -685,7 +686,7 @@ void moveCharacter()
 		}
         bSomethingHappened = true;
     }
-    if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
+    else if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
        if (map[y+1][x] != (char)178)
 	   {
@@ -707,7 +708,7 @@ void moveCharacter()
 		}
         bSomethingHappened = true;
     }
-    if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
+    else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
        if (map[y][x+1] != (char)178)
 	    {
@@ -754,6 +755,12 @@ void processUserInput()
 		g_sChar.m_cLocation.Y = 16;
 		displayLevel();
     }
+	if (g_eGameState == S_GAME && g_abKeyPressed[K_BACK])
+	{
+		g_sChar.m_cLocation.X = 28;
+		g_sChar.m_cLocation.Y = 16;
+		g_eGameState = S_LEVELMENU;
+	}
 }
 
 void clearScreen()

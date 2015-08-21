@@ -17,6 +17,7 @@ enum EKEYS
     K_RIGHT,
     K_ESCAPE,
     K_SPACE,
+	K_BACK,
     K_COUNT
 };
 
