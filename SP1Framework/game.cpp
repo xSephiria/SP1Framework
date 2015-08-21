@@ -70,11 +70,11 @@ void map1()
 	{
 		for (int rows = 0; rows < 60; rows++)
 		{
-			if (Nmap[cols][rows] == '#')
+			if (Nmap[cols][rows] == G_WALL)
 			{
 				Nmap[cols][rows] = (char)178;
 			}
-			if (Nmap[cols][rows] == 'B')
+			if (Nmap[cols][rows] == G_BOX)
 			{
 				Nmap[cols][rows] = (char)254;
 			}
@@ -638,6 +638,9 @@ void moveCharacter()
     if (g_dBounceTime > g_dElapsedTime)
         return;
 
+	int x = g_sChar.m_cLocation.X;
+	int y = g_sChar.m_cLocation.Y;
+
     // Updating the location of the character based on the key press
     // providing a beep sound whenver we shift the character
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
@@ -787,7 +790,7 @@ void renderMap()
 	{
 		for (int j = 0; j < 60; j++)
 		{
-		g_Console.writeToBuffer(j,i+1,map[i][j],0x0B);
+		g_Console.writeToBuffer(j,i,map[i][j],0x0B);
 		}
 	}
 

@@ -30,6 +30,14 @@ enum EGAMESTATES
     S_COUNT
 };
 
+enum GAMEOBJ
+{
+	G_WALL = '#',
+	G_BOX = 'B',
+	G_PORT = '@'
+};
+
+
 // struct for the game character
 struct SGameChar
 {
