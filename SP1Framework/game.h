@@ -2,6 +2,8 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
+#include <string>
+using std::string;
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -57,6 +59,8 @@ void displayMenu();
 void levelMenu();
 void optionsMenu();
 void gameStart();
+void displayLevel();
 void renderLevelMenu();
+
 
 #endif // _GAME_H

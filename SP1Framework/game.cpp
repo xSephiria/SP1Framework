@@ -16,8 +16,12 @@ bool    g_abKeyPressed[K_COUNT];
 
 
 bool something = false;
+char map[25][60] = {0};
+
+
 
 int currentLevel;           // Current Level ~.~
+
 int MenuP = 0;              // "Cursors" for main menu
 int &MenuPointer = MenuP;
 int LevelP = 0;               // "Cursors" for level menu
@@ -28,8 +32,475 @@ SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
+int x = g_sChar.m_cLocation.X;
+int y = g_sChar.m_cLocation.Y;
 // Console object
 Console g_Console(79, 28, "SP1 Framework");
+
+void map1()
+{
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                                                         #",
+	"#                                                         #",
+	"#                      STAGE ONE                          #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                          ###                            #",
+	"#                          #@#                            #",
+	"#                         ## ##                           #",
+	"#                         #   #                           #",
+	"#                         #BBB#                           #",
+	"#                         #   #                           #",
+	"#                         #   #                           #",
+	"#                         #BBB#                           #",
+	"#                         #   #                           #",
+	"#                         ## ##                           #",
+	"#                          #S#                            #",
+	"#                          ###                            #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                       EASY PEASY                        #",
+	"#                                                         #",
+	"#                                                         #",
+	"###########################################################",
+	};
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+	
+}
+void map2()
+{
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                                                         #",
+	"#                                                         #",
+	"#                       STAGE TWO                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                          ###                            #",
+	"#                        ###@###                          #",
+	"#                        #B B B#                          #",
+	"#                        #   B #                          #",
+	"#                        #B # B#                          #",
+	"#                        # B B #                          #",
+	"#                        #B B B#                          #",
+	"#                        #  #  #                          #",
+	"#                        # B B #                          #",
+	"#                        ### ###                          #",
+	"#                         # S #                           #",
+	"#                         #####                           #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                      Still OK Lah                       #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"###########################################################",
+	};
+
+
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
+void map3() {
+
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                         ##@##                           #",
+	"#                        ##   ##                          #",
+	"#                        #BB BB#                          #",
+	"#                        # BBB #                          #",
+	"#                        #B   B#                          #",
+	"#                        # BBB #                          #",
+	"#                        #     #                          #",
+	"#                       ##B##  ##                         #",
+	"#                       #B  ##  #                         #",
+	"#                       # B B B ##                        #",
+	"#      STAGE THREE      #B # B   #       Having Fun?      #",
+	"#                       #   B B ##                        #",
+	"#                       ##  ##  #                         #",
+	"#                       ## B ####                         #",
+	"#                         #   #                           #",
+	"#                         # S #                           #",
+	"#                         #####                           #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"###########################################################",
+	};
+
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
+void map4()
+{
+
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#              ##########################                 #",
+	"#              #                    B   #                 #",
+	"#              #   ##################   #                 #",
+	"#              # BB@B#   STAGE4     #   #                 #",
+	"#              #  B  #              #   #                 #",
+	"#              #######         ######   #                 #",
+	"#              #######        ##        #                 #",
+	"#                            ## B #######                 #",
+	"#                           ## B ##                       #",
+	"#                         ### B ##                        #",
+	"#                         ## B ##                         #",
+	"#                         #   ##                          #",
+	"#                         # S #                           #",
+	"#                         #####                           #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                         WUT???                          #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"###########################################################",
+	};
+
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
+void map5() {
+
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                      Stage 5            #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#           still easy?                                   #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                            ####                         #",
+	"#                        #####  #####                     #",
+	"#                      ###    B     #                     #",
+	"#                      #  B### #BBB #                     #",
+	"#                      # # #S# #B B #                     #",
+	"#                     ## ### ###B   #                     #",
+	"###########           # B # B ##B BB#                     #",
+	"# B    #B##          ##B B#    #BBB #                     #",
+	"# B#B@B#BB#          # B  #  B #B   #                     #",
+	"#  #B#B BB#  ####### ## B ### ##BBBB#                     #",
+	"#       B #### B   #####  # # ##### ##                    #",
+	"##BB#BBB#         B      #  #   B    #                    #",
+	"###########################################################",
+	};
+
+		for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+
+}
+void map6() {
+
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                          ###                            #",
+	"#                         ## ##################           #",
+	"#                         # B B               #           #",
+	"#                         #B ############### ##           #",
+	"#                      #### ##       #   B #B#            #",
+	"#                      # # B #       # B   B #            #",
+	"#                      # B ###       #B B  # #            #",
+	"#     Stage 6          # B  #        ## ######            #",
+	"#   Are you ready?    ##B######       # #########         #",
+	"#                     #   #           #  BB  B  #         #",
+	"#                     #BBB#           # B    B  #         #",
+	"#                     #   #######     ####### B #         #",
+	"#                     ## ###SB  #           ##@##         #",
+	"#                     #     BB###            ###          #",
+	"#                     ####### #                           #",
+	"#                           ###                           #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"###########################################################",
+	};
+
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
+void map7() 
+{
+
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#                                                         #",
+	"#         #############################  ###              #",
+	"#         #    B    B   B  B    B   B #  # ###            #",
+	"#         #@BB   BB  B B   B B    B # ####B B###          #",
+	"#         #######  BB B B  B ######## ## B B B ##         #",
+	"#               ##############     #      B B B ##        #",
+	"#               #B     B   B ##    ##### B B B   #        #",
+	"#               #  BB  B  ##  ##   ############# #        #",
+	"#               # B#######  B  #              ## ##       #",
+	"#               #B #     ##B#B #  Stage 7    ##   ##      #",
+	"#               #  #     ## B  #   SO CLOSE  #BB BB#      #",
+	"#               #BB#      # ####             # BBB #      #",
+	"#               #  #      # S#       ####### #B   B#      #",
+	"#               #  #      #######    #   B # # BBB #      #",
+	"#               #BB############ ###  # #B ## #     #      #",
+	"#               #    ## B B  B  B #### ## #  ### ###      #",
+	"#               # ##    B B  B  B     B # ####BB ##       #",
+	"#               ####### B B  B  B ####### B       #       #",
+	"#                     #############     ###########       #",
+	"#                                                         #",
+	"###########################################################",
+	};
+
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+
+}
+void map8() {
+
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#                                                         #",
+	"#  Stage 8                                                #",
+	"#              ##################################         #",
+	"#             ##   #  B  # B   B#  B B B # B # B####      #",
+	"#            ## B  #  #  # BB BB# B B # B B B # # B##     #",
+	"#           ## B B B  #  B  B B ## B B # # B B     B##    #",
+	"#           # B #  #########BB B# B # B B ## ## B B # ##  #",
+	"#          ##  #  #####UMAD?#BBB#B # B B###BRO?### B B #  #",
+	"#         ## B## ##########  #  # B B #############  ##   #",
+	"#      ####BB #  B   #B B  # B B### #####         B B ##  #",
+	"#    ###  B B ####B###  #       #  B  #   B ##########    #",
+	"#    #   B  B  #######  B ########## ####  #B B      #    #",
+	"#    # ####B##########  ### B   ### B #  BB B   ###B #    #",
+	"#    #     B##  B  ####    B #  B     #     B B####  #    #",
+	"#    ### B   ##B  B   #############################B #    #",
+	"#      ## BB  ##B  B  B     S#@                ####  #    #",
+	"#       ##  BB # B  ######################### BB### B##   #",
+	"#        ##   B ### B            ##          B ##   B #   #",
+	"#         ###  B  ############# ### ##############BBBB#   #",
+	"#           ###    B     BB   B ##   B    B    B      #   #",
+	"#             #####   BB     B  ###BB BB  B B   B #####   #",
+	"#                  ################################       #",
+	"#                                                         #",
+	"###########################################################",
+	};
+
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
+void map9() {
+
+	char Nmap[25][60] = {
+        "###########################################################",
+        "#       B     BBB         #                    B   BB  B  #",
+        "#         #        ######          #######     BB   B     #",
+        "##B B#BBB###########REKT############FACES##############   #",
+        "#         #       B######B         B######B           #   #",
+        "##BBB# BB##      B        B       B        B    #B  # #   #",
+        "# B       #     B  B   B   B     B  B    B  B   B#B#  #BBB#",
+        "##BBB#B B##     B          B     B          B    B#   #   #",
+        "#         #     B   BBBB   B     B  B    B  B   B#B#  #   #",
+        "##BBB# B###      B B    B B       B  BBBB  B        # # B #",
+        "#     B   #       BBBBBBBB         BBBBBBBB  BBBB######B B#",
+        "#    #    ## ##############################BBBB    BB##  B#",
+        "#   B     #                               #BBBBB B BB #   #",
+        "#  B      ########################B#B B B##BBBBBB B   #   #",
+        "##BBB#BB###                       B B## B######### B  #   #",
+        "#         #     ###############BBBB #  BB##     #BB BB#   #",
+        "########  #     ########### S # B # BBB B## LOL #   B #   #",
+        "#         #BB BB# LEVEL  ##   #   B    B ##     #   # #B B#",
+        "# B######## B B #  NINE  ##   # BBBB  BB ##########BB #BB #",
+        "#     B BB#B B B# LET'S  ## B #  B BB  BB### BB   #   #B B#",
+        "######  BB# BBB #  GO    ##  B#   BB B B ##B  B       # B #",
+        "#   B     # BB  ###########B B# ########### BBB####BBB#   #",
+        "# #########  B  #         ##  ###  B    BB    ##  #B B#BB #",
+        "#            B  #         #B        BB    B  B#   #B  # @ #",
+        "###########################################################",
+        };
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
+void map10() {
+
+	char Nmap[25][60] = {
+	"###########################################################",
+	"#         #          #         B      #   B               #",
+	"#               #  # # #######B # BBB ##B# ###########    #",
+	"#  ##############  # # #     #  #B   B#   B#         ##BB##",
+	"#  #    LAST    #  # # # ### #BB# BBB #  B## ####### #    #",
+	"#  #    STAGE   #B # #   ##  #  #BB BB# B  # #     # #    #",
+	"#  ##############B # #  ### ##BB##   ###B# # # ### # #BB#B#",
+	"#       # B        # #BBB##  #  ### ###    # # #@# # #    #",
+	"#   ##  # ########## #   ### #BB#     #  B## #   # # #    #",
+	"#BBB##    #  B       BB  ##B    #B###B# B  # ##### # #BBB##",
+	"#  B   BB # B# # # #B BB  ####### ### # ####       # #    #",
+	"#  ##B## B#   ##B B  B##  ####### BB B# B ########## #    #",
+	"# B##  #B## BB # # B# #  ########   B # # #          #B#BB#",
+	"#B   B    #       B#  #  #  # B #  BB #    B #########    #",
+	"## B ############    ##  #      ##B  B######## # # # B  #B#",
+	"##B B#JUST DO IT# ##     # BB#  #BB BB#     ##B # B B ##  #",
+	"## B #######################S#BB#  B B#  # B ##B B #   B B#",
+	"#  ###B   B  B   B  BB     ###  #  B B#B ## B ##B   B # B #",
+	"# ##B    BB   B BB B     B B#  B#B BB # B### B ######### ##",
+	"# ##BBB################## B #   #B B B#  B ## B #    B    #",
+	"#  #B  B         B    B #B  #   #BB BB### B ##B # #########",
+	"## #B B########    BBB B# B #BBB#BB B B ## B # B#         #",
+	"## ##### B B  ####### B #B B#   ### B B  ##  #  ######### #",
+	"#B                 B    ##  B   ###  BB     ##            #",
+	"###########################################################",
+	};
+
+	for (int cols = 0; cols < 25; cols++)
+	{
+		for (int rows = 0; rows < 60; rows++)
+		{
+			if (Nmap[cols][rows] == '#')
+			{
+				Nmap[cols][rows] = (char)178;
+			}
+			if (Nmap[cols][rows] == 'B')
+			{
+				Nmap[cols][rows] = (char)254;
+			}
+			map[cols][rows] = Nmap[cols][rows];
+		}
+	}
+}
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -47,11 +518,11 @@ void init( void )
     // sets the initial state for the game
     g_eGameState = S_SPLASHSCREEN;
 
-    g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
-    g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
+    g_sChar.m_cLocation.X = 28;
+    g_sChar.m_cLocation.Y = 16;
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
-    g_Console.setConsoleFont(0, 16, L"Consolas");
+    g_Console.setConsoleFont(0, 36, L"Consolas");
 }
 
 //--------------------------------------------------------------
@@ -109,18 +580,19 @@ void update(double dt)
     // get the delta time
     g_dElapsedTime += dt;
     g_dDeltaTime = dt;
-
+	
     switch (g_eGameState)
     {
         case S_SPLASHSCREEN : renderSplashScreen(); // game logic for the splash screen
             break;
-        case S_GAME: gameplay(); // gameplay logic when we are in the game
+        case S_GAME: gameplay();  // gameplay logic when we are in the game
             break;
 		case S_LEVELMENU : levelMenu(); //Level Menu
 			break;
 		//case S_OPTIONS : optionsMenu();
 			//break;
     }
+	
 }
 //--------------------------------------------------------------
 // Purpose  : Render function is to update the console screen
@@ -132,7 +604,7 @@ void update(double dt)
 //--------------------------------------------------------------
 void render()
 {
-    clearScreen();      // clears the current screen and draw from scratch 
+    clearScreen();     // clears the current screen and draw from scratch 
     switch (g_eGameState)
     {
         case S_SPLASHSCREEN: renderSplashScreen();
@@ -142,6 +614,7 @@ void render()
 		case S_LEVELMENU : renderLevelMenu(); 
 			break;
     }
+	
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
@@ -156,6 +629,7 @@ void gameplay()            // gameplay logic
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                         // sound can be played here too.
+	
 }
 
 void moveCharacter()
@@ -168,28 +642,91 @@ void moveCharacter()
     // providing a beep sound whenver we shift the character
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
     {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.Y--;
+        if (map[y-1][x] != (char)178)
+	   {
+			if( map[y - 1][x] != (char)254) //if box not present
+			{ 
+                g_sChar.m_cLocation.Y--;
+				
+			} 
+			else if ( map[y - 1][x] == (char)254 && map[y-2][x] != (char)178 && map[y-2][x] != (char)254)
+			{
+				map[y - 2][x] = (char)254;
+				g_sChar.m_cLocation.Y--;
+				map[y - 1][x] = ' ';
+				
+			}
+			else if (map[y-1][x] != (char)254 && map[y-2][x] != (char)254 )
+			{
+				g_sChar.m_cLocation.Y--;
+			}
+		}
         bSomethingHappened = true;
     }
     if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.X--;
+        if (map[y][x-1] != (char)178)
+	    {
+			if( map[y][x-1] != (char)254) //if box(ascii char 66) not present
+			{ 
+                g_sChar.m_cLocation.X--;	
+			} 
+			else if ( map[y][x-1] == (char)254 && map[y][x-2] != (char)178 && map[y][x-2] != (char)254)
+			{
+				map[y][x-2] = (char)254;
+				g_sChar.m_cLocation.X--;
+				map[y][x-1] = ' ';	
+			}
+			else if (map[y][x-1] != (char)254 && map[y][x-2] != (char)254 )
+			{
+				g_sChar.m_cLocation.X--;
+			}
+		}
         bSomethingHappened = true;
     }
     if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.Y++;
+       if (map[y+1][x] != (char)178)
+	   {
+			if( map[y + 1][x] != (char)254) //if box(ascii char 66) not present
+			{ 
+                g_sChar.m_cLocation.Y++;
+			} 
+			else if ( map[y+1][x] == (char)254 && map[y+2][x] != (char)178 && map[y+2][x] != (char)254)
+			{
+				map[y+2][x] = (char)254;
+				g_sChar.m_cLocation.Y++;
+				map[y+1][x] = ' ';
+			
+			}
+			else if (map[y+1][x] != (char)254 && map[y+2][x] != (char)254 )
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+		}
         bSomethingHappened = true;
     }
     if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.X++;
+       if (map[y][x+1] != (char)178)
+	    {
+			if( map[y][x+1] != (char)254) //if box(ascii char 66) not present
+			{ 
+                g_sChar.m_cLocation.X++;
+			} 
+			else if ( map[y][x+1] == (char)254 && map[y][x+2] != (char)178 && map[y][x+2] != (char)254)
+			{
+				map[y][x+2] = (char)254;
+				g_sChar.m_cLocation.X++;
+				map[y][x+1] = ' ';
+			}
+			else if (map[y][x+1] != (char)254 && map[y][x+2] != (char)254 )
+			{
+				g_sChar.m_cLocation.X++;
+			}
         bSomethingHappened = true;
-    }
+		}
+	}
     if (g_abKeyPressed[K_SPACE])
     {
         g_sChar.m_bActive = !g_sChar.m_bActive;
@@ -229,11 +766,10 @@ void renderGame()
     renderMap();        // renders the map to the buffer first
     renderCharacter();  // renders the character into the buffer
 }
-
 void renderMap()
 {
     // Set up sample colours, and output shadings
-    const WORD colors[] = {
+    /*const WORD colors[] = {
         0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
         0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
     };
@@ -245,7 +781,16 @@ void renderMap()
         c.Y = i + 1;
         colour(colors[i]);
         g_Console.writeToBuffer(c, " °±²Û", colors[i]);
-    }
+    }*/
+	
+	for(int i = 0; i < 25; i++) 
+	{
+		for (int j = 0; j < 60; j++)
+		{
+		g_Console.writeToBuffer(j,i+1,map[i][j],0x0B);
+		}
+	}
+
 }
 
 void renderCharacter()
@@ -318,7 +863,7 @@ void displayMenu()
 					MenuPointer = 2;
 				}
 			}
-			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			else if (g_abKeyPressed[K_DOWN])
 			{
 				MenuPointer++;
 				if (MenuPointer == 3)
@@ -341,10 +886,11 @@ void displayMenu()
 						}break;
 					case 2:
 						{
-							something = true;
+							g_bQuitGame = true;
 						}break;
 				}
 			}
+			Sleep(150);
 }
 void levelMenu()
 {
@@ -397,9 +943,83 @@ void levelMenu()
 				{
 					case 0:
 						{
-							currentLevel = 1; //Map1
+							currentLevel = 1;//Map1
+							displayLevel();
 							g_eGameState = S_GAME;
+							break;
 						}
+					case 1:
+						{
+							currentLevel = 2;//Map2
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 2:
+						{
+							currentLevel = 3;//Map3
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 3:
+						{
+							currentLevel = 4;//Map4
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 4:
+						{
+							currentLevel = 5;//Map5
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 5:
+						{
+							currentLevel = 6;//Map6
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 6:
+						{
+							currentLevel = 7;//Map7
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 7: 
+						{
+							currentLevel = 8;//Map8
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 8:
+						{
+							currentLevel = 9;//Map9
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 9:
+						{
+							currentLevel = 10;//Map10
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 10: g_eGameState = S_SPLASHSCREEN; break;
 				}
 			}
+	Sleep(150);
+}
+void displayLevel()
+{
+	switch (currentLevel)
+	{
+	case 1: map1(); break; 
+	case 2: map2(); break;
+	case 3: map3(); break;
+	case 4: map4(); break;
+	case 5: map5(); break;
+	case 6: map6(); break;
+	case 7: map7(); break;
+	case 8: map8(); break;
+	case 9: map9(); break;
+	case 10: map10(); break;
+	}
 }
