@@ -730,11 +730,14 @@ void moveCharacter()
         bSomethingHappened = true;
 		}
 	}
-    if (g_abKeyPressed[K_SPACE])
-    {
-        g_sChar.m_bActive = !g_sChar.m_bActive;
-        bSomethingHappened = true;
-    }
+	if (map[y][x] == '@')
+	{
+		g_sChar.m_cLocation.X = 28;
+		g_sChar.m_cLocation.Y = 16;
+		g_eGameState = S_LEVELMENU;
+		//displayLevel();
+		bSomethingHappened = true;
+	}
 
     if (bSomethingHappened)
     {
@@ -746,7 +749,13 @@ void processUserInput()
 {
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
-        g_bQuitGame = true;    
+        g_bQuitGame = true; 
+	if (g_abKeyPressed[K_SPACE])
+    {
+        g_sChar.m_cLocation.X = 28;
+		g_sChar.m_cLocation.Y = 16;
+		displayLevel();
+    }
 }
 
 void clearScreen()
