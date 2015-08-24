@@ -18,7 +18,9 @@ enum EKEYS
     K_ESCAPE,
     K_SPACE,
 	K_BACK,
+	K_RETURN,
     K_COUNT
+	
 };
 
 // Enumeration for the different screen states
@@ -70,6 +72,7 @@ void optionsMenu();
 void gameStart();
 void displayLevel();
 void renderLevelMenu();
+void renderOptionsMenu();
 
 
 #endif // _GAME_H
