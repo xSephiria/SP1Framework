@@ -3,6 +3,8 @@
 #include "Framework\timer.h"
 #include "game.h"
 
+char map[25][60] = {0};
+
 CStopWatch g_Timer;                            // Timer function to keep track of time and the frame rate
 bool g_bQuitGame = false;                    // Set to true if you want to quit the game
 const unsigned char gc_ucFPS = 30;                // FPS of this game

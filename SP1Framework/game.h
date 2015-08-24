@@ -23,6 +23,8 @@ enum EKEYS
 	
 };
 
+
+
 // Enumeration for the different screen states
 enum EGAMESTATES
 {
@@ -31,13 +33,6 @@ enum EGAMESTATES
 	S_LEVELMENU,
 	S_OPTIONS,
     S_COUNT
-};
-
-enum GAMEOBJ
-{
-	G_WALL = '#',
-	G_BOX = 'B',
-	G_PORT = '@'
 };
 
 
@@ -70,9 +65,11 @@ void displayMenu();
 void levelMenu();
 void optionsMenu();
 void gameStart();
-void displayLevel();
 void renderLevelMenu();
 void renderOptionsMenu();
+
+
+void lifepoint();
 
 
 #endif // _GAME_H
