@@ -28,7 +28,7 @@ enum EKEYS
 // Enumeration for the different screen states
 enum EGAMESTATES
 {
-    S_SPLASHSCREEN,
+    S_MAINMENU,
     S_GAME,
 	S_LEVELMENU,
 	S_OPTIONS,
@@ -62,17 +62,18 @@ void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
 
-void displayMenu();
-void levelMenu();
-void optionsMenu();
-void gameStart();
+void renderMainMenu();
 void renderLevelMenu();
 void renderOptionsMenu();
-void instruct();
+//void gameStart();
 void renderInstruct();
 
 int playSong();
 void lifepoint();
 
+void updateMenu();
+void updateLevelMenu();
+void updateOptionsMenu();
+void updateInstruct();
 
 #endif // _GAME_H
