@@ -152,7 +152,7 @@ void render()
 			break;
     }
 	
-    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
+	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
 /*void splashScreenWait()    // waits for time to pass in splash screen
 {
@@ -338,7 +338,7 @@ void renderMap()
         colour(colors[i]);
         g_Console.writeToBuffer(c, " °±²Û", colors[i]);
     }*/
-	
+
 	for(int i = 0; i < 25; i++) 
 	{
 		for (int j = 0; j < 60; j++)
@@ -653,3 +653,29 @@ void renderOptionsMenu()
 {
 	optionsMenu();
 }
+
+
+/*
+int Health = 3;
+
+/void lifepoint(){
+
+	COORD c;
+
+	char heart = 3;
+
+	for (int i = 0; i <= Health; i++)
+	{
+		g_Console.writeToBuffer(60, heart ,0x0B);
+		if (g_abKeyPressed[K_SPACE])
+		{
+			Health -= 1;
+			if (Health == 0)
+			{
+				g_bQuitGame = true; 
+			}
+
+		}
+	}
+}*/
+
