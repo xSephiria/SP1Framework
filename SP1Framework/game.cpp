@@ -2,6 +2,7 @@
 //
 //
 #include "game.h"
+#include "map.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
@@ -14,11 +15,7 @@ double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
 
-
 bool something = false;
-char map[25][60] = {0};
-
-
 
 int currentLevel;           // Current Level ~.~
 
