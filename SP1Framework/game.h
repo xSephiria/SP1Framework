@@ -32,6 +32,7 @@ enum EGAMESTATES
     S_GAME,
 	S_LEVELMENU,
 	S_OPTIONS,
+	S_INSTRUCTIONS,
     S_COUNT
 };
 
@@ -67,8 +68,10 @@ void optionsMenu();
 void gameStart();
 void renderLevelMenu();
 void renderOptionsMenu();
+void instruct();
+void renderInstruct();
 
-
+int playSong();
 void lifepoint();
 
 

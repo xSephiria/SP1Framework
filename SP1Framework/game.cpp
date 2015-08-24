@@ -35,6 +35,11 @@ int y = g_sChar.m_cLocation.Y;
 Console g_Console(79, 28, "SP1 Framework");
 
 extern char map[25][60];
+int playSong()
+{
+	PlaySound(TEXT("freesong.wav"), NULL, SND_ASYNC|SND_FILENAME|SND_LOOP);		
+	return 0;
+}
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
 //            Initialize variables, allocate memory, load data from file, etc. 
@@ -44,6 +49,7 @@ extern char map[25][60];
 //--------------------------------------------------------------
 void init( void )
 {
+	playSong();
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
     g_dBounceTime = 0.0;
@@ -120,6 +126,8 @@ void update(double dt)
     {
         case S_SPLASHSCREEN : renderSplashScreen(); // game logic for the splash screen
             break;
+		case S_INSTRUCTIONS: instruct(); // game logic for instructions
+			break;
         case S_GAME: gameplay();  // gameplay logic when we are in the game
             break;
 		case S_LEVELMENU : levelMenu(); //Level Menu
@@ -144,6 +152,8 @@ void render()
     {
         case S_SPLASHSCREEN: renderSplashScreen();
             break;
+		case S_INSTRUCTIONS: renderInstruct();
+			break;
         case S_GAME: renderGame();
             break;
 		case S_LEVELMENU : renderLevelMenu(); 
@@ -395,7 +405,7 @@ void renderToScreen()
 }
 void displayMenu()
 {
-	string Menu[3] ={"                                   Start Game", "                                    Options", "                                      Exit"};
+	string Menu[4] ={"                                   Start Game","                                  Instructions", "                                    Options", "                                      Exit"};
 	char box[9][75] = {
 "                  ______   _______           _______  _______ ",
 "                 (  ___ \\ (  ___  )|\\     /|(  ____ \\(  ____ \\",
@@ -410,7 +420,7 @@ void displayMenu()
   {
   g_Console.writeToBuffer(0,i,box[i],0x02);
   }
-	for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < 4; ++i)
 		{
 			if (i == MenuPointer)
 			{	
@@ -427,13 +437,13 @@ void displayMenu()
 				MenuPointer--;
 				if (MenuPointer == -1)
 				{
-					MenuPointer = 2;
+					MenuPointer = 3;
 				}
 			}
 			else if (GetAsyncKeyState(VK_DOWN) != 0)
 			{
 				MenuPointer++;
-				if (MenuPointer == 3)
+				if (MenuPointer == 4)
 				{
 					MenuPointer = 0;
 				}
@@ -447,11 +457,15 @@ void displayMenu()
 						{
 							g_eGameState = S_LEVELMENU; 
 						}break;
-					case 1: 
+					case 1:
+						{
+							g_eGameState = S_INSTRUCTIONS;
+						}break;
+					case 2: 
 						{
 							g_eGameState = S_OPTIONS;
 						}break;
-					case 2:
+					case 3:
 						{
 							g_bQuitGame = true;
 						}break;
@@ -663,7 +677,35 @@ void renderOptionsMenu()
 {
 	optionsMenu();
 }
+void renderInstruct()
+{
+	instruct();
+}
+void instruct()
+{
+	if (g_abKeyPressed[K_BACK])
+	{
+				g_eGameState = S_SPLASHSCREEN;
+	}
 
+	g_Console.writeToBuffer(17, 5, "Controls" , 0x0B );
+	g_Console.writeToBuffer(17, 6, "Arrow Key Up = Move up" );
+	g_Console.writeToBuffer(17, 7, "Arrow Key Down = Move down" );
+	g_Console.writeToBuffer(17, 8, "Arrow Key Left = Move left" );
+	g_Console.writeToBuffer(17, 9, "Arrow Key Right = Move right" );
+	g_Console.writeToBuffer(17, 10, "Spacebar = Restart stage");
+	g_Console.writeToBuffer(17, 11, "Backspace = Return to previous menu");
+	g_Console.writeToBuffer(17, 12, "Esc = Quit game");
+
+	g_Console.writeToBuffer(17, 14, "Backstory" , 0x0B);
+	g_Console.writeToBuffer(17, 15, "A man went into a cave to train by pushing boxes.");
+	g_Console.writeToBuffer(17, 16, "However,the more he pushed, the more he got addicted.");
+	g_Console.writeToBuffer(17, 17, "This left him getting stuck in the cave building his");
+	g_Console.writeToBuffer(17, 18, "biceps for years. All hope is not lost yet, it seems");
+	g_Console.writeToBuffer(17, 19, "that if he gets to a portal, he might just get out!?");
+
+	g_Console.writeToBuffer(17, 21, "Press backspace to return" , 0x0B );
+}
 
 /*
 int Health = 3;
