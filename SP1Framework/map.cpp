@@ -339,7 +339,7 @@ void mapData(char c[][60]) {
 			}
 			if (c[cols][rows] == G_BOX)
 			{
-				c[cols][rows] = (char)254;
+				c[cols][rows] = (char)177;
 			}
 			map[cols][rows] = c[cols][rows];
 		}

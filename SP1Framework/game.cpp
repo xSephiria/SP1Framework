@@ -55,7 +55,7 @@ void init( void )
     g_sChar.m_cLocation.Y = 16;
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
-    g_Console.setConsoleFont(0, 36, L"Consolas");
+    g_Console.setConsoleFont(0, 36, L"Calibri");
 }
 
 //--------------------------------------------------------------
@@ -183,19 +183,19 @@ void moveCharacter()
     {
         if (map[y-1][x] != (char)178)
 	   {
-			if( map[y - 1][x] != (char)254) //if box not present
+			if( map[y - 1][x] != (char)177) //if box not present
 			{ 
                 g_sChar.m_cLocation.Y--;
 				
 			} 
-			else if ( map[y - 1][x] == (char)254 && map[y-2][x] != (char)178 && map[y-2][x] != (char)254)
+			else if ( map[y - 1][x] == (char)177 && map[y-2][x] != (char)178 && map[y-2][x] != (char)177)
 			{
-				map[y - 2][x] = (char)254;
+				map[y - 2][x] = (char)177;
 				g_sChar.m_cLocation.Y--;
 				map[y - 1][x] = ' ';
 				
 			}
-			else if (map[y-1][x] != (char)254 && map[y-2][x] != (char)254 )
+			else if (map[y-1][x] != (char)177 && map[y-2][x] != (char)177 )
 			{
 				g_sChar.m_cLocation.Y--;
 			}
@@ -206,17 +206,17 @@ void moveCharacter()
     {
         if (map[y][x-1] != (char)178)
 	    {
-			if( map[y][x-1] != (char)254) //if box(ascii char 66) not present
+			if( map[y][x-1] != (char)177) //if box(ascii char 66) not present
 			{ 
                 g_sChar.m_cLocation.X--;	
 			} 
-			else if ( map[y][x-1] == (char)254 && map[y][x-2] != (char)178 && map[y][x-2] != (char)254)
+			else if ( map[y][x-1] == (char)177 && map[y][x-2] != (char)178 && map[y][x-2] != (char)177)
 			{
-				map[y][x-2] = (char)254;
+				map[y][x-2] = (char)177;
 				g_sChar.m_cLocation.X--;
 				map[y][x-1] = ' ';	
 			}
-			else if (map[y][x-1] != (char)254 && map[y][x-2] != (char)254 )
+			else if (map[y][x-1] != (char)177 && map[y][x-2] != (char)177 )
 			{
 				g_sChar.m_cLocation.X--;
 			}
@@ -227,18 +227,18 @@ void moveCharacter()
     {
        if (map[y+1][x] != (char)178)
 	   {
-			if( map[y + 1][x] != (char)254) //if box(ascii char 66) not present
+			if( map[y + 1][x] != (char)177) //if box(ascii char 66) not present
 			{ 
                 g_sChar.m_cLocation.Y++;
 			} 
-			else if ( map[y+1][x] == (char)254 && map[y+2][x] != (char)178 && map[y+2][x] != (char)254)
+			else if ( map[y+1][x] == (char)177 && map[y+2][x] != (char)178 && map[y+2][x] != (char)177)
 			{
-				map[y+2][x] = (char)254;
+				map[y+2][x] = (char)177;
 				g_sChar.m_cLocation.Y++;
 				map[y+1][x] = ' ';
 			
 			}
-			else if (map[y+1][x] != (char)254 && map[y+2][x] != (char)254 )
+			else if (map[y+1][x] != (char)177 && map[y+2][x] != (char)177 )
 			{
 				g_sChar.m_cLocation.Y++;
 			}
@@ -249,17 +249,17 @@ void moveCharacter()
     {
        if (map[y][x+1] != (char)178)
 	    {
-			if( map[y][x+1] != (char)254) //if box(ascii char 66) not present
+			if( map[y][x+1] != (char)177) //if box(ascii char 66) not present
 			{ 
                 g_sChar.m_cLocation.X++;
 			} 
-			else if ( map[y][x+1] == (char)254 && map[y][x+2] != (char)178 && map[y][x+2] != (char)254)
+			else if ( map[y][x+1] == (char)177 && map[y][x+2] != (char)178 && map[y][x+2] != (char)177)
 			{
-				map[y][x+2] = (char)254;
+				map[y][x+2] = (char)177;
 				g_sChar.m_cLocation.X++;
 				map[y][x+1] = ' ';
 			}
-			else if (map[y][x+1] != (char)254 && map[y][x+2] != (char)254 )
+			else if (map[y][x+1] != (char)177 && map[y][x+2] != (char)177 )
 			{
 				g_sChar.m_cLocation.X++;
 			}
@@ -343,7 +343,17 @@ void renderMap()
 	{
 		for (int j = 0; j < 60; j++)
 		{
-		g_Console.writeToBuffer(j,i,map[i][j],0x0B);
+			if (map[i][j] == (char)178)
+			{
+				g_Console.writeToBuffer(j,i,map[i][j],0x0B);
+			}
+			else if (map[i][j] == (char)177)
+			{
+				g_Console.writeToBuffer(j,i,map[i][j],0x0E);
+			}
+			else
+				g_Console.writeToBuffer(j,i,map[i][j],0x0F);
+		
 		}
 	}
 
