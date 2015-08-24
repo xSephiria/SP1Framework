@@ -557,7 +557,8 @@ void getInput( void )
     g_abKeyPressed[K_RIGHT]  = isKeyPressed(VK_RIGHT);
     g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
-	g_abKeyPressed[K_BACK] = isKeyPressed(VK_BACK);
+	g_abKeyPressed[K_BACK]   = isKeyPressed(VK_BACK);
+	g_abKeyPressed[K_RETURN] = isKeyPressed(VK_RETURN);
 }
 
 //--------------------------------------------------------------
@@ -588,8 +589,8 @@ void update(double dt)
             break;
 		case S_LEVELMENU : levelMenu(); //Level Menu
 			break;
-		//case S_OPTIONS : optionsMenu();
-			//break;
+		case S_OPTIONS : optionsMenu();
+			break;
     }
 	
 }
@@ -611,6 +612,8 @@ void render()
         case S_GAME: renderGame();
             break;
 		case S_LEVELMENU : renderLevelMenu(); 
+			break;
+		case S_OPTIONS : renderOptionsMenu();
 			break;
     }
 	
@@ -755,7 +758,7 @@ void processUserInput()
 		g_sChar.m_cLocation.Y = 16;
 		displayLevel();
     }
-	if (g_eGameState == S_GAME && g_abKeyPressed[K_BACK])
+	if (g_eGameState == S_GAME && GetAsyncKeyState(VK_BACK) != 0)
 	{
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
@@ -797,7 +800,7 @@ void renderMap()
         c.X = 5 * i;
         c.Y = i + 1;
         colour(colors[i]);
-        g_Console.writeToBuffer(c, " °±²Û", colors[i]);
+        g_Console.writeToBuffer(c, " Â°Â±Â²Ã›", colors[i]);
     }*/
 	
 	for(int i = 0; i < 25; i++) 
@@ -858,7 +861,7 @@ void displayMenu()
 	};
   for (int i = 0; i < 9; i++)
   {
-  g_Console.writeToBuffer(0,i,box[i]);
+  g_Console.writeToBuffer(0,i,box[i],0x02);
   }
 	for (int i = 0; i < 3; ++i)
 		{
@@ -868,7 +871,7 @@ void displayMenu()
 			}
 			else
 			{
-				 g_Console.writeToBuffer(0,10+i,Menu[i],0x0F);
+				 g_Console.writeToBuffer(0,10+i,Menu[i],0x03);
 			}
 		}
 
@@ -880,7 +883,7 @@ void displayMenu()
 					MenuPointer = 2;
 				}
 			}
-			else if (g_abKeyPressed[K_DOWN])
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
 			{
 				MenuPointer++;
 				if (MenuPointer == 3)
@@ -907,6 +910,10 @@ void displayMenu()
 						}break;
 				}
 			}
+			else if (GetAsyncKeyState(VK_ESCAPE) != 0)
+			{
+				g_bQuitGame = true;
+			}
 			Sleep(150);
 }
 void levelMenu()
@@ -923,7 +930,7 @@ void levelMenu()
 					  "                                      Map10",
 					  "                               Back to Main Menu"};
 
-	g_Console.writeToBuffer(0,2,"                               Choose Your Level",0x0F);
+	g_Console.writeToBuffer(0,2,"                               Choose Your Level",0x04);
 
 	for (int i = 0; i < 11; ++i)
 		{
@@ -933,7 +940,7 @@ void levelMenu()
 			}
 			else
 			{
-				g_Console.writeToBuffer(0, 6+i,Menu[i],0x0F);
+				g_Console.writeToBuffer(0, 6+i,Menu[i],0x03);
 			}
 		}
 
@@ -1031,6 +1038,14 @@ void levelMenu()
 					case 10: g_eGameState = S_SPLASHSCREEN; break;
 				}
 			}
+	/*else if (GetAsyncKeyState(VK_BACK) != 0)
+	{
+		g_eGameState = S_SPLASHSCREEN;              //Only one that jumps 2... WHYYYYYYYY???
+	}*/
+	else if (GetAsyncKeyState(VK_ESCAPE) != 0)
+	{
+		g_bQuitGame = true;
+	}
 	Sleep(150);
 }
 void displayLevel()
@@ -1048,4 +1063,67 @@ void displayLevel()
 	case 9: map9(); break;
 	case 10: map10(); break;
 	}
+}
+
+void optionsMenu()
+{
+	string Options[3] ={"                                   Something", "                                   Something", "                               Back To Main Menu"};
+	g_Console.writeToBuffer(0,2,"                                    OPTIONS",0x04);
+	for (int i = 0; i < 3; ++i)
+		{
+			if (i == MenuPointer)
+			{	
+				 g_Console.writeToBuffer(0,10+i,Options[i],0x0B);
+			}
+			else
+			{
+				 g_Console.writeToBuffer(0,10+i,Options[i],0x03);
+			}
+		}
+
+			if (GetAsyncKeyState(VK_UP) != 0)
+			{
+				MenuPointer--;
+				if (MenuPointer == -1)
+				{
+					MenuPointer = 2;
+				}
+			}
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			{
+				MenuPointer++;
+				if (MenuPointer == 3)
+				{
+					MenuPointer = 0;
+				}
+			}
+			else if (GetAsyncKeyState(VK_RETURN) != 0)
+			{
+				switch(MenuPointer)
+				{
+
+					case 0:
+						{
+							g_eGameState = S_LEVELMENU; 
+						}break;
+					case 1: 
+						{
+							g_eGameState = S_OPTIONS;
+						}break;
+					case 2:
+						{
+							g_eGameState = S_SPLASHSCREEN;
+						}break;
+				}
+			}
+			else if (GetAsyncKeyState(VK_ESCAPE) != 0)
+			{
+				g_bQuitGame = true;
+			}
+			Sleep(150);
+}
+
+void renderOptionsMenu()
+{
+	optionsMenu();
 }
