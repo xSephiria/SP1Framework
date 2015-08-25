@@ -25,6 +25,7 @@ int LevelP = 0;               // "Cursors" for level menu
 int &LevelPointer = LevelP;
 int OptionsP = 0;
 int &OptionsPointer = OptionsP;
+int Health = 3;
 // Game specific variables here
 SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_MAINMENU;
@@ -297,7 +298,10 @@ void processUserInput()
 	bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
+<<<<<<< 3867a93adb5586dddbc72cd73ebae4a8628207c0
 
+=======
+>>>>>>> 0694aca494e2078196e0242319bad101b1182e16
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
         g_bQuitGame = true; 
@@ -308,6 +312,7 @@ void processUserInput()
 		g_sChar.m_cLocation.Y = 16;
 		displayLevel();
 		loselife();
+		bSomethingHappened = true;
     }
 	else if (g_eGameState == S_GAME && GetAsyncKeyState(VK_BACK) != 0)
 	{
@@ -315,7 +320,12 @@ void processUserInput()
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		g_eGameState = S_LEVELMENU;
+		bSomethingHappened = true;
 	}
+<<<<<<< 3867a93adb5586dddbc72cd73ebae4a8628207c0
+=======
+
+>>>>>>> 0694aca494e2078196e0242319bad101b1182e16
 	if (bSomethingHappened)
     {
         // set the bounce time to some time in the future to prevent accidental triggers
@@ -503,30 +513,6 @@ void renderInstruct()
 
 	g_Console.writeToBuffer(17, 21, "Press backspace to return" , 0x0B );
 }
-/*
-int Health = 3;
-
-/void lifepoint(){
-
-	COORD c;
-
-	char heart = 3;
-
-	for (int i = 0; i <= Health; i++)
-	{
-		g_Console.writeToBuffer(60, heart ,0x0B);
-		if (g_abKeyPressed[K_SPACE])
-		{
-			Health -= 1;
-			if (Health == 0)
-			{
-				g_bQuitGame = true; 
-			}
-
-		}
-	}
-}*/
-
 
 void updateMenu()
 {
@@ -618,6 +604,7 @@ void updateLevelMenu()
 					case 0:
 						{
 							currentLevel = 1;//Map1
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -625,6 +612,7 @@ void updateLevelMenu()
 					case 1:
 						{
 							currentLevel = 2;//Map2
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -632,6 +620,7 @@ void updateLevelMenu()
 					case 2:
 						{
 							currentLevel = 3;//Map3
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -639,6 +628,7 @@ void updateLevelMenu()
 					case 3:
 						{
 							currentLevel = 4;//Map4
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -646,6 +636,7 @@ void updateLevelMenu()
 					case 4:
 						{
 							currentLevel = 5;//Map5
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -653,6 +644,7 @@ void updateLevelMenu()
 					case 5:
 						{
 							currentLevel = 6;//Map6
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -660,6 +652,7 @@ void updateLevelMenu()
 					case 6:
 						{
 							currentLevel = 7;//Map7
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -667,6 +660,7 @@ void updateLevelMenu()
 					case 7: 
 						{
 							currentLevel = 8;//Map8
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -674,6 +668,7 @@ void updateLevelMenu()
 					case 8:
 						{
 							currentLevel = 9;//Map9
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -681,6 +676,7 @@ void updateLevelMenu()
 					case 9:
 						{
 							currentLevel = 10;//Map10
+							Health = 3;
 							displayLevel();
 							g_eGameState = S_GAME;
 							break;
@@ -763,3 +759,30 @@ void updateInstruct()
 	{
 				g_eGameState = S_MAINMENU;
 	}
+}
+
+void lifepoint(){
+
+	COORD c;
+	g_Console.writeToBuffer(64, 11, "Tries Left: " ,0x0B);
+	for (int i = 0; i < Health; i++)
+	{
+		g_Console.writeToBuffer(64+i, 12, (char)3 ,0x04);
+	}
+
+	if (g_eGameState == S_LEVELMENU)
+	{
+		Health = 3;
+	}
+}
+
+void loselife() {
+
+	
+		Health -= 1;
+		if (Health == -1)
+		{
+			  g_bQuitGame = true;
+		}
+
+}
