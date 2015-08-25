@@ -799,8 +799,8 @@ void loselife() {
 void selectChar() {
 
 	g_Console.writeToBuffer(27,8," Select Your Character ",0x0B);
-	char Char[4] ={(char)1,(char)2,(char)3,(char)0};
-	string CharName[4] ={"HollowFace", "FullFace", "HeartShape","Stealth"};
+	char Char[4] ={(char)255,(char)1,(char)2,(char)3,};
+	string CharName[4] ={"Stealth","HollowFace", "FullFace", "HeartShape"};
 	g_Console.writeToBuffer(33,10," << ",0x0B);
 	for (int i = 0; i < 4; ++i)
 		{
@@ -820,7 +820,7 @@ void selectChar() {
 
 void UpdateCharSel() {
 
-	char Char[4] ={(char)1,(char)2,(char)3,(char)0}; 
+	char Char[4] ={(char)255,(char)1,(char)2,(char)3,}; 
 	bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
@@ -850,19 +850,19 @@ void UpdateCharSel() {
 							{
 							case 0 : {
 								g_sChar.gamechar = Char[0];
-								g_eGameState = S_LEVELMENU;
+								g_eGameState = S_MAINMENU;
 							} break;
 							case 1 : {
 								g_sChar.gamechar = Char[1];
-								g_eGameState = S_LEVELMENU;
+								g_eGameState = S_MAINMENU;
 							} break;
 							case 2 : {
 								g_sChar.gamechar = Char[2];
-								g_eGameState = S_LEVELMENU;
+								g_eGameState = S_MAINMENU;
 							} break;
 							case 3 : {
 								g_sChar.gamechar = Char[3];
-								g_eGameState = S_LEVELMENU;
+								g_eGameState = S_MAINMENU;
 							} break;
 							default: {
 								g_sChar.gamechar = (char)1;
