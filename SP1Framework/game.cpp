@@ -294,21 +294,32 @@ void moveCharacter()
 }
 void processUserInput()
 {
+	bool bSomethingHappened = false;
+    if (g_dBounceTime > g_dElapsedTime)
+        return;
+
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
         g_bQuitGame = true; 
-	if (g_abKeyPressed[K_SPACE])
+	else if (g_abKeyPressed[K_SPACE])
     {
+		bSomethingHappened = true;
         g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		displayLevel();
     }
-	if (g_eGameState == S_GAME && GetAsyncKeyState(VK_BACK) != 0)
+	else if (g_eGameState == S_GAME && GetAsyncKeyState(VK_BACK) != 0)
 	{
+		bSomethingHappened = true;
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		g_eGameState = S_LEVELMENU;
 	}
+	if (bSomethingHappened)
+    {
+        // set the bounce time to some time in the future to prevent accidental triggers
+        g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+    }
 }
 
 void clearScreen()
@@ -364,10 +375,10 @@ void renderCharacter()
 {
     // Draw the location of the character
     WORD charColor = 0x0C;
-    if (g_sChar.m_bActive)
+    /*if (g_sChar.m_bActive)
     {
         charColor = 0x0A;
-    }
+    }*/
     g_Console.writeToBuffer(g_sChar.m_cLocation, (char)3, charColor);
 }
 void renderFramerate()
@@ -457,7 +468,7 @@ void renderOptionsMenu()
 	g_Console.writeToBuffer(0,2,"                                    OPTIONS",0x04);
 	for (int i = 0; i < 3; ++i)
 		{
-			if (i == MenuPointer)
+			if (i == OptionsPointer)
 			{	
 				 g_Console.writeToBuffer(0,10+i,Options[i],0x0B);
 			}
