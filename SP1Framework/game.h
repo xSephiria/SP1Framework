@@ -70,6 +70,7 @@ void renderInstruct();
 
 int playSong();
 void lifepoint();
+void loselife();
 
 void updateMenu();
 void updateLevelMenu();

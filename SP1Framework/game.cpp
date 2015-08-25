@@ -307,6 +307,7 @@ void processUserInput()
         g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		displayLevel();
+		loselife();
     }
 	else if (g_eGameState == S_GAME && GetAsyncKeyState(VK_BACK) != 0)
 	{
@@ -331,7 +332,7 @@ void renderGame()
 {
     renderMap();        // renders the map to the buffer first
     renderCharacter();  // renders the character into the buffer
-	//lifepoint();
+	lifepoint();
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc
 }
 void renderMap()
@@ -369,6 +370,8 @@ void renderMap()
 		}
 	}
 
+
+
 }
 
 void renderCharacter()
@@ -398,6 +401,8 @@ void renderFramerate()
     c.X = g_Console.getConsoleSize().X - 15;
     c.Y = 9;
     g_Console.writeToBuffer(c, ss.str(), 0x59);
+
+
 
 }
 void renderToScreen()
@@ -758,4 +763,3 @@ void updateInstruct()
 	{
 				g_eGameState = S_MAINMENU;
 	}
-}
