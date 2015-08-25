@@ -1,8 +1,10 @@
-// This is the main file for the game logic and function
+/ This is the main file for the game logic and function
 //
 //
 #include "game.h"
 #include "map.h"
+#include "update.h"
+#include "render.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
@@ -19,15 +21,8 @@ bool something = false;
 
 int currentLevel;           // Current Level ~.~
 
-int MenuP = 0;              // "Cursors" for main menu
-int &MenuPointer = MenuP;
-int LevelP = 0;               // "Cursors" for level menu
-int &LevelPointer = LevelP;
-int OptionsP = 0;
-int &OptionsPointer = OptionsP;
+
 int Health = 3;
-int CharP = 0;
-int &CharPointer = CharP;
 // Game specific variables here
 SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_MAINMENU;
@@ -36,10 +31,9 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 int x = g_sChar.m_cLocation.X;
 int y = g_sChar.m_cLocation.Y;
 // Console object
-Console g_Console(80, 25, "SP1 Framework");
+Console g_Console(79, 28, "SP1 Framework");
 
 extern char map[25][60];
-
 int playSong()
 {
 	PlaySound(TEXT("freesong.wav"), NULL, SND_ASYNC|SND_FILENAME|SND_LOOP);		
@@ -139,7 +133,7 @@ void update(double dt)
 			break;
 		case S_OPTIONS : updateOptionsMenu();
 			break;
-		case S_CHARSELECT : UpdateCharSel();
+		case S_CHARSELECT : updateCharSelect();
 			break;
     }
 	
@@ -167,25 +161,14 @@ void render()
 			break;
 		case S_OPTIONS : renderOptionsMenu();
 			break;
-		case S_CHARSELECT : selectChar();
+		case S_CHARSELECT :renderCharSelect();
 			break;
+
     }
 	
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
-/*void splashScreenWait()    // waits for time to pass in splash screen
-{
-    if (g_dElapsedTime > 5.0) // wait for 3 seconds to switch to game mode, else do nothing
-        g_eGameState = S_GAME;
-}*/
 
-void gameplay()            // gameplay logic
-{
-    processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
-    moveCharacter();    // moves the character, collision detection, physics, etc
-                        // sound can be played here too.
-	
-}
 
 void moveCharacter()
 {
@@ -305,7 +288,6 @@ void processUserInput()
 	bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
-
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
         g_bQuitGame = true; 
@@ -326,7 +308,6 @@ void processUserInput()
 		g_eGameState = S_LEVELMENU;
 		bSomethingHappened = true;
 	}
-
 	if (bSomethingHappened)
     {
         // set the bounce time to some time in the future to prevent accidental triggers
@@ -384,24 +365,16 @@ void renderMap()
 
 
 }
-
 void renderCharacter()
 {
     // Draw the location of the character
     WORD charColor = 0x0C;
-    /*if (g_sChar.m_bActive)
-    {
-        charColor = 0x0A;
-    }*/
-	if (g_sChar.gamechar == 0)
+   if (g_sChar.gamechar == 0)
 	{
 		g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
 	} else {
 		g_Console.writeToBuffer(g_sChar.m_cLocation, g_sChar.gamechar, charColor);
 	}
-
-
-
 }
 void renderFramerate()
 {
@@ -429,350 +402,8 @@ void renderToScreen()
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
 }
-void renderMainMenu()
-{
-	string Menu[4] ={"                                   Start Game","                                  Instructions", "                                    Options", "                                      Exit"};
-	char box[9][75] = {
-"                  ______   _______           _______  _______ ",
-"                 (  ___ \\ (  ___  )|\\     /|(  ____ \\(  ____ \\",
-"                 | (   ) )| (   ) |( \\   / )| (    \\/| (    \\/",
-"                 | (__/ / | |   | | \\ (_) / | (__    | (_____ ",
-"                 |  __ (  | |   | |  ) _ (  |  __)   (_____  )",
-"                 | (  \\ \\ | |   | | / ( ) \\ | (            ) |",
-"                 | )___) )| (___) |( /   \\ )| (____/\\/\\____) |",
-"                 |______/ (_______)|/     \\|(_______/\\_______)"
-	};
-  for (int i = 0; i < 9; i++)
-  {
-  g_Console.writeToBuffer(0,i,box[i],0x02);
-  }
-  for (int i = 0; i < 4; ++i)
-		{
-			if (i == MenuPointer)
-			{	
-				 g_Console.writeToBuffer(0,10+i,Menu[i],0x0B);
-			}
-			else
-			{
-				 g_Console.writeToBuffer(0,10+i,Menu[i],0x03);
-			}
-		}
-}
-void renderLevelMenu()
-{
-	string Menu[11] ={"                                      Map1",
-		              "                                      Map2", 
-					  "                                      Map3", 
-					  "                                      Map4", 
-					  "                                      Map5", 
-					  "                                      Map6", 
-					  "                                      Map7", 
-					  "                                      Map8", 
-					  "                                      Map9",
-					  "                                      Map10",
-					  "                               Back to Main Menu"};
-
-	g_Console.writeToBuffer(0,2,"                               Choose Your Level",0x04);
-
-	for (int i = 0; i < 11; ++i)
-		{
-			if (i == LevelPointer)
-			{
-				g_Console.writeToBuffer(0, 6+i,Menu[i],0x0B);
-			}
-			else
-			{
-				g_Console.writeToBuffer(0, 6+i,Menu[i],0x03);
-			}
-		}
-}
-void renderOptionsMenu()
-{
-	string Options[3] ={"Character", "Something", "Back To Main Menu"};
-	g_Console.writeToBuffer(0,2,"                                    OPTIONS",0x04);
-	for (int i = 0; i < 3; ++i)
-		{
-			if (i == OptionsPointer)
-			{	
-				 g_Console.writeToBuffer(35,10+i,Options[i],0x0B);
-			}
-			else
-			{
-				 g_Console.writeToBuffer(35,10+i,Options[i],0x03);
-			}
-		}
-}
-void renderInstruct()
-{
-	g_Console.writeToBuffer(17, 5, "Controls" , 0x0B );
-	g_Console.writeToBuffer(17, 6, "Arrow Key Up = Move up" );
-	g_Console.writeToBuffer(17, 7, "Arrow Key Down = Move down" );
-	g_Console.writeToBuffer(17, 8, "Arrow Key Left = Move left" );
-	g_Console.writeToBuffer(17, 9, "Arrow Key Right = Move right" );
-	g_Console.writeToBuffer(17, 10, "Spacebar = Restart stage");
-	g_Console.writeToBuffer(17, 11, "Backspace = Return to previous menu");
-	g_Console.writeToBuffer(17, 12, "Esc = Quit game");
-
-	g_Console.writeToBuffer(17, 14, "Backstory" , 0x0B);
-	g_Console.writeToBuffer(17, 15, "A man went into a cave to train by pushing boxes.");
-	g_Console.writeToBuffer(17, 16, "However,the more he pushed, the more he got addicted.");
-	g_Console.writeToBuffer(17, 17, "This left him getting stuck in the cave building his");
-	g_Console.writeToBuffer(17, 18, "biceps for years. All hope is not lost yet, it seems");
-	g_Console.writeToBuffer(17, 19, "that if he gets to a portal, he might just get out!?");
-
-	g_Console.writeToBuffer(17, 21, "Press backspace to return" , 0x0B );
-}
-
-void updateMenu()
-{
-	bool bSomethingHappened = false;
-    if (g_dBounceTime > g_dElapsedTime)
-        return;
-	if (g_abKeyPressed[K_UP])
-			{
-				bSomethingHappened = true;
-				MenuPointer--;
-				if (MenuPointer == -1)
-				{
-					MenuPointer = 3;
-				}
-			}
-			else if (g_abKeyPressed[K_DOWN])
-			{
-				bSomethingHappened = true;
-				MenuPointer++;
-				if (MenuPointer == 4)
-				{
-					MenuPointer = 0;
-				}
-			}
-			else if (g_abKeyPressed[K_RETURN])
-			{
-				bSomethingHappened = true;
-				switch(MenuPointer)
-				{
-
-					case 0:
-						{
-							g_eGameState = S_LEVELMENU; 
-						}break;
-					case 1:
-						{
-							g_eGameState = S_INSTRUCTIONS;
-						}break;
-					case 2: 
-						{
-							g_eGameState = S_OPTIONS;
-						}break;
-					case 3:
-						{
-							g_bQuitGame = true;
-						}break;
-				}
-			}
-
-			else if (g_abKeyPressed[K_ESCAPE])
-			{
-				g_bQuitGame = true;
-			}
-			if (bSomethingHappened)
-			 {
-				// set the bounce time to some time in the future to prevent accidental triggers
-				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-			 }
-}
-void updateLevelMenu()
-{
-	bool bSomethingHappened = false;
-    if (g_dBounceTime > g_dElapsedTime)
-        return;
-	if (g_abKeyPressed[K_UP])
-			{
-				bSomethingHappened = true;
-				LevelPointer -= 1;
-				if (LevelPointer == -1)
-				{
-					LevelPointer = 10;
-				}
-			}
-	else if (g_abKeyPressed[K_DOWN])
-			{
-				bSomethingHappened = true;
-				LevelPointer += 1;
-				if (LevelPointer == 11)
-				{
-					LevelPointer = 0;
-				}
-			}
-	else if (g_abKeyPressed[K_RETURN])
-			{
-				bSomethingHappened= true;
-				g_bQuitGame = false;
-				switch(LevelPointer)
-				{
-					case 0:
-						{
-							currentLevel = 1;//Map1
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 1:
-						{
-							currentLevel = 2;//Map2
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 2:
-						{
-							currentLevel = 3;//Map3
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 3:
-						{
-							currentLevel = 4;//Map4
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 4:
-						{
-							currentLevel = 5;//Map5
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 5:
-						{
-							currentLevel = 6;//Map6
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 6:
-						{
-							currentLevel = 7;//Map7
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 7: 
-						{
-							currentLevel = 8;//Map8
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 8:
-						{
-							currentLevel = 9;//Map9
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 9:
-						{
-							currentLevel = 10;//Map10
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 10: g_eGameState = S_MAINMENU; break;
-				}
-			}
-
-	else if (g_abKeyPressed[K_BACK])
-	{
-		bSomethingHappened = true;
-		g_eGameState = S_MAINMENU;              //Only one that jumps 2... WHYYYYYYYY???
-	}
-	else if (GetAsyncKeyState(VK_ESCAPE) != 0)
-	{
-		g_bQuitGame = true;
-	}
-	if (bSomethingHappened)
-			 {
-				// set the bounce time to some time in the future to prevent accidental triggers
-				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-			 }
-}
-void updateOptionsMenu()
-{
-	bool bSomethingHappened = false;
-    if (g_dBounceTime > g_dElapsedTime)
-        return;
-	if (g_abKeyPressed[K_UP])
-			{
-				bSomethingHappened = true;
-				OptionsPointer--;
-				if (OptionsPointer == -1)
-				{
-					OptionsPointer = 2;
-				}
-			}
-			else if (g_abKeyPressed[K_DOWN])
-			{
-				bSomethingHappened = true;
-				OptionsPointer++;
-				if (OptionsPointer == 3)
-				{
-					OptionsPointer = 0;
-				}
-			}
-			else if (g_abKeyPressed[K_RETURN])
-			{
-				bSomethingHappened = true;
-				switch(OptionsPointer)
-				{
-
-					case 0:
-						{
-							g_eGameState = S_CHARSELECT; 
-						}break;
-					case 1: 
-						{
-							g_eGameState = S_OPTIONS;
-						}break;
-					case 2:
-						{
-							g_eGameState = S_MAINMENU;
-						}break;
-				}
-			}
-			else if (GetAsyncKeyState(VK_ESCAPE) != 0)
-			{
-				g_bQuitGame = true;
-			}
-			if (bSomethingHappened)
-			 {
-				// set the bounce time to some time in the future to prevent accidental triggers
-				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-			 }
-}
-void updateInstruct()
-{
-	if (g_abKeyPressed[K_BACK])
-	{
-				g_eGameState = S_MAINMENU;
-	}
-}
 
 void lifepoint(){
-
-	COORD c;
 	g_Console.writeToBuffer(64, 11, "Tries Left: " ,0x0B);
 	for (int i = 0; i < Health; i++)
 	{
@@ -786,95 +417,9 @@ void lifepoint(){
 }
 
 void loselife() {
-
-	
 		Health -= 1;
 		if (Health == -1)
 		{
 			  g_bQuitGame = true;
 		}
-
-}
-
-void selectChar() {
-
-	g_Console.writeToBuffer(27,8," Select Your Character ",0x0B);
-	char Char[4] ={(char)255,(char)1,(char)2,(char)3,};
-	string CharName[4] ={"Stealth","HollowFace", "FullFace", "HeartShape"};
-	g_Console.writeToBuffer(33,10," << ",0x0B);
-	for (int i = 0; i < 4; ++i)
-		{
-			if (i == CharPointer)
-			{	
-				 g_Console.writeToBuffer(38,10,Char[i],0x0B);
-				 g_Console.writeToBuffer(35,11,CharName[i],0x0B);
-			}
-			else
-			{
-				 Char[i];
-				 CharName[i];
-			}
-		}
-	g_Console.writeToBuffer(40,10," >> ",0x0B);
-}
-
-void UpdateCharSel() {
-
-	char Char[4] ={(char)255,(char)1,(char)2,(char)3,}; 
-	bool bSomethingHappened = false;
-    if (g_dBounceTime > g_dElapsedTime)
-        return;
-
-			if (g_abKeyPressed[K_LEFT])
-					{
-						bSomethingHappened = true;
-						CharPointer--;
-						if (CharPointer == -1)
-						{
-							CharPointer = 3;
-						}
-					}
-			else if (g_abKeyPressed[K_RIGHT])
-					{
-						bSomethingHappened = true;
-						CharPointer++;
-						if (CharPointer == 4)
-						{
-							CharPointer = 0;
-						}
-					}
-			else if (g_abKeyPressed[K_RETURN])
-					{
-						bSomethingHappened = true;
-							switch (CharPointer)
-							{
-							case 0 : {
-								g_sChar.gamechar = Char[0];
-								g_eGameState = S_MAINMENU;
-							} break;
-							case 1 : {
-								g_sChar.gamechar = Char[1];
-								g_eGameState = S_MAINMENU;
-							} break;
-							case 2 : {
-								g_sChar.gamechar = Char[2];
-								g_eGameState = S_MAINMENU;
-							} break;
-							case 3 : {
-								g_sChar.gamechar = Char[3];
-								g_eGameState = S_MAINMENU;
-							} break;
-							default: {
-								g_sChar.gamechar = (char)1;
-							} break;
-					}
-			}
-									 
-
-	if (bSomethingHappened)
-			 {
-				// set the bounce time to some time in the future to prevent accidental triggers
-				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-			 }
-
 }
