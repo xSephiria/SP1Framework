@@ -33,6 +33,7 @@ enum EGAMESTATES
 	S_LEVELMENU,
 	S_OPTIONS,
 	S_INSTRUCTIONS,
+	S_CHARSELECT,
     S_COUNT
 };
 
@@ -41,6 +42,7 @@ enum EGAMESTATES
 struct SGameChar
 {
     COORD m_cLocation;
+	char gamechar;
     bool  m_bActive;
 };
 
@@ -77,4 +79,7 @@ void updateLevelMenu();
 void updateOptionsMenu();
 void updateInstruct();
 
+
+void selectChar();
+void UpdateCharSel();
 #endif // _GAME_H
