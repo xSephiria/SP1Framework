@@ -36,7 +36,7 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 int x = g_sChar.m_cLocation.X;
 int y = g_sChar.m_cLocation.Y;
 // Console object
-Console g_Console(79, 28, "SP1 Framework");
+Console g_Console(80, 25, "SP1 Framework");
 
 extern char map[25][60];
 
