@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
 #include <string>
 
 extern int currentLevel;
@@ -66,17 +67,39 @@ void readHS1() {
 	std::ifstream text;
 	text.open("highscore1.txt");
 
-	if (text.fail()) {
+	/*if (text.fail()) {
 		std::cerr << "ERROR" << std::endl;
 		exit(1);
-	}
+	}*/
 
+	g_Console.writeToBuffer(0, 0, "FASTEST TIMING FOR STAGE 1" ,0x04);
+	g_Console.writeToBuffer(0, 1, "==========================" ,0x04);
+	g_Console.writeToBuffer(0, 2, "NAME       | TIMING" ,0x04);
+	g_Console.writeToBuffer(0, 3, "==========================" ,0x04);
+
+	//std::string line_;
+	/*
+	if (text.is_open())
+	{
+		while(getline(text,line_))
+		{
+			g_Console.writeToBuffer(0,4,line_,0x04);
+		}
+		text.close();
+	}
+	else
+	{
+		g_Console.writeToBuffer(0,5,"ERROR",0x04);
+	}
+	*/
 	string name;
 	string timing;
+	while (true)
+	{
+		text >> name >> timing;
+		if(text.eof()) break;
+		g_Console.writeToBuffer(0,5,name,0x04);
+	}
 
-	text >> name >> timing;
-
-	g_Console.writeToBuffer(0, 1, name ,0x04);
-	g_Console.writeToBuffer(5, 1, timing ,0x04);
-
+	
 }
