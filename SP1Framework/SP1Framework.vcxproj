@@ -94,7 +94,16 @@
     <ClInclude Include="update.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="highscore.txt" />
+    <None Include="highscore1.txt" />
+    <None Include="highscore10.txt" />
+    <None Include="highscore2.txt" />
+    <None Include="highscore3.txt" />
+    <None Include="highscore4.txt" />
+    <None Include="highscore5.txt" />
+    <None Include="highscore6.txt" />
+    <None Include="highscore7.txt" />
+    <None Include="highscore8.txt" />
+    <None Include="highscore9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

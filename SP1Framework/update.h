@@ -10,5 +10,7 @@ void updateCharSelect();
 void gameplay();            // gameplay logic
 void pointing();
 void levelpoint();
+void optionpoint();
+void charpoint();
 
 #endif _UPDATE_H

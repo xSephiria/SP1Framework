@@ -21,7 +21,7 @@ void gettime() {
 		std::cin >> name;
 		switch (currentLevel)
 			{
-			case 1: saveHS(); break; 
+			case 1: saveHS1(); break; 
 			case 2: map2(); break;
 			case 3: map3(); break;
 			case 4: map4(); break;
@@ -36,10 +36,10 @@ void gettime() {
 }
 
 
-void saveHS() {
+void saveHS1() {
 
 	std::ofstream text;
-	text.open("highscore.txt",std::ofstream::out | std::ofstream::app);
+	text.open("highscore1.txt",std::ofstream::out | std::ofstream::app);
 
 	timetaken = g_dElapsedTime;
 
@@ -61,10 +61,10 @@ void refreshtime () {
 
 }
 
-void readHS() {
+void readHS1() {
 
 	std::ifstream text;
-	text.open("highscore.txt");
+	text.open("highscore1.txt");
 
 	if (text.fail()) {
 		std::cerr << "ERROR" << std::endl;

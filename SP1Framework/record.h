@@ -2,9 +2,9 @@
 #define _RECORD_H
 
 void gettime();
-void saveHS();
+void saveHS1();
 void refreshtime();
-void readHS();
+void readHS1();
 
 
 

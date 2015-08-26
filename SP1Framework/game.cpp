@@ -136,7 +136,7 @@ void update(double dt)
 			break;
 		case S_CHARSELECT : updateCharSelect();
 			break;
-		case S_RECORD : readHS();
+		case S_RECORD : readHS1();
 			break;
     }
 	
@@ -166,7 +166,7 @@ void render()
 			break;
 		case S_CHARSELECT :renderCharSelect();
 			break;
-		case S_RECORD : readHS();
+		case S_RECORD : readHS1();
 			break;
     }
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game

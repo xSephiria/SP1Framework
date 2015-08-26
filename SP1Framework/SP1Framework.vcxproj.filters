@@ -70,7 +70,34 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="highscore.txt">
+    <None Include="highscore1.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore2.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore3.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore4.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore5.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore6.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore7.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore8.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore9.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="highscore10.txt">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

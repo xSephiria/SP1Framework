@@ -253,13 +253,12 @@ void gameplay()            // gameplay logic
 void pointing()
 {
 	
-	if ( g_abKeyPressed[K_UP])
+	if (g_abKeyPressed[K_UP] != 0)
 	{
 		if(keyCount == 0)
 		{
 		MenuPointer--;
 		
-
 		if (MenuPointer == -1)
 		{
 			MenuPointer = 3;
@@ -269,7 +268,7 @@ void pointing()
 	}
 	
 
-	else if ( g_abKeyPressed[K_DOWN])
+	else if ( g_abKeyPressed[K_DOWN] != 0)
 
 	{
 		if (keyCount == 0)
@@ -280,15 +279,12 @@ void pointing()
 				MenuPointer = 0;
 			}
 		}
+		
 		keyCount = 1;
 	}
 	
-	else if ( g_abKeyPressed[K_ESCAPE])
-	{
-		g_bQuitGame = true;
-	}
 
-	else if ( g_abKeyPressed[K_RETURN])
+	else if ( g_abKeyPressed[K_RETURN] != 0)
 	{
 		if (keyCount == 0)
 		{
@@ -313,7 +309,7 @@ void pointing()
 						}break;
 				}
 		}
-		keyCount = 1;
+	keyCount = 1;
 	}
 		
 		
@@ -327,7 +323,7 @@ void pointing()
 
 void levelpoint()
 {
-	if ( g_abKeyPressed[K_UP])
+	if ( g_abKeyPressed[K_UP] != 0)
 	{
 		if(keyCount == 0)
 		{
@@ -343,7 +339,7 @@ void levelpoint()
 	}
 	
 
-	else if ( g_abKeyPressed[K_DOWN])
+	else if ( g_abKeyPressed[K_DOWN] != 0)
 
 	{
 		if (keyCount == 0)
@@ -357,95 +353,79 @@ void levelpoint()
 		keyCount = 1;
 	}
 	
+	
 
-	else if ( g_abKeyPressed[K_RETURN])
+	else if ( g_abKeyPressed[K_RETURN] != 0)
 	{
 		if (keyCount == 0)
 		{
+				Health = 3;
+				g_dElapsedTime = 0;
 				switch(LevelPointer)
 				{
 					case 0:
 						{
 							currentLevel = 1;//Map1
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 1:
 						{
 							currentLevel = 2;//Map2
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 2:
 						{
 							currentLevel = 3;//Map3
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 3:
 						{
 							currentLevel = 4;//Map4
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 4:
 						{
 							currentLevel = 5;//Map5
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 5:
 						{
 							currentLevel = 6;//Map6
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 6:
 						{
 							currentLevel = 7;//Map7
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 7: 
 						{
 							currentLevel = 8;//Map8
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 8:
 						{
 							currentLevel = 9;//Map9
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 9:
 						{
 							currentLevel = 10;//Map10
-							Health = 3;
 							displayLevel();
-							g_eGameState = S_GAME;
 							break;
 						}
 					case 10: g_eGameState = S_MAINMENU; break;
 				}
+				g_eGameState = S_GAME;
 		}
 		keyCount = 1;
 	}
@@ -457,4 +437,124 @@ void levelpoint()
 	{
 		keyCount = 0;
 	}
+}
+
+void optionpoint()
+{
+	if (g_abKeyPressed[K_UP])
+			{
+				if (keyCount == 0)
+				{
+				OptionsPointer--;
+				if (OptionsPointer == -1)
+				{
+					OptionsPointer = 2;
+				}
+				}
+				keyCount = 1;
+			}
+			else if (g_abKeyPressed[K_DOWN])
+			{
+				if (keyCount == 0)
+				{
+				OptionsPointer++;
+				if (OptionsPointer == 3)
+				{
+					OptionsPointer = 0;
+				}
+				}
+				keyCount = 1;
+			}
+			else if (g_abKeyPressed[K_RETURN])
+			{
+				if (keyCount == 0)
+				{
+				switch(OptionsPointer)
+				{
+
+					case 0:
+						{
+							g_eGameState = S_CHARSELECT; 
+						}break;
+					case 1: 
+						{
+							g_eGameState = S_OPTIONS;
+						}break;
+					case 2:
+						{
+							g_eGameState = S_MAINMENU;
+						}break;
+				}
+				}
+				keyCount = 1;
+			}
+			else
+	{
+		keyCount = 0;
+	}
+}
+
+void charpoint()
+{
+	char Char[4] ={(char)255,(char)1,(char)2,(char)3,}; 
+	if (g_abKeyPressed[K_LEFT])
+					{
+						if (keyCount == 0)
+						{
+						
+						CharPointer--;
+						if (CharPointer == -1)
+						{
+							CharPointer = 3;
+						}
+						}
+						keyCount = 1;
+					}
+			else if (g_abKeyPressed[K_RIGHT])
+					{
+						if (keyCount == 0)
+						{
+						
+						CharPointer++;
+						if (CharPointer == 4)
+						{
+							CharPointer = 0;
+						}
+						}
+						keyCount = 1;
+					}
+			else if (g_abKeyPressed[K_RETURN])
+					{
+						if (keyCount == 0)
+						{
+							switch (CharPointer)
+							{
+							case 0 : {
+								g_sChar.gamechar = Char[0];
+								g_eGameState = S_MAINMENU;
+							} break;
+							case 1 : {
+								g_sChar.gamechar = Char[1];
+								g_eGameState = S_MAINMENU;
+							} break;
+							case 2 : {
+								g_sChar.gamechar = Char[2];
+								g_eGameState = S_MAINMENU;
+							} break;
+							case 3 : {
+								g_sChar.gamechar = Char[3];
+								g_eGameState = S_MAINMENU;
+							} break;
+							default: {
+								g_sChar.gamechar = (char)1;
+							} break;
+					}
+						}
+						keyCount = 1;
+
+			}
+			else 
+			{
+				keyCount = 0;
+			}
 }
