@@ -94,7 +94,7 @@ void updateLevelMenu()
 		bSomethingHappened = true;
 		g_eGameState = S_MAINMENU;              //Only one that jumps 2... WHYYYYYYYY???
 	}
-	else if (GetAsyncKeyState(VK_ESCAPE) != 0)
+	else if (g_abKeyPressed[K_ESCAPE])
 	{
 		g_bQuitGame = true;
 	}
@@ -147,7 +147,12 @@ void updateOptionsMenu()
 						}break;
 				}
 			}
-			else if (GetAsyncKeyState(VK_ESCAPE) != 0)
+			else if (g_abKeyPressed[K_BACK])
+			{
+				bSomethingHappened = true;
+				g_eGameState = S_MAINMENU; 
+			}
+			else if (g_abKeyPressed[K_ESCAPE])
 			{
 				g_bQuitGame = true;
 			}
@@ -162,6 +167,10 @@ void updateInstruct()
 	if (g_abKeyPressed[K_BACK])
 	{
 				g_eGameState = S_MAINMENU;
+	}
+	else if (g_abKeyPressed[K_ESCAPE])
+	{
+		g_bQuitGame = true;
 	}
 }
 void updateCharSelect() {
@@ -189,6 +198,15 @@ void updateCharSelect() {
 							CharPointer = 0;
 						}
 					}
+			else if (g_abKeyPressed[K_BACK])
+					{
+						bSomethingHappened = true;
+						g_eGameState = S_MAINMENU;
+					}	
+			else if (g_abKeyPressed[K_ESCAPE])
+					{
+						g_bQuitGame = true;
+					}	
 			else if (g_abKeyPressed[K_RETURN])
 					{
 						bSomethingHappened = true;
@@ -234,7 +252,7 @@ void gameplay()            // gameplay logic
 void pointing()
 {
 	
-	if ( g_abKeyPressed[K_UP] != 0)
+	if ( g_abKeyPressed[K_UP])
 	{
 		if(keyCount == 0)
 		{
@@ -250,7 +268,7 @@ void pointing()
 	}
 	
 
-	else if ( g_abKeyPressed[K_DOWN] != 0)
+	else if ( g_abKeyPressed[K_DOWN])
 
 	{
 		if (keyCount == 0)
@@ -264,8 +282,12 @@ void pointing()
 		keyCount = 1;
 	}
 	
+	else if ( g_abKeyPressed[K_ESCAPE])
+	{
+		g_bQuitGame = true;
+	}
 
-	else if ( g_abKeyPressed[K_RETURN] != 0)
+	else if ( g_abKeyPressed[K_RETURN])
 	{
 		if (keyCount == 0)
 		{
@@ -304,7 +326,7 @@ void pointing()
 
 void levelpoint()
 {
-	if ( g_abKeyPressed[K_UP] != 0)
+	if ( g_abKeyPressed[K_UP])
 	{
 		if(keyCount == 0)
 		{
@@ -320,7 +342,7 @@ void levelpoint()
 	}
 	
 
-	else if ( g_abKeyPressed[K_DOWN] != 0)
+	else if ( g_abKeyPressed[K_DOWN])
 
 	{
 		if (keyCount == 0)
@@ -335,7 +357,7 @@ void levelpoint()
 	}
 	
 
-	else if ( g_abKeyPressed[K_RETURN] != 0)
+	else if ( g_abKeyPressed[K_RETURN])
 	{
 		if (keyCount == 0)
 		{

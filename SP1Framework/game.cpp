@@ -418,6 +418,6 @@ void loselife() {
 		Health -= 1;
 		if (Health == -1)
 		{
-			  g_bQuitGame = true;
+			  g_eGameState = S_LEVELMENU;
 		}
 }
