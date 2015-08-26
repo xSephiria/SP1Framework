@@ -60,7 +60,7 @@ void init( void )
     g_sChar.m_cLocation.Y = 16;
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
-    g_Console.setConsoleFont(0, 36, L"Calibri");
+    g_Console.setConsoleFont(0, 36, L"Arial");
 }
 
 //--------------------------------------------------------------
@@ -163,9 +163,7 @@ void render()
 			break;
 		case S_CHARSELECT :renderCharSelect();
 			break;
-
     }
-	
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
 
@@ -203,7 +201,6 @@ void moveCharacter()
 			}
 		}
         bSomethingHappened = true;
-
     }
     else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {

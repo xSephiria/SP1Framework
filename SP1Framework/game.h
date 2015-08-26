@@ -71,4 +71,5 @@ void lifepoint();
 void loselife();
 
 
+
 #endif // _GAME_H

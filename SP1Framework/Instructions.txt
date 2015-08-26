@@ -1,0 +1,18 @@
+
+Controls
+Arrow Key Up = Move up
+Arrow Key Down = Move down
+Arrow Key Left = Move left
+Arrow Key Right = Move right
+Spaebar = Restart stage
+Backspace = Return to previous menu
+Esc = Quit game
+
+Backstory
+A man went into a cave to train by pushing boxes.
+However, the more he pushed, the more he got addicted.
+This left him getting tuck in the cave building his 
+biceps for years. All hope is not lost yet, it seems
+that if he gets to a portal, he might just get out!?
+
+Press backspace to return

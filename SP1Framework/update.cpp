@@ -21,8 +21,9 @@ int OptionsP = 0;
 int &OptionsPointer = OptionsP;
 int CharP = 0;
 int &CharPointer = CharP;
+int keyCount = 0;
 
-void updateMenu()
+/*void updateMenu()
 {
 	bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
@@ -79,121 +80,16 @@ void updateMenu()
 				// set the bounce time to some time in the future to prevent accidental triggers
 				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 			 }
+}*/
+void updateMenu()
+{
+	pointing();
 }
 void updateLevelMenu()
 {
 	bool bSomethingHappened = false;
-    if (g_dBounceTime > g_dElapsedTime)
-        return;
-	if (g_abKeyPressed[K_UP])
-			{
-				bSomethingHappened = true;
-				LevelPointer -= 1;
-				if (LevelPointer == -1)
-				{
-					LevelPointer = 10;
-				}
-			}
-	else if (g_abKeyPressed[K_DOWN])
-			{
-				bSomethingHappened = true;
-				LevelPointer += 1;
-				if (LevelPointer == 11)
-				{
-					LevelPointer = 0;
-				}
-			}
-	else if (g_abKeyPressed[K_RETURN])
-			{
-				bSomethingHappened= true;
-				g_bQuitGame = false;
-				switch(LevelPointer)
-				{
-					case 0:
-						{
-							currentLevel = 1;//Map1
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 1:
-						{
-							currentLevel = 2;//Map2
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 2:
-						{
-							currentLevel = 3;//Map3
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 3:
-						{
-							currentLevel = 4;//Map4
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 4:
-						{
-							currentLevel = 5;//Map5
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 5:
-						{
-							currentLevel = 6;//Map6
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 6:
-						{
-							currentLevel = 7;//Map7
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 7: 
-						{
-							currentLevel = 8;//Map8
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 8:
-						{
-							currentLevel = 9;//Map9
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 9:
-						{
-							currentLevel = 10;//Map10
-							Health = 3;
-							displayLevel();
-							g_eGameState = S_GAME;
-							break;
-						}
-					case 10: g_eGameState = S_MAINMENU; break;
-				}
-			}
-
-	else if (g_abKeyPressed[K_BACK])
+    levelpoint();
+	if (g_abKeyPressed[K_BACK])
 	{
 		bSomethingHappened = true;
 		g_eGameState = S_MAINMENU;              //Only one that jumps 2... WHYYYYYYYY???
@@ -334,4 +230,208 @@ void gameplay()            // gameplay logic
     moveCharacter();    // moves the character, collision detection, physics, etc
                         // sound can be played here too.
 	
+}
+void pointing()
+{
+	
+	if ( g_abKeyPressed[K_UP] != 0)
+	{
+		if(keyCount == 0)
+		{
+		MenuPointer--;
+		
+
+		if (MenuPointer == -1)
+		{
+			MenuPointer = 3;
+		}
+		}
+		keyCount = 1;
+	}
+	
+
+	else if ( g_abKeyPressed[K_DOWN] != 0)
+
+	{
+		if (keyCount == 0)
+		{
+			MenuPointer++;
+			if (MenuPointer == 4)
+			{
+				MenuPointer = 0;
+			}
+		}
+		keyCount = 1;
+	}
+	
+
+	else if ( g_abKeyPressed[K_RETURN] != 0)
+	{
+		if (keyCount == 0)
+		{
+				switch(MenuPointer)
+				{
+
+					case 0:
+						{
+							g_eGameState = S_LEVELMENU; 
+						}break;
+					case 1:
+						{
+							g_eGameState = S_INSTRUCTIONS;
+						}break;
+					case 2: 
+						{
+							g_eGameState = S_OPTIONS;
+						}break;
+					case 3:
+						{
+							g_bQuitGame = true;
+						}break;
+				}
+		}
+		keyCount = 1;
+	}
+		
+		
+	
+
+	else
+	{
+		keyCount = 0;
+	}
+}
+
+void levelpoint()
+{
+	if ( g_abKeyPressed[K_UP] != 0)
+	{
+		if(keyCount == 0)
+		{
+		LevelPointer -= 1;
+		
+
+		if (LevelPointer == -1)
+		{
+			LevelPointer = 10;
+		}
+		}
+		keyCount = 1;
+	}
+	
+
+	else if ( g_abKeyPressed[K_DOWN] != 0)
+
+	{
+		if (keyCount == 0)
+		{
+			LevelPointer += 1;
+			if (LevelPointer == 11)
+			{
+				LevelPointer = 0;
+			}
+		}
+		keyCount = 1;
+	}
+	
+
+	else if ( g_abKeyPressed[K_RETURN] != 0)
+	{
+		if (keyCount == 0)
+		{
+				switch(LevelPointer)
+				{
+					case 0:
+						{
+							currentLevel = 1;//Map1
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 1:
+						{
+							currentLevel = 2;//Map2
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 2:
+						{
+							currentLevel = 3;//Map3
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 3:
+						{
+							currentLevel = 4;//Map4
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 4:
+						{
+							currentLevel = 5;//Map5
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 5:
+						{
+							currentLevel = 6;//Map6
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 6:
+						{
+							currentLevel = 7;//Map7
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 7: 
+						{
+							currentLevel = 8;//Map8
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 8:
+						{
+							currentLevel = 9;//Map9
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 9:
+						{
+							currentLevel = 10;//Map10
+							Health = 3;
+							displayLevel();
+							g_eGameState = S_GAME;
+							break;
+						}
+					case 10: g_eGameState = S_MAINMENU; break;
+				}
+		}
+		keyCount = 1;
+	}
+		
+		
+	
+
+	else
+	{
+		keyCount = 0;
+	}
 }
