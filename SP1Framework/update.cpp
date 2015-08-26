@@ -90,12 +90,8 @@ void updateLevelMenu()
 {
 	bool bSomethingHappened = false;
     levelpoint();
-	if (g_abKeyPressed[K_BACK])
-	{
-		bSomethingHappened = true;
-		g_eGameState = S_MAINMENU;              //Only one that jumps 2... WHYYYYYYYY???
-	}
-	else if (g_abKeyPressed[K_ESCAPE])
+	
+	if (g_abKeyPressed[K_ESCAPE])
 	{
 		g_bQuitGame = true;
 	}
@@ -107,61 +103,11 @@ void updateLevelMenu()
 }
 void updateOptionsMenu()
 {
-	bool bSomethingHappened = false;
-    if (g_dBounceTime > g_dElapsedTime)
-        return;
-	if (g_abKeyPressed[K_UP])
-			{
-				bSomethingHappened = true;
-				OptionsPointer--;
-				if (OptionsPointer == -1)
-				{
-					OptionsPointer = 2;
-				}
-			}
-			else if (g_abKeyPressed[K_DOWN])
-			{
-				bSomethingHappened = true;
-				OptionsPointer++;
-				if (OptionsPointer == 3)
-				{
-					OptionsPointer = 0;
-				}
-			}
-			else if (g_abKeyPressed[K_RETURN])
-			{
-				bSomethingHappened = true;
-				switch(OptionsPointer)
-				{
-
-					case 0:
-						{
-							g_eGameState = S_CHARSELECT; 
-						}break;
-					case 1: 
-						{
-							g_eGameState = S_OPTIONS;
-						}break;
-					case 2:
-						{
-							g_eGameState = S_MAINMENU;
-						}break;
-				}
-			}
-			else if (g_abKeyPressed[K_BACK])
-			{
-				bSomethingHappened = true;
-				g_eGameState = S_MAINMENU; 
-			}
-			else if (g_abKeyPressed[K_ESCAPE])
-			{
-				g_bQuitGame = true;
-			}
-			if (bSomethingHappened)
-			 {
-				// set the bounce time to some time in the future to prevent accidental triggers
-				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-			 }
+	optionpoint();
+	if (g_abKeyPressed[K_ESCAPE] != 0)
+	{
+		g_bQuitGame = true;
+	}
 }
 void updateInstruct()
 {
@@ -176,71 +122,7 @@ void updateInstruct()
 }
 void updateCharSelect() {
 
-	char Char[4] ={(char)255,(char)1,(char)2,(char)3,}; 
-	bool bSomethingHappened = false;
-    if (g_dBounceTime > g_dElapsedTime)
-        return;
-
-			if (g_abKeyPressed[K_LEFT])
-					{
-						bSomethingHappened = true;
-						CharPointer--;
-						if (CharPointer == -1)
-						{
-							CharPointer = 3;
-						}
-					}
-			else if (g_abKeyPressed[K_RIGHT])
-					{
-						bSomethingHappened = true;
-						CharPointer++;
-						if (CharPointer == 4)
-						{
-							CharPointer = 0;
-						}
-					}
-			else if (g_abKeyPressed[K_BACK])
-					{
-						bSomethingHappened = true;
-						g_eGameState = S_MAINMENU;
-					}	
-			else if (g_abKeyPressed[K_ESCAPE])
-					{
-						g_bQuitGame = true;
-					}	
-			else if (g_abKeyPressed[K_RETURN])
-					{
-						bSomethingHappened = true;
-							switch (CharPointer)
-							{
-							case 0 : {
-								g_sChar.gamechar = Char[0];
-								g_eGameState = S_MAINMENU;
-							} break;
-							case 1 : {
-								g_sChar.gamechar = Char[1];
-								g_eGameState = S_MAINMENU;
-							} break;
-							case 2 : {
-								g_sChar.gamechar = Char[2];
-								g_eGameState = S_MAINMENU;
-							} break;
-							case 3 : {
-								g_sChar.gamechar = Char[3];
-								g_eGameState = S_MAINMENU;
-							} break;
-							default: {
-								g_sChar.gamechar = (char)1;
-							} break;
-					}
-			}
-									 
-
-	if (bSomethingHappened)
-			 {
-				// set the bounce time to some time in the future to prevent accidental triggers
-				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-			 }
+	charpoint();
 
 }
 void gameplay()            // gameplay logic
@@ -478,7 +360,7 @@ void optionpoint()
 						}break;
 					case 1: 
 						{
-							g_eGameState = S_OPTIONS;
+							g_eGameState = S_RECORD;
 						}break;
 					case 2:
 						{
