@@ -1,6 +1,7 @@
 // This is the main file for the game logic and function
 //
 //
+#include "record.h"
 #include "game.h"
 #include "map.h"
 #include "update.h"
@@ -135,6 +136,8 @@ void update(double dt)
 			break;
 		case S_CHARSELECT : updateCharSelect();
 			break;
+		case S_RECORD : readHS();
+			break;
     }
 	
 }
@@ -162,6 +165,8 @@ void render()
 		case S_OPTIONS : renderOptionsMenu();
 			break;
 		case S_CHARSELECT :renderCharSelect();
+			break;
+		case S_RECORD : readHS();
 			break;
     }
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -268,6 +273,7 @@ void moveCharacter()
 	}
 	if (map[y][x] == '@')
 	{
+		gettime();
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		g_eGameState = S_LEVELMENU;
@@ -360,7 +366,7 @@ void renderMap()
 		}
 	}
 
-
+	refreshtime();
 
 }
 void renderCharacter()
@@ -386,12 +392,12 @@ void renderFramerate()
     g_Console.writeToBuffer(c, ss.str());
 
     // displays the elapsed time
-    ss.str("");
+    /*ss.str("");
     ss << g_dElapsedTime << "secs";
     c.X = g_Console.getConsoleSize().X - 15;
     c.Y = 9;
     g_Console.writeToBuffer(c, ss.str(), 0x59);
-
+	*/
 
 
 }

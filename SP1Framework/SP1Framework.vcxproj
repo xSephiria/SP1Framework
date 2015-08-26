@@ -80,6 +80,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="record.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="update.cpp" />
   </ItemGroup>
@@ -88,8 +89,12 @@
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="record.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="update.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="highscore.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

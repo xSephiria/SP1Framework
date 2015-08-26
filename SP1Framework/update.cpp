@@ -1,5 +1,6 @@
 #include "update.h"
 #include "game.h"
+#include "record.h"
 #include "Framework\console.h"
 
 extern double  g_dElapsedTime;

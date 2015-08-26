@@ -1,4 +1,5 @@
 #include "render.h"
+#include "record.h"
 #include "game.h"
 #include "Framework\console.h"
 
