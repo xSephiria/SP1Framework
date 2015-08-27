@@ -286,6 +286,7 @@ void moveCharacter()
 	}
 	if (map[y][x] == '@')
 	{
+		system("CLS");
 		gettime();
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;

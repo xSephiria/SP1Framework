@@ -30,7 +30,7 @@ void gettime() {
 		timetaken = g_dElapsedTime;
 
 		text << name << "           " << timetaken << std::endl;
-
+		
 		text.close();
 
 }
@@ -44,15 +44,17 @@ void readHS()
 	g_Console.writeToBuffer(10, 3, "==========================" ,0x04);
 
 	std::string line;
+	std::string timing;
     std::ifstream Reader (highscores[currentLevel]);             //Open file
- 
+
 	if (Reader.is_open())
 	{
 		int y = 4;
-		while (getline (Reader, line))
+		while (Reader >> line >> timing)
 		{
 			line;
 			g_Console.writeToBuffer(10, y, line);
+			g_Console.writeToBuffer(25, y, timing);
 			y++;
 		}
 		
