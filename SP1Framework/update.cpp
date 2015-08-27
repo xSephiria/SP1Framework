@@ -97,6 +97,7 @@ void updateLevelMenu()
 	{
 		g_bQuitGame = true;
 	}
+
 	if (bSomethingHappened)
 			 {
 				// set the bounce time to some time in the future to prevent accidental triggers

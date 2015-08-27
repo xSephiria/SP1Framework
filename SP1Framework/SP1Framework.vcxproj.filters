@@ -73,5 +73,32 @@
     <None Include="Highscores\highscore1.txt">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Highscores\highscore2.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore3.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore4.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore5.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore6.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore7.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore8.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore9.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Highscores\highscore10.txt">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -95,6 +95,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Highscores\highscore1.txt" />
+    <None Include="Highscores\highscore10.txt" />
+    <None Include="Highscores\highscore2.txt" />
+    <None Include="Highscores\highscore3.txt" />
+    <None Include="Highscores\highscore4.txt" />
+    <None Include="Highscores\highscore5.txt" />
+    <None Include="Highscores\highscore6.txt" />
+    <None Include="Highscores\highscore7.txt" />
+    <None Include="Highscores\highscore8.txt" />
+    <None Include="Highscores\highscore9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
