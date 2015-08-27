@@ -105,6 +105,7 @@ void updateLevelMenu()
 }
 void updateOptionsMenu()
 {
+
 	optionpoint();
 	if (g_abKeyPressed[K_ESCAPE] != 0)
 	{
@@ -203,6 +204,7 @@ void pointing()
 		 g_prevkey[K_DOWN] = g_prevkey[K_COUNT];
 		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
 	}
+
 }
 
 void levelpoint()
@@ -249,60 +251,70 @@ void levelpoint()
 					case 0:
 						{
 							currentLevel = 1;//Map1
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 1:
 						{
 							currentLevel = 2;//Map2
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 2:
 						{
 							currentLevel = 3;//Map3
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 3:
 						{
 							currentLevel = 4;//Map4
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 4:
 						{
 							currentLevel = 5;//Map5
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 5:
 						{
 							currentLevel = 6;//Map6
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 6:
 						{
 							currentLevel = 7;//Map7
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 7: 
 						{
 							currentLevel = 8;//Map8
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 8:
 						{
 							currentLevel = 9;//Map9
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
 					case 9:
 						{
 							currentLevel = 10;//Map10
+							g_dElapsedTime = 0.0;
 							displayLevel();
 							break;
 						}
@@ -310,7 +322,7 @@ void levelpoint()
 				}
 
 		}
-			g_dElapsedTime = 0;
+
 		g_prevkey[K_RETURN] = g_abKeyPressed[K_RETURN];
 	}
 	else
@@ -320,6 +332,13 @@ void levelpoint()
 		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
 		
 	}
+
+		if (bool bSomethingHappened =true)
+			 {
+				// set the bounce time to some time in the future to prevent accidental triggers
+				g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+			 }
+
 }
 
 void optionpoint()

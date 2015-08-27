@@ -291,12 +291,14 @@ void moveCharacter()
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		g_eGameState = S_LEVELMENU;
+
 		//displayLevel();
 		bSomethingHappened = true;
 	}
 
     if (bSomethingHappened)
     {
+
         // set the bounce time to some time in the future to prevent accidental triggers
         g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
     }
@@ -320,6 +322,7 @@ void processUserInput()
     }
 	else if (g_eGameState == S_GAME && GetAsyncKeyState(VK_BACK) != 0)
 	{
+		g_dElapsedTime = 0.0;
 		bSomethingHappened = true;
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
@@ -439,5 +442,6 @@ void loselife() {
 		if (Health == -1)
 		{
 			  g_eGameState = S_LEVELMENU;
+			  g_dElapsedTime = 0.0;
 		}
 }
