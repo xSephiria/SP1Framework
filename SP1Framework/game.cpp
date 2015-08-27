@@ -291,7 +291,6 @@ void moveCharacter()
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		g_eGameState = S_LEVELMENU;
-
 		//displayLevel();
 		bSomethingHappened = true;
 	}
