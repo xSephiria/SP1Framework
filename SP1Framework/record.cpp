@@ -26,6 +26,7 @@ string name;
 void gettime() {
 
 		std::cin >> name;
+	
 		std::ofstream text;
 		text.open(highscores[currentLevel],std::ofstream::out | std::ofstream::app);
 
