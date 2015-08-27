@@ -20,10 +20,11 @@ int &MenuPointer = MenuP;
 int LevelP = 0;               // "Cursors" for level menu
 int &LevelPointer = LevelP;
 int OptionsP = 0;
-int &OptionsPointer = OptionsP;
+int &OptionsPointer = OptionsP;  // "Cursors" for Options menu
 int CharP = 0;
 int &CharPointer = CharP;
-int keyCount = 0;
+int HSP = 0;                   // "Cursors" for Highscore menu
+int &HSPointer = HSP;
 
 /*void updateMenu()
 {
@@ -235,10 +236,6 @@ void levelpoint()
 		}
 		g_prevkey[K_DOWN] = g_abKeyPressed[K_DOWN];
 	}
-	
-	
-	
-
 	else if ( g_abKeyPressed[K_RETURN])
 	{
 		if (g_prevkey[K_RETURN] != g_abKeyPressed[K_RETURN])
@@ -330,13 +327,9 @@ void levelpoint()
 		}
 		g_prevkey[K_RETURN] = g_abKeyPressed[K_RETURN];
 	}
-		
-		
-	
-
 	else
 	{
-		g_prevkey[K_UP] = g_prevkey[K_COUNT];
+		 g_prevkey[K_UP] = g_prevkey[K_COUNT];
 		 g_prevkey[K_DOWN] = g_prevkey[K_COUNT];
 		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
 		
@@ -462,7 +455,118 @@ void charpoint()
 			else 
 			{
 				 g_prevkey[K_LEFT] = g_prevkey[K_COUNT];
-		 g_prevkey[K_RIGHT] = g_prevkey[K_COUNT];
-		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
+				 g_prevkey[K_RIGHT] = g_prevkey[K_COUNT];
+				 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
 			}
+}
+void updateHSMenu()
+{
+	if ( g_abKeyPressed[K_UP])
+	{
+		if(g_prevkey[K_UP] != g_abKeyPressed[K_UP])
+		{
+			HSPointer -= 1;
+			if (HSPointer == -1)
+			{
+				HSPointer = 10;
+			}
+			}
+			g_prevkey[K_UP] = g_abKeyPressed[K_UP];
+	}
+	else if (g_abKeyPressed[K_DOWN])
+	{
+		if (g_prevkey[K_DOWN] != g_abKeyPressed[K_DOWN])
+		{
+			HSPointer += 1;
+			if (HSPointer == 11)
+			{
+				HSPointer = 0;
+			}
+		}
+		g_prevkey[K_DOWN] = g_abKeyPressed[K_DOWN];
+	}
+	else if ( g_abKeyPressed[K_RETURN])
+	{
+		if (g_prevkey[K_RETURN] != g_abKeyPressed[K_RETURN])
+		{
+				switch(HSPointer)
+				{
+					case 0:
+						{
+							currentLevel = 1;
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 1:
+						{
+							currentLevel = 2;
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 2:
+						{
+							currentLevel = 3;//Map3
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 3:
+						{
+							currentLevel = 4;//Map4
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 4:
+						{
+							currentLevel = 5;//Map5
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 5:
+						{
+							currentLevel = 6;//Map6
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 6:
+						{
+							currentLevel = 7;//Map7
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 7: 
+						{
+							currentLevel = 8;//Map8
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 8:
+						{
+							currentLevel = 9;//Map9
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 9:
+						{
+							currentLevel = 10;//Map10
+							g_eGameState = S_HIGHSCORES;
+							break;
+						}
+					case 10: g_eGameState = S_OPTIONS; break;
+				}
+				g_prevkey[K_RETURN] = g_abKeyPressed[K_RETURN];
+		}
+	}
+		else 
+			{
+				 g_prevkey[K_UP] = g_prevkey[K_COUNT];
+				 g_prevkey[K_DOWN] = g_prevkey[K_COUNT];
+				 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
+			}
+}
+void updateHighscore()
+{
+	if (g_abKeyPressed[K_BACK])
+	{
+				g_eGameState = S_RECORD;
+	}
 }

@@ -8,6 +8,7 @@ extern int &MenuPointer;
 extern int &LevelPointer;
 extern int &OptionsPointer;
 extern int &CharPointer;
+extern int &HSPointer;
 void renderMainMenu()
 {
 	string Menu[4] ={"Start Game","Instructions", "Options", "Exit"};
@@ -68,7 +69,7 @@ void renderLevelMenu()
 }
 void renderOptionsMenu()
 {
-	string Options[3] ={"Character", "Something", "Back To Main Menu"};
+	string Options[3] ={"Character", "Highscores", "Back To Main Menu"};
 	g_Console.writeToBuffer(37,2,"OPTIONS",0x04);
 	for (int i = 0; i < 3; ++i)
 		{
@@ -107,7 +108,22 @@ void renderCharSelect() {
 		}
 	g_Console.writeToBuffer(40,10," >> ",0x0B);
 }
-
+void renderHSMenu()
+{
+	string HS[11] = {"Map 1","Map 2","Map 3","Map 4","Map 5","Map 6","Map 7","Map 8","Map 9","Map 10","Return"};
+	g_Console.writeToBuffer(37,2,"HIGHSCORES",0x04);
+	for (int i = 0; i < 11; ++i)
+		{
+			if (i == HSPointer)
+			{	
+				 g_Console.writeToBuffer(39,6+i,HS[i],0x0B);
+			}
+			else
+			{
+				 g_Console.writeToBuffer(39,6+i,HS[i],0x03);
+			}
+		}
+}
 
 void readtext()
 {

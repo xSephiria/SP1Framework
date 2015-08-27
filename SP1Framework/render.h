@@ -10,4 +10,6 @@ void renderInstruct();
 void renderCharSelect(); 
 void readtext();
 
+void renderHSMenu();
+
 #endif _RENDER_H

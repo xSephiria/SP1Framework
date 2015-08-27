@@ -12,5 +12,7 @@ void pointing();
 void levelpoint();
 void optionpoint();
 void charpoint();
+void updateHSMenu();
+void updateHighscore();
 
 #endif _UPDATE_H

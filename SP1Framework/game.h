@@ -19,6 +19,7 @@ enum EKEYS
     K_SPACE,
 	K_BACK,
 	K_RETURN,
+
     K_COUNT
 	
 };
@@ -35,6 +36,7 @@ enum EGAMESTATES
 	S_INSTRUCTIONS,
 	S_CHARSELECT,
 	S_RECORD,
+	S_HIGHSCORES,
     S_COUNT
 };
 
