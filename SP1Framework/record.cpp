@@ -40,7 +40,7 @@ void gettime() {
 }
 void readHS()
 {
-	string word = "FASTEST TIMING FOR STAGE ";
+	string word = "RECORDED TIMING FOR STAGE ";
 	word += numbers[currentLevel];
 	g_Console.writeToBuffer(10, 0, word ,0x0F);
 	g_Console.writeToBuffer(10, 1, "==============================================" ,0x04);
