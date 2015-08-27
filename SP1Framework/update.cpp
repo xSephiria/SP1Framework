@@ -243,6 +243,7 @@ void levelpoint()
 		{
 				Health = 3;
 				g_dElapsedTime = 0;
+				g_eGameState = S_GAME;
 				switch(LevelPointer)
 				{
 					case 0:
@@ -307,7 +308,6 @@ void levelpoint()
 						}
 					case 10: g_eGameState = S_MAINMENU; break;
 				}
-				g_eGameState = S_GAME;
 		}
 		keyCount = 1;
 	}
