@@ -17,6 +17,7 @@ using std::string;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
+bool    g_prevkey[K_COUNT];
 
 bool something = false;
 
@@ -100,6 +101,14 @@ void getInput( void )
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	g_abKeyPressed[K_BACK]   = isKeyPressed(VK_BACK);
 	g_abKeyPressed[K_RETURN] = isKeyPressed(VK_RETURN);
+	g_prevkey[K_UP];
+	g_prevkey[K_DOWN];
+	g_prevkey[K_LEFT];
+	g_prevkey[K_RIGHT];
+	g_prevkey[K_SPACE];
+	g_prevkey[K_ESCAPE];
+	g_prevkey[K_BACK];
+	g_prevkey[K_RETURN];
 }
 
 //--------------------------------------------------------------

@@ -8,6 +8,7 @@ extern double  g_dElapsedTime;
 extern double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
 extern bool g_abKeyPressed[K_COUNT];
+extern bool g_prevkey[K_COUNT];
 extern int currentLevel;
 extern int Health;
 extern void displayLevel();
@@ -135,9 +136,9 @@ void gameplay()            // gameplay logic
 void pointing()
 {
 	
-	if (g_abKeyPressed[K_UP] != 0)
+	if (g_abKeyPressed[K_UP])
 	{
-		if(keyCount == 0)
+		if(g_prevkey[K_UP] != g_abKeyPressed[K_UP])
 		{
 		MenuPointer--;
 		
@@ -146,14 +147,14 @@ void pointing()
 			MenuPointer = 3;
 		}
 		}
-		keyCount = 1;
+		g_prevkey[K_UP] = g_abKeyPressed[K_UP];
 	}
 	
 
-	else if ( g_abKeyPressed[K_DOWN] != 0)
+	else if ( g_abKeyPressed[K_DOWN])
 
 	{
-		if (keyCount == 0)
+		if (g_prevkey[K_DOWN] != g_abKeyPressed[K_DOWN])
 		{
 			MenuPointer++;
 			if (MenuPointer == 4)
@@ -162,13 +163,13 @@ void pointing()
 			}
 		}
 		
-		keyCount = 1;
+		g_prevkey[K_DOWN] = g_abKeyPressed[K_DOWN];
 	}
 	
 
-	else if ( g_abKeyPressed[K_RETURN] != 0)
+	else if ( g_abKeyPressed[K_RETURN])
 	{
-		if (keyCount == 0)
+		if (g_prevkey[K_RETURN] != g_abKeyPressed[K_RETURN])
 		{
 				switch(MenuPointer)
 				{
@@ -191,23 +192,23 @@ void pointing()
 						}break;
 				}
 		}
-	keyCount = 1;
+	g_prevkey[K_RETURN] = g_abKeyPressed[K_RETURN];
 	}
 		
-		
-	
 
 	else
 	{
-		keyCount = 0;
+	     g_prevkey[K_UP] = g_prevkey[K_COUNT];
+		 g_prevkey[K_DOWN] = g_prevkey[K_COUNT];
+		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
 	}
 }
 
 void levelpoint()
 {
-	if ( g_abKeyPressed[K_UP] != 0)
+	if ( g_abKeyPressed[K_UP])
 	{
-		if(keyCount == 0)
+		if(g_prevkey[K_UP] != g_abKeyPressed[K_UP])
 		{
 		LevelPointer -= 1;
 		
@@ -217,14 +218,14 @@ void levelpoint()
 			LevelPointer = 10;
 		}
 		}
-		keyCount = 1;
+		g_prevkey[K_UP] = g_abKeyPressed[K_UP];
 	}
 	
 
-	else if ( g_abKeyPressed[K_DOWN] != 0)
+	else if (g_abKeyPressed[K_DOWN])
 
 	{
-		if (keyCount == 0)
+		if (g_prevkey[K_DOWN] != g_abKeyPressed[K_DOWN])
 		{
 			LevelPointer += 1;
 			if (LevelPointer == 11)
@@ -232,84 +233,102 @@ void levelpoint()
 				LevelPointer = 0;
 			}
 		}
-		keyCount = 1;
+		g_prevkey[K_DOWN] = g_abKeyPressed[K_DOWN];
 	}
 	
 	
+	
 
-	else if ( g_abKeyPressed[K_RETURN] != 0)
+	else if ( g_abKeyPressed[K_RETURN])
 	{
-		if (keyCount == 0)
+		if (g_prevkey[K_RETURN] != g_abKeyPressed[K_RETURN])
 		{
-				Health = 3;
-				g_dElapsedTime = 0;
-				g_eGameState = S_GAME;
 				switch(LevelPointer)
 				{
 					case 0:
 						{
 							currentLevel = 1;//Map1
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 1:
 						{
 							currentLevel = 2;//Map2
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 2:
 						{
 							currentLevel = 3;//Map3
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 3:
 						{
 							currentLevel = 4;//Map4
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 4:
 						{
 							currentLevel = 5;//Map5
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 5:
 						{
 							currentLevel = 6;//Map6
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 6:
 						{
 							currentLevel = 7;//Map7
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 7: 
 						{
 							currentLevel = 8;//Map8
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 8:
 						{
 							currentLevel = 9;//Map9
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 9:
 						{
 							currentLevel = 10;//Map10
+							Health = 3;
 							displayLevel();
+							g_eGameState = S_GAME;
 							break;
 						}
 					case 10: g_eGameState = S_MAINMENU; break;
 				}
 		}
-		keyCount = 1;
+		g_prevkey[K_RETURN] = g_abKeyPressed[K_RETURN];
 	}
 		
 		
@@ -317,7 +336,10 @@ void levelpoint()
 
 	else
 	{
-		keyCount = 0;
+		g_prevkey[K_UP] = g_prevkey[K_COUNT];
+		 g_prevkey[K_DOWN] = g_prevkey[K_COUNT];
+		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
+		
 	}
 }
 
@@ -325,7 +347,7 @@ void optionpoint()
 {
 	if (g_abKeyPressed[K_UP])
 			{
-				if (keyCount == 0)
+				if (g_prevkey[K_UP] != g_abKeyPressed[K_UP])
 				{
 				OptionsPointer--;
 				if (OptionsPointer == -1)
@@ -333,11 +355,11 @@ void optionpoint()
 					OptionsPointer = 2;
 				}
 				}
-				keyCount = 1;
+				g_prevkey[K_UP] = g_abKeyPressed[K_UP];
 			}
 			else if (g_abKeyPressed[K_DOWN])
 			{
-				if (keyCount == 0)
+				if (g_prevkey[K_DOWN] != g_abKeyPressed[K_DOWN])
 				{
 				OptionsPointer++;
 				if (OptionsPointer == 3)
@@ -345,11 +367,11 @@ void optionpoint()
 					OptionsPointer = 0;
 				}
 				}
-				keyCount = 1;
+				g_prevkey[K_DOWN] = g_abKeyPressed[K_DOWN];
 			}
 			else if (g_abKeyPressed[K_RETURN])
 			{
-				if (keyCount == 0)
+				if (g_prevkey[K_RETURN] != g_abKeyPressed[K_RETURN])
 				{
 				switch(OptionsPointer)
 				{
@@ -368,11 +390,13 @@ void optionpoint()
 						}break;
 				}
 				}
-				keyCount = 1;
+				g_prevkey[K_RETURN] = g_abKeyPressed[K_RETURN];
 			}
 			else
 	{
-		keyCount = 0;
+		 g_prevkey[K_UP] = g_prevkey[K_COUNT];
+		 g_prevkey[K_DOWN] = g_prevkey[K_COUNT];
+		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
 	}
 }
 
@@ -381,7 +405,7 @@ void charpoint()
 	char Char[4] ={(char)255,(char)1,(char)2,(char)3,}; 
 	if (g_abKeyPressed[K_LEFT])
 					{
-						if (keyCount == 0)
+						if (g_prevkey[K_LEFT] != g_abKeyPressed[K_LEFT])
 						{
 						
 						CharPointer--;
@@ -390,11 +414,11 @@ void charpoint()
 							CharPointer = 3;
 						}
 						}
-						keyCount = 1;
+						g_prevkey[K_LEFT] = g_abKeyPressed[K_LEFT];
 					}
 			else if (g_abKeyPressed[K_RIGHT])
 					{
-						if (keyCount == 0)
+						if (g_prevkey[K_RIGHT] != g_abKeyPressed[K_RIGHT])
 						{
 						
 						CharPointer++;
@@ -403,11 +427,11 @@ void charpoint()
 							CharPointer = 0;
 						}
 						}
-						keyCount = 1;
+						g_prevkey[K_RIGHT] = g_abKeyPressed[K_RIGHT];
 					}
 			else if (g_abKeyPressed[K_RETURN])
 					{
-						if (keyCount == 0)
+						if (g_prevkey[K_RETURN] != g_abKeyPressed[K_RETURN])
 						{
 							switch (CharPointer)
 							{
@@ -432,11 +456,13 @@ void charpoint()
 							} break;
 					}
 						}
-						keyCount = 1;
+						g_prevkey[K_RETURN] = g_abKeyPressed[K_RETURN];
 
 			}
 			else 
 			{
-				keyCount = 0;
+				 g_prevkey[K_LEFT] = g_prevkey[K_COUNT];
+		 g_prevkey[K_RIGHT] = g_prevkey[K_COUNT];
+		 g_prevkey[K_RETURN] = g_prevkey[K_COUNT];
 			}
 }
