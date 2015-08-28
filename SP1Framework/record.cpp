@@ -70,6 +70,7 @@ void readHS()
 		}
 		
 	}
+	Reader.close();
 }
 void refreshtime () {
 

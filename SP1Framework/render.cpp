@@ -93,19 +93,10 @@ void renderCharSelect() {
 	char Char[4] ={(char)255,(char)1,(char)2,(char)3,};
 	string CharName[4] ={"Stealth","HollowFace", "FullFace", "HeartShape"};
 	g_Console.writeToBuffer(33,10," << ",0x0B);
-	for (int i = 0; i < 4; ++i)
-		{
-			if (i == CharPointer)
-			{	
-				 g_Console.writeToBuffer(38,10,Char[i],0x0B);
-				 g_Console.writeToBuffer(35,11,CharName[i],0x0B);
-			}
-			else
-			{
-				 Char[i];
-				 CharName[i];
-			}
-		}
+	
+	g_Console.writeToBuffer(38,10,Char[CharPointer],0x0B);
+	g_Console.writeToBuffer(35,11,CharName[CharPointer],0x0B);
+	
 	g_Console.writeToBuffer(40,10," >> ",0x0B);
 }
 void renderHSMenu()

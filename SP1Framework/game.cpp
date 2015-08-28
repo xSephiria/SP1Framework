@@ -17,7 +17,7 @@ using std::string;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
-bool    g_prevkey[K_COUNT];
+bool    g_abOnKeyPress[K_COUNT];
 
 bool something = false;
 
@@ -93,22 +93,25 @@ void shutdown( void )
 //--------------------------------------------------------------
 void getInput( void )
 {    
-    g_abKeyPressed[K_UP]     = isKeyPressed(VK_UP);
-    g_abKeyPressed[K_DOWN]   = isKeyPressed(VK_DOWN);
-    g_abKeyPressed[K_LEFT]   = isKeyPressed(VK_LEFT);
-    g_abKeyPressed[K_RIGHT]  = isKeyPressed(VK_RIGHT);
-    g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
-    g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
-	g_abKeyPressed[K_BACK]   = isKeyPressed(VK_BACK);
-	g_abKeyPressed[K_RETURN] = isKeyPressed(VK_RETURN);
-	g_prevkey[K_UP];
-	g_prevkey[K_DOWN];
-	g_prevkey[K_LEFT];
-	g_prevkey[K_RIGHT];
-	g_prevkey[K_SPACE];
-	g_prevkey[K_ESCAPE];
-	g_prevkey[K_BACK];
-	g_prevkey[K_RETURN];
+    // on key press
+        g_abOnKeyPress[K_UP] = !g_abKeyPressed[K_UP] && isKeyPressed(VK_UP);
+        g_abOnKeyPress[K_DOWN] = !g_abKeyPressed[K_DOWN] && isKeyPressed(VK_DOWN);
+        g_abOnKeyPress[K_LEFT] = !g_abKeyPressed[K_LEFT] && isKeyPressed(VK_LEFT);
+        g_abOnKeyPress[K_RIGHT] = !g_abKeyPressed[K_RIGHT] && isKeyPressed(VK_RIGHT);
+        g_abOnKeyPress[K_SPACE] = !g_abKeyPressed[K_SPACE] && isKeyPressed(VK_SPACE);
+        g_abOnKeyPress[K_ESCAPE] = !g_abKeyPressed[K_ESCAPE] && isKeyPressed(VK_ESCAPE);
+        g_abOnKeyPress[K_BACK] = !g_abKeyPressed[K_BACK] && isKeyPressed(VK_BACK);
+        g_abOnKeyPress[K_RETURN] = !g_abKeyPressed[K_RETURN] && isKeyPressed(VK_RETURN);
+ 
+        // update current status
+		g_abKeyPressed[K_UP]     = isKeyPressed(VK_UP);
+		g_abKeyPressed[K_DOWN]   = isKeyPressed(VK_DOWN);
+		g_abKeyPressed[K_LEFT]   = isKeyPressed(VK_LEFT);
+		g_abKeyPressed[K_RIGHT]  = isKeyPressed(VK_RIGHT);
+		g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
+		g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
+		g_abKeyPressed[K_BACK]   = isKeyPressed(VK_BACK);
+		g_abKeyPressed[K_RETURN] = isKeyPressed(VK_RETURN);
 }
 
 //--------------------------------------------------------------
