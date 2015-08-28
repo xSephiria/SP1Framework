@@ -149,6 +149,8 @@ void update(double dt)
 			break;
 		case S_HIGHSCORES : updateHighscore();
 			break;
+		case S_KEYNAME : gettime();
+			break;
     }
 	
 }
@@ -180,6 +182,8 @@ void render()
 		case S_RECORD : renderHSMenu();
 			break;
 		case S_HIGHSCORES : readHS();
+			break;
+		case S_KEYNAME : keyname();
 			break;
     }
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -286,11 +290,9 @@ void moveCharacter()
 	}
 	if (map[y][x] == '@')
 	{
-		system("CLS");
-		gettime();
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
-		g_eGameState = S_LEVELMENU;
+		g_eGameState = S_KEYNAME;
 		//displayLevel();
 		bSomethingHappened = true;
 	}

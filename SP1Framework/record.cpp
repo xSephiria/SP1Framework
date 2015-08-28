@@ -17,6 +17,7 @@ extern int currentLevel;
 extern Console g_Console;
 extern double  g_dElapsedTime;
 extern double  g_dDeltaTime;
+extern EGAMESTATES g_eGameState;
 
 string highscores[11] = {"","Highscores/highscore1.txt","Highscores/highscore2.txt","Highscores/highscore3.txt","Highscores/highscore4.txt","Highscores/highscore5.txt","Highscores/highscore6.txt","Highscores/highscore7.txt","Highscores/highscore8.txt","Highscores/highscore9.txt","Highscores/highscore10.txt",};
 string numbers[11] = {"","1","2","3","4","5","6","7","8","9","10"};
@@ -24,6 +25,7 @@ double timetaken;
 double HP;
 string name;
 void gettime() {
+
 
 		std::cin >> name;
 	
@@ -36,6 +38,8 @@ void gettime() {
 		text << name << " " << timetaken << " " << HP << std::endl;
 		
 		text.close();
+
+		g_eGameState = S_LEVELMENU;
 
 }
 void readHS()
@@ -78,3 +82,15 @@ void refreshtime () {
 
 }
 
+void keyname() {
+
+	g_Console.writeToBuffer(15,0, " ____________________________________________ ", 0x04);
+	g_Console.writeToBuffer(15,1, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,2, "|               CONGRATULATION!              |", 0x04);
+	g_Console.writeToBuffer(15,3, "|            YOU CLEARED THIS STAGE          |", 0x04);
+	g_Console.writeToBuffer(15,4, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,5, "|           YOUR NAME:                       |", 0x04);
+	g_Console.writeToBuffer(15,6, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,7, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,8, "|____________________________________________|", 0x04);
+}
