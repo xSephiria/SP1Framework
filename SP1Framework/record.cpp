@@ -24,11 +24,12 @@ string numbers[11] = {"","1","2","3","4","5","6","7","8","9","10"};
 double timetaken;
 double HP;
 string name;
+
 void gettime() {
 
-
+		cls();
 		std::cin >> name;
-	
+
 		std::ofstream text;
 		text.open(highscores[currentLevel],std::ofstream::out | std::ofstream::app);
 
@@ -84,13 +85,13 @@ void refreshtime () {
 
 void keyname() {
 
-	g_Console.writeToBuffer(15,0, " ____________________________________________ ", 0x04);
-	g_Console.writeToBuffer(15,1, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,2, "|               CONGRATULATION!              |", 0x04);
-	g_Console.writeToBuffer(15,3, "|            YOU CLEARED THIS STAGE          |", 0x04);
-	g_Console.writeToBuffer(15,4, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,5, "|           YOUR NAME:                       |", 0x04);
-	g_Console.writeToBuffer(15,6, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,6, " ____________________________________________ ", 0x04);
 	g_Console.writeToBuffer(15,7, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,8, "|____________________________________________|", 0x04);
+	g_Console.writeToBuffer(15,8, "|               CONGRATULATION!              |", 0x04);
+	g_Console.writeToBuffer(15,9, "|           YOU CLEARED THIS STAGE!          |", 0x04);
+	g_Console.writeToBuffer(15,10, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,11, "|           YOUR NAME:                       |", 0x04);
+	g_Console.writeToBuffer(15,12, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,13, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,14, "|____________________________________________|", 0x04);
 }

@@ -38,6 +38,7 @@ enum EGAMESTATES
 	S_RECORD,
 	S_HIGHSCORES,
 	S_KEYNAME,
+	S_GAMEOVER,
     S_COUNT
 };
 
@@ -73,7 +74,7 @@ void renderToScreen();      // dump the contents of the buffer to the screen, on
 int playSong();
 void lifepoint();
 void loselife();
-
+void gameover();
 
 
 #endif // _GAME_H

@@ -185,6 +185,8 @@ void render()
 			break;
 		case S_KEYNAME : keyname();
 			break;
+		case S_GAMEOVER : gameover();
+			break;
     }
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
@@ -442,7 +444,34 @@ void loselife() {
 		Health -= 1;
 		if (Health == -1)
 		{
-			  g_eGameState = S_LEVELMENU;
+			  g_eGameState = S_GAMEOVER;
 			  g_dElapsedTime = 0.0;
 		}
+}
+
+void gameover() {
+
+	std::string line;
+ 
+    std::ifstream Reader ("gameover.txt");             //Open file
+ 
+	if (Reader.is_open())
+	{
+		int y = 2;
+		while (getline (Reader, line))
+		{
+			line;
+			g_Console.writeToBuffer(15, y, line, 0x04);
+			y++;
+		}
+		
+	}
+	Reader.close();
+
+	g_Console.writeToBuffer(15,20, "         PRESS ENTER TO RETURN TO MAINMENU         ", 0x04);
+	
+	if (g_abKeyPressed[K_RETURN])
+	{
+		 g_eGameState = S_MAINMENU;
+	}
 }
