@@ -17,6 +17,7 @@ extern SGameChar   g_sChar;
 extern Console g_Console;
 extern string PlayerName;
 extern void openMap(int i);
+extern bool something;
 int MenuP = 0;              // "Cursors" for main menu
 int &MenuPointer = MenuP;
 int LevelP = 0;               // "Cursors" for level menu
@@ -162,8 +163,15 @@ void levelpoint()
 			{
 				openMap(LevelPointer);
 				Health = 3;
+				g_dElapsedTime = 0.0;
 				g_eGameState = S_GAME;
 			}
+			if (something = true)
+	{
+        // set the bounce time to some time in the future to prevent accidental triggers
+        g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+    }
+
         }     
 }
  
