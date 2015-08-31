@@ -14,7 +14,9 @@ extern int Health;
 extern void displayLevel();
 extern EGAMESTATES g_eGameState;
 extern SGameChar   g_sChar;
-
+extern Console g_Console;
+extern string PlayerName;
+extern void openMap(int i);
 int MenuP = 0;              // "Cursors" for main menu
 int &MenuPointer = MenuP;
 int LevelP = 0;               // "Cursors" for level menu
@@ -25,6 +27,8 @@ int CharP = 0;
 int &CharPointer = CharP;
 int HSP = 0;                   // "Cursors" for Highscore menu
 int &HSPointer = HSP;
+int NP = 0;
+int &NamePointer = NP;
 
 
 void updateMenu()
@@ -101,7 +105,6 @@ void pointing()
  
         else if (g_abOnKeyPress[K_RETURN])
         {
-               
                                 switch(MenuPointer)
                                 {
  
@@ -149,105 +152,19 @@ void levelpoint()
                         }
        
         }
-       
-       
-       
- 
         else if (g_abOnKeyPress[K_RETURN])
-        {
-               
-                                switch(LevelPointer)
-                                {
-                                        case 0:
-                                                {
-                                                        currentLevel = 1;//Map1
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 1:
-                                                {
-                                                        currentLevel = 2;//Map2
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 2:
-                                                {
-                                                        currentLevel = 3;//Map3
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 3:
-                                                {
-                                                        currentLevel = 4;//Map4
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 4:
-                                                {
-                                                        currentLevel = 5;//Map5
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 5:
-                                                {
-                                                        currentLevel = 6;//Map6
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 6:
-                                                {
-                                                        currentLevel = 7;//Map7
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 7:
-                                                {
-                                                        currentLevel = 8;//Map8
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 8:
-                                                {
-                                                        currentLevel = 9;//Map9
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 9:
-                                                {
-                                                        currentLevel = 10;//Map10
-                                                        Health = 3;
-                                                        displayLevel();
-                                                        g_eGameState = S_GAME;
-                                                        break;
-                                                }
-                                        case 10: g_eGameState = S_MAINMENU; break;
-                                }
-       
-        }
-               
-               
-       
- 
-       
-       
+        {  
+			if (LevelPointer == 10)
+			{
+				g_eGameState = S_MAINMENU;
+			}
+			else
+			{
+				openMap(LevelPointer);
+				Health = 3;
+				g_eGameState = S_GAME;
+			}
+        }     
 }
  
 void optionpoint()
@@ -258,7 +175,7 @@ void optionpoint()
                                 OptionsPointer--;
                                 if (OptionsPointer == -1)
                                 {
-                                        OptionsPointer = 2;
+                                        OptionsPointer = 3;
                                 }
                        
                         }
@@ -266,7 +183,7 @@ void optionpoint()
                         {
                                
                                 OptionsPointer++;
-                                if (OptionsPointer == 3)
+                                if (OptionsPointer == 4)
                                 {
                                         OptionsPointer = 0;
                                 }
@@ -290,6 +207,10 @@ void optionpoint()
                                                 {
                                                         g_eGameState = S_MAINMENU;
                                                 }break;
+										case 3:
+												{
+														g_eGameState = S_NAMESELECT;
+												}
                                 }
                                
                         }
@@ -373,71 +294,15 @@ void updateHSMenu()
         }
         else if ( g_abOnKeyPress[K_RETURN])
         {
-                                switch(HSPointer)
-                                {
-                                        case 0:
-                                                {
-                                                        currentLevel = 1;
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 1:
-                                                {
-                                                        currentLevel = 2;
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 2:
-                                                {
-                                                        currentLevel = 3;//Map3
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 3:
-                                                {
-                                                        currentLevel = 4;//Map4
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 4:
-                                                {
-                                                        currentLevel = 5;//Map5
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 5:
-                                                {
-                                                        currentLevel = 6;//Map6
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 6:
-                                                {
-                                                        currentLevel = 7;//Map7
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 7:
-                                                {
-                                                        currentLevel = 8;//Map8
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 8:
-                                                {
-                                                        currentLevel = 9;//Map9
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 9:
-                                                {
-                                                        currentLevel = 10;//Map10
-                                                        g_eGameState = S_HIGHSCORES;
-                                                        break;
-                                                }
-                                        case 10: g_eGameState = S_OPTIONS; break;
-                               
-                }
+            if (HSPointer == 10)
+			{
+				g_eGameState = S_MAINMENU;
+			}
+			else
+			{
+				readHS(HSPointer);
+				g_eGameState = S_HIGHSCORES;
+			}                  
         }
                
 }
@@ -447,4 +312,40 @@ void updateHighscore()
 	{
 				g_eGameState = S_RECORD;
 	}
+}
+void updateNameSelect()
+{
+		
+        char Char[27] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+		if (g_abOnKeyPress[K_LEFT])
+                                        {
+                                               
+                                                NamePointer--;
+                                                if (NamePointer == -1)
+                                                {
+                                                        NamePointer = 26;
+                                                }
+                                               
+                                        }
+                        else if (g_abOnKeyPress[K_RIGHT])
+                                        {
+                                               
+                                               
+                                                NamePointer++;
+                                                if (NamePointer == 27)
+                                                {
+                                                        NamePointer = 0;
+                                                }
+                                               
+                                        }
+                        else if (g_abOnKeyPress[K_RETURN])
+                                        {
+											if (NamePointer == 26)
+											{
+												g_eGameState = S_MAINMENU;
+											}
+											else
+                                                PlayerName+=Char[NamePointer]; 
+                                        }
+                                               
 }

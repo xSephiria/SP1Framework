@@ -13,14 +13,14 @@
 #include <vector>
 
 extern int Health;
-extern int currentLevel;
 extern Console g_Console;
 extern double  g_dElapsedTime;
 extern double  g_dDeltaTime;
 extern EGAMESTATES g_eGameState;
-
-string highscores[11] = {"","Highscores/highscore1.txt","Highscores/highscore2.txt","Highscores/highscore3.txt","Highscores/highscore4.txt","Highscores/highscore5.txt","Highscores/highscore6.txt","Highscores/highscore7.txt","Highscores/highscore8.txt","Highscores/highscore9.txt","Highscores/highscore10.txt",};
-string numbers[11] = {"","1","2","3","4","5","6","7","8","9","10"};
+extern string PlayerName;
+extern int &HSPointer;
+string highscores[10] = {"Highscores/highscore1.txt","Highscores/highscore2.txt","Highscores/highscore3.txt","Highscores/highscore4.txt","Highscores/highscore5.txt","Highscores/highscore6.txt","Highscores/highscore7.txt","Highscores/highscore8.txt","Highscores/highscore9.txt","Highscores/highscore10.txt",};
+string numbers[10] = {"1","2","3","4","5","6","7","8","9","10"};
 double timetaken;
 double HP;
 string name;
@@ -31,7 +31,7 @@ void gettime() {
 		std::cin >> name;
 
 		std::ofstream text;
-		text.open(highscores[currentLevel],std::ofstream::out | std::ofstream::app);
+		text.open(highscores[HSPointer],std::ofstream::out | std::ofstream::app);
 
 		timetaken = g_dElapsedTime;
 		HP = Health;
@@ -43,10 +43,10 @@ void gettime() {
 		g_eGameState = S_LEVELMENU;
 
 }
-void readHS()
+void readHS(int i)
 {
 	string word = "RECORDED TIMING FOR STAGE ";
-	word += numbers[currentLevel];
+	word += numbers[i];
 	g_Console.writeToBuffer(10, 0, word ,0x0F);
 	g_Console.writeToBuffer(10, 1, "==============================================" ,0x04);
 	g_Console.writeToBuffer(10, 2, "NAME       |     TIMING      | Life Remaining " ,0x04);
@@ -55,7 +55,7 @@ void readHS()
 	std::string line;
 	std::string timing;
 	std::string HP;
-    std::ifstream Reader (highscores[currentLevel]);             //Open file
+    std::ifstream Reader (highscores[i]);             //Open file
 
 	if (Reader.is_open())
 	{

@@ -11,5 +11,6 @@ void renderCharSelect();
 void readtext();
 
 void renderHSMenu();
+void renderNameSelect();
 
 #endif _RENDER_H

@@ -14,5 +14,6 @@ void optionpoint();
 void charpoint();
 void updateHSMenu();
 void updateHighscore();
+void updateNameSelect();
 
 #endif _UPDATE_H

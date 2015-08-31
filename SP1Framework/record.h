@@ -3,7 +3,7 @@
 
 void gettime();
 void refreshtime();
-void readHS();
+void readHS(int i);
 void keyname();
 
 #endif // _RECORD_H

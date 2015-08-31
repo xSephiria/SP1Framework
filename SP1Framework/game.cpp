@@ -20,10 +20,8 @@ bool    g_abKeyPressed[K_COUNT];
 bool    g_abOnKeyPress[K_COUNT];
 
 bool something = false;
-
-int currentLevel;           // Current Level ~.~
-
-
+extern int &LevelPointer;
+extern int &HSPointer;
 int Health = 3;
 // Game specific variables here
 SGameChar   g_sChar;
@@ -154,6 +152,8 @@ void update(double dt)
 			break;
 		case S_KEYNAME : gettime();
 			break;
+		case S_NAMESELECT :updateNameSelect();
+			break;
     }
 	
 }
@@ -184,11 +184,13 @@ void render()
 			break;
 		case S_RECORD : renderHSMenu();
 			break;
-		case S_HIGHSCORES : readHS();
+		case S_HIGHSCORES : readHS(HSPointer);
 			break;
 		case S_KEYNAME : keyname();
 			break;
 		case S_GAMEOVER : gameover();
+			break;
+		case S_NAMESELECT : renderNameSelect();
 			break;
     }
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -298,7 +300,6 @@ void moveCharacter()
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		g_eGameState = S_KEYNAME;
-		//displayLevel();
 		bSomethingHappened = true;
 	}
 
@@ -322,8 +323,8 @@ void processUserInput()
 		bSomethingHappened = true;
         g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
-		displayLevel();
 		loselife();
+		openMap(LevelPointer);
 		bSomethingHappened = true;
     }
 	else if (g_eGameState == S_GAME && GetAsyncKeyState(VK_BACK) != 0)
@@ -333,7 +334,6 @@ void processUserInput()
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
 		g_eGameState = S_LEVELMENU;
-		bSomethingHappened = true;
 	}
 	if (bSomethingHappened)
     {
@@ -370,7 +370,7 @@ void renderMap()
         colour(colors[i]);
         g_Console.writeToBuffer(c, " °±²Û", colors[i]);
     }*/
-
+	
 	for(int i = 0; i < 25; i++) 
 	{
 		for (int j = 0; j < 60; j++)
