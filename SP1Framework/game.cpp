@@ -152,8 +152,6 @@ void update(double dt)
 			break;
 		case S_KEYNAME : gettime();
 			break;
-		case S_NAMESELECT :updateNameSelect();
-			break;
     }
 	
 }
@@ -189,8 +187,6 @@ void render()
 		case S_KEYNAME : keyname();
 			break;
 		case S_GAMEOVER : gameover();
-			break;
-		case S_NAMESELECT : renderNameSelect();
 			break;
     }
 	    renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -305,7 +301,6 @@ void moveCharacter()
 
     if (bSomethingHappened)
     {
-
         // set the bounce time to some time in the future to prevent accidental triggers
         g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
     }
@@ -356,21 +351,6 @@ void renderGame()
 }
 void renderMap()
 {
-    // Set up sample colours, and output shadings
-    /*const WORD colors[] = {
-        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
-    };
-
-    COORD c;
-    for (int i = 0; i < 12; ++i)
-    {
-        c.X = 5 * i;
-        c.Y = i + 1;
-        colour(colors[i]);
-        g_Console.writeToBuffer(c, " °±²Û", colors[i]);
-    }*/
-	
 	for(int i = 0; i < 25; i++) 
 	{
 		for (int j = 0; j < 60; j++)
@@ -385,22 +365,18 @@ void renderMap()
 			}
 			else
 				g_Console.writeToBuffer(j,i,map[i][j],0x0F);
-		
 		}
 	}
-
 	refreshtime();
-
 }
 void renderCharacter()
 {
     // Draw the location of the character
-    WORD charColor = 0x0C;
    if (g_sChar.gamechar == 0)
 	{
-		g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
+		g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, 0x0C);
 	} else {
-		g_Console.writeToBuffer(g_sChar.m_cLocation, g_sChar.gamechar, charColor);
+		g_Console.writeToBuffer(g_sChar.m_cLocation, g_sChar.gamechar, 0x0C);
 	}
 }
 void renderFramerate()
@@ -413,16 +389,6 @@ void renderFramerate()
     c.X = g_Console.getConsoleSize().X - 15;
     c.Y = 10;
     g_Console.writeToBuffer(c, ss.str());
-
-    // displays the elapsed time
-    /*ss.str("");
-    ss << g_dElapsedTime << "secs";
-    c.X = g_Console.getConsoleSize().X - 15;
-    c.Y = 9;
-    g_Console.writeToBuffer(c, ss.str(), 0x59);
-	*/
-
-
 }
 void renderToScreen()
 {
@@ -456,7 +422,7 @@ void gameover() {
 
 	std::string line;
  
-    std::ifstream Reader ("gameover.txt");             //Open file
+    std::ifstream Reader ("gameover.txt");             //Open file to read gameover screen
  
 	if (Reader.is_open())
 	{
@@ -476,5 +442,22 @@ void gameover() {
 	if (g_abKeyPressed[K_RETURN])
 	{
 		 g_eGameState = S_MAINMENU;
+	}
+}
+void keyname() {
+
+	g_Console.writeToBuffer(15,6, " ____________________________________________ ", 0x04);
+	g_Console.writeToBuffer(15,7, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,8, "|               CONGRATULATION!              |", 0x04);
+	g_Console.writeToBuffer(15,9, "|           YOU CLEARED THIS STAGE!          |", 0x04);
+	g_Console.writeToBuffer(15,10, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,11, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,12, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,13, "|                                            |", 0x04);
+	g_Console.writeToBuffer(15,14, "|____________________________________________|", 0x04);
+
+	if (g_abKeyPressed[K_RETURN])
+	{
+				g_eGameState = S_LEVELMENU;
 	}
 }

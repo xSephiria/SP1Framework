@@ -71,9 +71,9 @@ void renderLevelMenu()
 }
 void renderOptionsMenu()
 {
-	string Options[4] ={"Character", "Highscores", "Back To Main Menu","Test"};
+	string Options[3] ={"Character", "Highscores", "Back To Main Menu"};
 	g_Console.writeToBuffer(37,2,"OPTIONS",0x04);
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 3; ++i)
 		{
 			if (i == OptionsPointer)
 			{	
@@ -87,7 +87,22 @@ void renderOptionsMenu()
 }
 void renderInstruct()
 {
-	readtext();
+	std::string line;
+ 
+    std::ifstream Reader ("Instructions.txt");             //Open file
+ 
+	if (Reader.is_open())
+	{
+		int y = 3;
+		while (getline (Reader, line))
+		{
+			line;
+			g_Console.writeToBuffer(7, y, line);
+			y++;
+		}
+		
+	}
+	Reader.close();
 }
 void renderCharSelect() {
 
@@ -118,34 +133,3 @@ void renderHSMenu()
 		}
 }
 
-void readtext()
-{
-	std::string line;
- 
-    std::ifstream Reader ("Instructions.txt");             //Open file
- 
-	if (Reader.is_open())
-	{
-		int y = 3;
-		while (getline (Reader, line))
-		{
-			line;
-			g_Console.writeToBuffer(7, y, line);
-			y++;
-		}
-		
-	}
-	Reader.close();
-}
-void renderNameSelect()
-{
-
-	g_Console.writeToBuffer(27,8," Select Your Name ",0x0B);
-	char Letter[27] ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','end'};
-	g_Console.writeToBuffer(28,9,PlayerName,0x0C);
-	g_Console.writeToBuffer(33,10," << ",0x0B);
-	
-	g_Console.writeToBuffer(38,10,Letter[NamePointer],0x0B);
-	
-	g_Console.writeToBuffer(40,10," >> ",0x0B);
-}

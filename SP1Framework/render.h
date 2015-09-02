@@ -8,9 +8,7 @@ void renderLevelMenu();
 void renderOptionsMenu();
 void renderInstruct();
 void renderCharSelect(); 
-void readtext();
-
 void renderHSMenu();
-void renderNameSelect();
+void keyname();
 
 #endif _RENDER_H
