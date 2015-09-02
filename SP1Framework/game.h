@@ -75,6 +75,6 @@ int playSong();
 void lifepoint();
 void loselife();
 void gameover();
-
+//void score();
 
 #endif // _GAME_H

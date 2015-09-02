@@ -150,8 +150,8 @@ void update(double dt)
 			break;
 		case S_HIGHSCORES : updateHighscore();
 			break;
-		case S_KEYNAME : gettime();
-			break;
+		//case S_KEYNAME : gettime();
+			//break;
     }
 	
 }
@@ -183,8 +183,6 @@ void render()
 		case S_RECORD : renderHSMenu();
 			break;
 		case S_HIGHSCORES : readHS(HSPointer);
-			break;
-		case S_KEYNAME : keyname();
 			break;
 		case S_GAMEOVER : gameover();
 			break;
@@ -295,8 +293,9 @@ void moveCharacter()
 	{
 		g_sChar.m_cLocation.X = 28;
 		g_sChar.m_cLocation.Y = 16;
-		g_eGameState = S_KEYNAME;
+		gettime();
 		bSomethingHappened = true;
+		g_eGameState = S_LEVELMENU;
 	}
 
     if (bSomethingHappened)
@@ -403,6 +402,18 @@ void lifepoint(){
 		g_Console.writeToBuffer(64+i, 12, (char)3 ,0x04);
 	}
 
+	int score = 500;
+	int sec = 0;
+	
+	COORD c;
+	std::ostringstream ss;
+	ss << std::fixed << std::setprecision(3);
+	c.X = g_Console.getConsoleSize().X - 15;
+	c.Y = 15;
+	ss << "Score: " << score - (int)g_dElapsedTime;
+	g_Console.writeToBuffer(c, ss.str());
+	
+	
 	if (g_eGameState == S_LEVELMENU)
 	{
 		Health = 3;
@@ -417,6 +428,20 @@ void loselife() {
 			  g_dElapsedTime = 0.0;
 		}
 }
+
+/*void score(){
+	g_Console.writeToBuffer(64, 13, "Currently Score: " ,0x0B);
+	int score = 500;
+
+	g_Console.writeToBuffer(64, 14, score ,0x04);
+	for (int i = 0; i <= 500; i++)
+	{
+		while (g_dElapsedTime == i)
+		{
+					score -= 1;
+		}
+	}
+}*/
 
 void gameover() {
 
@@ -444,20 +469,4 @@ void gameover() {
 		 g_eGameState = S_MAINMENU;
 	}
 }
-void keyname() {
 
-	g_Console.writeToBuffer(15,6, " ____________________________________________ ", 0x04);
-	g_Console.writeToBuffer(15,7, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,8, "|               CONGRATULATION!              |", 0x04);
-	g_Console.writeToBuffer(15,9, "|           YOU CLEARED THIS STAGE!          |", 0x04);
-	g_Console.writeToBuffer(15,10, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,11, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,12, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,13, "|                                            |", 0x04);
-	g_Console.writeToBuffer(15,14, "|____________________________________________|", 0x04);
-
-	if (g_abKeyPressed[K_RETURN])
-	{
-				g_eGameState = S_LEVELMENU;
-	}
-}

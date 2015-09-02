@@ -39,7 +39,10 @@ void gettime() {
 		timetaken = static_cast<int>(g_dElapsedTime);
 		int score = 500;
 
+		if(text.is_open())
+		{
 		text << /*name << " " */ score - timetaken << std::endl;
+		}
 		text.close();
 
 		std::ifstream file;

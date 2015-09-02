@@ -9,6 +9,5 @@ void renderOptionsMenu();
 void renderInstruct();
 void renderCharSelect(); 
 void renderHSMenu();
-void keyname();
 
 #endif _RENDER_H
